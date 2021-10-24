@@ -1,0 +1,5 @@
+.vscode
+*.o
+dwm/dwm
+dwm-build
+flexipatch-finalizer
