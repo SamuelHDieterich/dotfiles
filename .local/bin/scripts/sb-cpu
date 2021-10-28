@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Show CPU usage (%)
+
+case $BLOCK_BUTTON in
+	# Open process viewer
+	1) setsid -f "$TERMINAL" -e btop ;;
+esac
+
+printf " %.0f%%\n" "$(mpstat | awk 'END{printf $3}')"	# USER
+# printf " %.0f%%" "$(mpstat | awk 'END{gsub(",",".",$12); printf 100-$12}')"	# 100 - IDLE

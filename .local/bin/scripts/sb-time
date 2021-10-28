@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Retorna a hora
+
+printf " $(date '+%R')\n"

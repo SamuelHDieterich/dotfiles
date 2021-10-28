@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Check internet connection
+
+case $BLOCK_BUTTON in
+    # Open NetworkManager GUI
+    1) setsid -f nm-connection-editor ;;
+esac
+
+# Change the devices names for your needs
+wifi="$(cat /sys/class/net/wlp8s0/operstate)"
+ethernet="$(cat /sys/class/net/enp7s0/operstate)"
+
+# WIFI connection
+if [ "$wifi" = 'up' ]; then
+    icon=''
+# ETHERNET connection
+elif [ "$ethernet" = 'up' ]; then
+    icon=''
+# No connection
+else
+    icon=''
+fi
+
+# Print result
+printf "$icon\n"

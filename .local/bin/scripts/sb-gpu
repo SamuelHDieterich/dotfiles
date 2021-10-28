@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Mostra o uso da GPU NVIDIA
+
+printf " %s%%\n" "$(nvidia-smi | grep " / " | awk '{print int($9/$11*100)}')"

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Calcula a memória utilizada no sistema
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e btop ;;
+esac
+
+mem=$(free -m | awk '/^Mem/ { print $3+$5 }')
+const="1024"
+
+if [ $mem -gt 1000 ] 
+then
+    printf " %sG\n" "$(bc <<< "scale=2; ${mem}/${const}")"
+else
+    printf " $mem%s\n" "M"
+fi

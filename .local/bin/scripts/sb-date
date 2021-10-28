@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Retorna o dia
+
+printf " $(date '+%a, %b %d')\n"

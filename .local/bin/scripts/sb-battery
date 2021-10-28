@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Mostra a porcentagem de bateria
+
+read -r capacity </sys/class/power_supply/BAT0/capacity
+printf " %s%%\n" "$capacity"

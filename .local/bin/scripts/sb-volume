@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Check sound status
+
+case $BLOCK_BUTTON in
+    # Open pavucontrol
+    1) setsid -f pavucontrol ;;
+esac
+
+# Icons
+OFF=''
+ON=''
+
+# Check if sound is muted
+[ $(pamixer --get-mute) = true ] && printf "$OFF\n" && exit
+
+# Get volume
+vol="$(pamixer --get-volume)"
+
+# Print volume result
+printf "$ON $vol%%\n"
+
+# Notification
+# notify-send -t 1000 "🔊 $vol%"
