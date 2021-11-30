@@ -17,11 +17,7 @@ static const int swallowfloating         = 0;   /* 1 means swallow floating wind
 static int nomodbuttons                  = 1;   /* allow client mouse button bindings that have no modifier */
 #endif // NO_MOD_BUTTONS_PATCH
 #if VANITYGAPS_PATCH
-static const unsigned int gappih         = 14;  /* horiz inner gap between windows */
-static const unsigned int gappiv         = 14;  /* vert inner gap between windows */
-static const unsigned int gappoh         = 14;  /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 14;  /* vert outer gap between windows and screen edge */
-static const int smartgaps_fact          = 0;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
+#include "config/gaps.h"
 #endif // VANITYGAPS_PATCH
 #if AUTOSTART_PATCH
 static const char autostartblocksh[]     = "autostart_blocking.sh";
@@ -96,7 +92,7 @@ static const int showsystray             = 1;   /* 0 means no systray */
 /* Indicators: see patch/bar_indicators.h for options */
 static int tagindicatortype              = INDICATOR_BOTTOM_BAR_SLIM;	// changed
 static int tiledindicatortype            = INDICATOR_NONE;
-static int floatindicatortype            = INDICATOR_BOTTOM_BAR_SLIM;				// changed
+static int floatindicatortype            = INDICATOR_BOTTOM_BAR_SLIM;	// changed
 #if FAKEFULLSCREEN_CLIENT_PATCH && !FAKEFULLSCREEN_PATCH
 static int fakefsindicatortype           = INDICATOR_PLUS;
 static int floatfakefsindicatortype      = INDICATOR_PLUS_AND_LARGER_SQUARE;
@@ -130,43 +126,43 @@ static char c000000[]                    = "#000000"; // placeholder value
 
 #if BAR_FLEXWINTITLE_PATCH
 #endif // BAR_FLEXWINTITLE_PATCH
-static char normfgcolor[]                = "#aaaaaa";
-static char normbgcolor[]                = "#050505";
+static char normfgcolor[]                = "#bbbbbb";
+static char normbgcolor[]                = "#000000";
 static char normbordercolor[]            = "#000000";
 static char normfloatcolor[]             = "#000000";
 
 static char selfgcolor[]                 = "#ffffff";
-static char selbgcolor[]                 = "#050505";
+static char selbgcolor[]                 = "#000000";
 static char selbordercolor[]             = "#000000";
 static char selfloatcolor[]              = "#000000";
 
 static char titlenormfgcolor[]           = "#dddddd";
-static char titlenormbgcolor[]           = "#050505";
+static char titlenormbgcolor[]           = "#000000";
 static char titlenormbordercolor[]       = "#000000";
 static char titlenormfloatcolor[]        = "#000000";
 
 static char titleselfgcolor[]            = "#f0f0f0";
-static char titleselbgcolor[]            = "#050505";
+static char titleselbgcolor[]            = "#000000";
 static char titleselbordercolor[]        = "#000000";
 static char titleselfloatcolor[]         = "#000000";
 
-static char tagsnormfgcolor[]            = "#aaaaaa";
-static char tagsnormbgcolor[]            = "#050505";
+static char tagsnormfgcolor[]            = "#bbbbbb";
+static char tagsnormbgcolor[]            = "#000000";
 static char tagsnormbordercolor[]        = "#000000";
 static char tagsnormfloatcolor[]         = "#000000";
 
 static char tagsselfgcolor[]             = "#ffffff";
-static char tagsselbgcolor[]             = "#050505";
+static char tagsselbgcolor[]             = "#000000";
 static char tagsselbordercolor[]         = "#000000";
 static char tagsselfloatcolor[]          = "#000000";
 
-static char hidnormfgcolor[]             = "#888888";
-static char hidselfgcolor[]              = "#050505";
+static char hidnormfgcolor[]             = "#aaaaaa";
+static char hidselfgcolor[]              = "#000000";
 static char hidnormbgcolor[]             = "#000000";
 static char hidselbgcolor[]              = "#000000";
 
 static char urgfgcolor[]                 = "#ffffff";
-static char urgbgcolor[]                 = "#050505";
+static char urgbgcolor[]                 = "#000000";
 static char urgbordercolor[]             = "#000000";
 static char urgfloatcolor[]              = "#000000";
 
@@ -207,7 +203,7 @@ static char selfloatbgcolor[]            = "#117799";
 #endif // BAR_FLEXWINTITLE_PATCH
 
 #if BAR_ALPHA_PATCH
-static const unsigned int baralpha = 0xd0;
+static const unsigned int baralpha = 0x00;
 static const unsigned int borderalpha = OPAQUE;
 static const unsigned int alphas[][3] = {
 	/*                       fg      bg        border     */
@@ -341,15 +337,12 @@ static char *statuscolors[][ColCount] = {
 static const char *layoutmenu_cmd = "layoutmenu.sh";
 #endif
 
-#if COOL_AUTOSTART_PATCH							// Maybe use xinit
+#if COOL_AUTOSTART_PATCH
 static const char *const autostart[] = {
 	"picom", NULL,																	// Compositor
 	"xrandr", "--output", "HDMI-1-1", "--auto", "--right-of", "eDP-1-1", NULL,		// 2 monitors
-	"mons", "-a", NULL,																// Monitors daemon
 	"nitrogen", "--restore", NULL,													// Wallpaper
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,				// Polkit
-	// "nm-applet", NULL,																// Network
-	// "volumeicon", NULL,																// Volume
 	"setxkbmap", "-model", "pc104", "-layout", "br", "-variant", "thinkpad", NULL,	// Keyboard
 	"dwmblocks", NULL,																// Status bar
 	NULL /* terminate */
@@ -430,32 +423,33 @@ static const int tagrows = 2;
  * Refer to the Rule struct definition for the list of available fields depending on
  * the patches you enable.
  */
-static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 *	WM_WINDOW_ROLE(STRING) = role
-	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
-	 */
+#include "config/rules.h"
+// static const Rule rules[] = {
+// 	/* xprop(1):
+// 	 *	WM_CLASS(STRING) = instance, class
+// 	 *	WM_NAME(STRING) = title
+// 	 *	WM_WINDOW_ROLE(STRING) = role
+// 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
+// 	 */
 	
-    RULE(.wintype = WTYPE "DIALOG",	    .isfloating = 1,    .iscentered = 1)
-	RULE(.wintype = WTYPE "UTILITY",    .isfloating = 1,    .iscentered = 1)
-	RULE(.wintype = WTYPE "TOOLBAR",    .isfloating = 1,    .iscentered = 1)
-	RULE(.wintype = WTYPE "SPLASH",     .isfloating = 1,    .iscentered = 1)
+//     RULE(.wintype = WTYPE "DIALOG",	    .isfloating = 1,    .iscentered = 1)
+// 	RULE(.wintype = WTYPE "UTILITY",    .isfloating = 1,    .iscentered = 1)
+// 	RULE(.wintype = WTYPE "TOOLBAR",    .isfloating = 1,    .iscentered = 1)
+// 	RULE(.wintype = WTYPE "SPLASH",     .isfloating = 1,    .iscentered = 1)
 
-	RULE(.class = "VSCodium",						.tags = 1 << 2, .switchtag = 1)
-	RULE(.class = "Brave", 							.tags = 1 << 3, .switchtag = 1)
-	RULE(.class = "Signal", 						.tags = 1 << 4)
-	RULE(.class = "Microsoft Teams - Preview", 		.tags = 1 << 5, .switchtag = 1)
-	RULE(.class = "spotify",						.tags = 1 << 6)
-	RULE(.class = "Steam", .title = "Steam",			.tags = 1 << 7, .switchtag = 1)
-	RULE(.class = "Steam", .title = "Lista de amigos",	.isfloating = 1, .iscentered = 1)
-	RULE(.class = "Pavucontrol", 						.isfloating = 1, .iscentered = 1)
-	RULE(.class = "Nm-connection-editor", 				.isfloating = 1, .iscentered = 1)
-	#if SCRATCHPADS_PATCH
-	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
-	#endif // SCRATCHPADS_PATCH
-};
+// 	RULE(.class = "VSCodium",						.tags = 1 << 2, .switchtag = 1)
+// 	RULE(.class = "Brave", 							.tags = 1 << 3, .switchtag = 1)
+// 	RULE(.class = "Signal", 						.tags = 1 << 4)
+// 	RULE(.class = "Microsoft Teams - Preview", 		.tags = 1 << 5, .switchtag = 1)
+// 	RULE(.class = "spotify",						.tags = 1 << 6)
+// 	RULE(.class = "Steam", .title = "Steam",			.tags = 1 << 7, .switchtag = 1)
+// 	RULE(.class = "Steam", .title = "Lista de amigos",	.isfloating = 1, .iscentered = 1)
+// 	RULE(.class = "Pavucontrol", 						.isfloating = 1, .iscentered = 1)
+// 	RULE(.class = "Nm-connection-editor", 				.isfloating = 1, .iscentered = 1)
+// 	#if SCRATCHPADS_PATCH
+// 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
+// 	#endif // SCRATCHPADS_PATCH
+// };
 
 #if MONITOR_RULES_PATCH
 #if PERTAG_PATCH
@@ -822,7 +816,7 @@ static const char *dmenucmd[] = {
 	#endif // BAR_DMENUMATCHTOP_PATCH
 	NULL
 };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -870,7 +864,7 @@ static Key keys[] = {
     // SCREENSHOT
 	{ 0,						    XK_Print,					spawn,			        SHCMD("flameshot gui") 		    },
     // SYSTEM MONITOR
-	{ ControlMask|ShiftMask,	    XK_Escape,					spawn,			        SHCMD("alacritty -e btop")	    },
+	{ ControlMask|ShiftMask,	    XK_Escape,					spawn,			        SHCMD("$TERMINAL -e btop")	    },
     // FILE MANAGER
 	{ MODKEY,					    XK_e,						spawn,			        SHCMD("thunar") 				},
 	// BROWSER

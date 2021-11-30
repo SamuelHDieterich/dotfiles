@@ -1,4 +1,6 @@
-.vscode
+*.vscode
 *.o
+dwm/dwm
+dwmblocks/dwmblocks
 *.1
 flexipatch-finalizer

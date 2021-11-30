@@ -2,7 +2,7 @@
 
 # Checa a quantidade de updates disponíveis
 
-pacman=$(pacman -Qu | wc -l)
-aur=$(yay -Qu | wc -l)
+aur=$(checkupdates-aur | wc -l)
+pacman=$(checkupdates | wc -l)
 
-printf " $pacman(%i)\n" "$(($aur-$pacman))"
+printf " $pacman($aur)\n"
