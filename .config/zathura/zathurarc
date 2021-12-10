@@ -1,0 +1,16 @@
+set default-fg \#abb2bf
+set default-bg \#1e2227
+
+set inputbar-fg \#abb2bf
+set inputbar-bg \#1e2227
+
+set statusbar-fg \#abb2bf
+set statusbar-bg \#1e2227
+
+set recolor true
+set recolor-darkcolor \#abb2bf
+set recolor-lightcolor \#1e2227
+
+set font "JetBrains Mono 12"
+
+set guioptions none

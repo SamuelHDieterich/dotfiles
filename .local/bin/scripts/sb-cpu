@@ -7,5 +7,8 @@ case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -e btop ;;
 esac
 
-printf " %.0f%%\n" "$(mpstat | awk 'END{printf $3}')"	# USER
-# printf " %.0f%%" "$(mpstat | awk 'END{gsub(",",".",$12); printf 100-$12}')"	# 100 - IDLE
+# en_US --> use column 4 and 13 (AM/PM "issue")
+# pt_BR --> use column 3 and 12
+
+#printf " %.0f%%\n" "$(mpstat | awk 'END{printf $4}')"	# USER
+printf " %.0f%%\n" "$(mpstat | awk 'END{printf 100-$13}')"	# 100 - IDLE

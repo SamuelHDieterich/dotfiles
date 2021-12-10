@@ -4,7 +4,7 @@
 
 case $BLOCK_BUTTON in
     # Open NetworkManager GUI
-    1) setsid -f nm-connection-editor ;;
+    1) $TERMINAL -e nmtui;;
 esac
 
 # Change the devices names for your needs

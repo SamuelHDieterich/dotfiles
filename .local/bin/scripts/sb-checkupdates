@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Make a cron job as root
-
-pacman -Sy 
-
-kill -46 $(pidoff dwmblocks)

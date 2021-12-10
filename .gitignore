@@ -1,6 +1,7 @@
 *.vscode
 *.o
 dwm/dwm
+dmenu/dmenu
+dmenu/stest
 dwmblocks/dwmblocks
-*.1
 flexipatch-finalizer

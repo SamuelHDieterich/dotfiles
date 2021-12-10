@@ -35,17 +35,7 @@ sigstatusbar(const Arg *arg)
 	if ((statuspid = getstatusbarpid()) <= 0)
 		return;
 
-	#if BAR_DWMBLOCKS_SIGUSR1_PATCH
-	sv.sival_int = (statussig << 8) | arg->i;
-	if (sigqueue(statuspid, SIGUSR1, sv) == -1) {
-		if (errno == ESRCH) {
-			if (!getstatusbarpid())
-				sigqueue(statuspid, SIGUSR1, sv);
-		}
-	}
-	#else
 	sv.sival_int = arg->i;
 	sigqueue(statuspid, SIGRTMIN+statussig, sv);
-	#endif // BAR_DWMBLOCKS_SIGUSR1_PATCH
 }
 
