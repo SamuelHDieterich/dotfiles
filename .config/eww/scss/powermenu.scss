@@ -1,0 +1,22 @@
+.powermenu-buttons {
+  font-family: $font;
+  animation: Fade 200ms ease-in-out;
+  
+  button {
+    margin: 0.8rem;
+    border-radius: 2rem;
+    background-color: $gray;
+
+    label {
+      font-size: 6rem;
+      color: $white;
+      padding: 1.5rem 3rem;
+    }
+
+  }
+
+  button:hover {
+    background-color: $light-gray;
+  }
+
+}

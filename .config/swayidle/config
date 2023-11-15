@@ -1,0 +1,4 @@
+timeout 300 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
+timeout 600 'swaylock'
+before-sleep 'playerctl pause'
+
