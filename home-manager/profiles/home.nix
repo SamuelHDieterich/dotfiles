@@ -70,7 +70,6 @@
     rofi-wayland
     bat
     nh
-    hyprpanel
   ];
 
   #programs.steam.enable = true;
