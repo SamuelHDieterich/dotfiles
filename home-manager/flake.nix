@@ -7,12 +7,16 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprpanel = {
+      url = "github:Jas-SinghFSU/HyprPanel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {
-    self,
+  outputs = inputs @ {
     nixpkgs, 
     home-manager,
+    hyprpanel,
     ...
   }: let
     system = "x86_64-linux";
@@ -20,10 +24,19 @@
   in {
     homeConfigurations = {
       home = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            inputs.hyprpanel.overlay
+          ];
+        };
         modules = [
           ./profiles/home.nix
         ];
+        extraSpecialArgs = {
+          inherit system;
+          inherit inputs;
+        };
       };
     };
   };

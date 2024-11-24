@@ -9,6 +9,7 @@
     ../modules/shell/starship.nix
     ../modules/terminal/kitty.nix
     ../modules/dev/git.nix
+    ../modules/wm/hyprland/hyprland.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -28,7 +29,7 @@
     cursorTheme = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
-      size = 24;
+      size = 20;
     };
     gtk3 = {
       extraConfig.gtk-application-prefer-dark-theme = true;
@@ -69,6 +70,7 @@
     rofi-wayland
     bat
     nh
+    hyprpanel
   ];
 
   #programs.steam.enable = true;
@@ -85,6 +87,8 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "code";
+    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = 20;
   };
 
   # Let Home Manager install and manage itself.
