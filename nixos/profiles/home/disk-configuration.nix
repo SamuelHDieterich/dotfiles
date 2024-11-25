@@ -22,7 +22,7 @@
               };
             };
             luks = {
-              label = "luks";
+              label = "cryptroot";
               size = "100%";
               content = {
                 name = "cryptroot";
@@ -85,7 +85,7 @@
           type = "gpt";
           partitions = {
             luks = {
-              label = "luks";
+              label = "cryptdata";
               size = "100%";
               content = {
                 name = "cryptdata";
@@ -98,7 +98,6 @@
                   type = "filesystem";
                   format = "ext4";
                   mountpoint = "/backup";
-                  mountOptions = [ "umask = 0000" ];
                 };
               };
             };
