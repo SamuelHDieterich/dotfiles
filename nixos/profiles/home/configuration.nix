@@ -99,4 +99,7 @@
     # Nix
     nh
   ];
+
+  # Programs
+  programs.nix-ld.enable = true;  # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
 }
