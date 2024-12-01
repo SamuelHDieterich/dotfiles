@@ -42,6 +42,8 @@
     };
   };
 
+  # Firmware
+  services.fwupd.enable = true;
 
   # Nvidia
   nvidia.prime.busId = {
