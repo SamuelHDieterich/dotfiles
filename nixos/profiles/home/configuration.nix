@@ -27,10 +27,21 @@
       allowUnfree = true;
       version = "24.05";
     };
-    bootloader = "systemd-boot";
+    # bootloader = "systemd-boot"; # Lanzaboote
     hostname = "nixos";
     username = "samuel";
   };
+
+  # Secure boot
+  boot = {
+    initrd.systemd.enable = true;
+    loader.systemd-boot.enable = lib.mkForce false;
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
+  };
+
 
   # Nvidia
   nvidia.prime.busId = {
