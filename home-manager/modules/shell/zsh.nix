@@ -28,6 +28,7 @@
       "
       # Autocomplete: accept next word
       "bindkey '^[[Z' forward-word"
+      "bindkey '^[[1;5C' forward-word"
     ];
     shellAliases = {
       ls = "eza --icons=always --color";
