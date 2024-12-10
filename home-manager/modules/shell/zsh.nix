@@ -19,6 +19,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    # Get a Keystroke: CTRL+V + <key combination>
     initExtra = lib.concatStrings [
       # Copy current buffer to clipboard
       "
