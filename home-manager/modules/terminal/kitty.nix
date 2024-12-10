@@ -6,7 +6,7 @@
 }: {
   home.packages = with pkgs; [
     kitty
-    (nerdfonts.override {fonts = ["JetBrainsMono"];})
+    nerd-fonts.jetbrains-mono
   ];
 
   programs.kitty = lib.mkForce {
