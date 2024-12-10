@@ -30,6 +30,7 @@
       # Autocomplete: accept next word
       "bindkey '^[[Z' forward-word"
       "bindkey '^[[1;5C' forward-word"
+      "bindkey '^[[1;5D' backward-word"
     ];
     shellAliases = {
       ls = "eza --icons=always --color";
