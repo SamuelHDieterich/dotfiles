@@ -45,6 +45,9 @@
   # Firmware
   services.fwupd.enable = true;
 
+  # I2C
+  hardware.i2c.enable = true;
+
   # Nvidia
   nvidia.prime.busId = {
     nvidia = "PCI:1:0:0";
@@ -88,6 +91,7 @@
     btop
     nvtopPackages.full
     powertop
+    ddcutil
     #mission-center
     # Network
     curl
