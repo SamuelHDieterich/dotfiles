@@ -35,7 +35,14 @@
       extraConfig.gtk-application-prefer-dark-theme = true;
     };
   };
-
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
+    };
+  };
   qt = {
     enable = true;
   };
@@ -72,7 +79,6 @@
     nh
   ];
 
-  #programs.steam.enable = true;
   programs.zoxide.enable = true;
 
   #programs.nix-ld.enable = true;
