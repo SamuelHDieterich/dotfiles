@@ -6,6 +6,7 @@
     ./animations.nix
     ./decoration.nix
     ./windowrules.nix
+    ./autostart.nix
   ];
   wayland.windowManager.hyprland.enable = true;
 }
