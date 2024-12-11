@@ -74,7 +74,6 @@
     nvtopPackages.full
     zoxide
     #mission-center
-    rofi-wayland
     bat
     nh
   ];

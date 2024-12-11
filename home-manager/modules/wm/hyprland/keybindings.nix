@@ -5,16 +5,19 @@
 }: {
   home.packages = with pkgs; [
     hyprlock
+    fuzzel
     wireplumber
     brightnessctl
     playerctl
     kitty
     firefox
     vscode
+    bemoji
   ];
 
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
+    "$dmenu" = "fuzzel";
     "$terminal" = "kitty";
     "$browser" = "firefox";
     bind = [
@@ -43,8 +46,9 @@
       "$mod, return, exec, $terminal"
       "$mod, B, exec, $browser"
       "$mod, V, exec, code"
-      "$mod, A, exec, rofi -show drun"
-      "$mod, R, exec, rofi -show run"
+      "$mod, A, exec, $dmenu"
+      "$mod, R, exec, ls /run/current-system/sw/bin/ | $dmenu -d | bash"
+      "$mod, period, exec, bemoji -cn"
     ] ++ (
       # Workspaces
       # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
