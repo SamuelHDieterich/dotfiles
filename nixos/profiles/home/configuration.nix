@@ -54,6 +54,9 @@
     intel = "PCI:0:2:0";
   };
 
+  # Display manager
+  services.displayManager.ly.enable = true;
+
   # Packages
   environment.systemPackages = with pkgs; [
     # Editor
