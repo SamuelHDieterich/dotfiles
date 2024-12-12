@@ -78,6 +78,8 @@
     nh
   ];
 
+  services.udiskie.enable = true;
+
   programs.zoxide.enable = true;
 
   #programs.nix-ld.enable = true;

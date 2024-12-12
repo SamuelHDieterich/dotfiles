@@ -91,6 +91,7 @@ in {
           "networkmanager"
           "video"
           "audio"
+          "storage"
           "docker"
           "libvirt"
           "lp"

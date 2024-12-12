@@ -57,6 +57,10 @@
   # Display manager
   services.displayManager.ly.enable = true;
 
+  # Disks
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
   # Packages
   environment.systemPackages = with pkgs; [
     # Editor
