@@ -3,11 +3,7 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [
-    wbg
-  ];
-
   wayland.windowManager.hyprland.settings.exec-once = [
-    "wbg ~/Pictures/Wallpaper/wallpaper"
+    "${pkgs.wbg}/bin/wbg ~/Pictures/Wallpaper/wallpaper"
   ];
 }

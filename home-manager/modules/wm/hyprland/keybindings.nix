@@ -3,30 +3,23 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [
-    hyprlock
-    fuzzel
-    wireplumber
-    brightnessctl
-    playerctl
-    kitty
-    firefox
-    vscode
-    bemoji
-  ];
-
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
-    "$dmenu" = "fuzzel";
-    "$terminal" = "kitty";
-    "$browser" = "firefox";
+    "$terminal" = "${pkgs.kitty}/bin/kitty";
+    "$filemanager" = "${pkgs.xfce.thunar}/bin/thunar";
+    "$webbrowser" = "${pkgs.firefox}/bin/firefox";
+    "$drun" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
+    "$run" = "${pkgs.rofi-wayland}/bin/rofi -show run";
+    "$emoji" = "${pkgs.bemoji}/bin/bemoji -cn";
+    "$lock" = "${pkgs.hyprlock}/bin/hyprlock";
+    "$editor" = "${pkgs.vscode}/bin/code";
     bind = [
       # General system
       "$mod, C, killactive"
       "$mod, delete, exit"
       "$mod, F, fullscreen"
       "$mod, space, togglefloating"
-      "$mod, L, exec, hyprlock"
+      "$mod, L, exec, $lock"
 
       # Move focus
       "$mod, left, movefocus, l"
@@ -44,11 +37,12 @@
 
       # Application shortcuts
       "$mod, return, exec, $terminal"
-      "$mod, B, exec, $browser"
-      "$mod, V, exec, code"
-      "$mod, A, exec, $dmenu"
-      "$mod, R, exec, ls /run/current-system/sw/bin/ | $dmenu -d | bash"
-      "$mod, period, exec, bemoji -cn"
+      "$mod, E, exec, $filemanager"
+      "$mod, B, exec, $webbrowser"
+      "$mod, V, exec, $editor"
+      "$mod, A, exec, $drun"
+      "$mod, R, exec, $run"
+      "$mod, period, exec, $emoji"
     ] ++ (
       # Workspaces
       # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
@@ -68,21 +62,21 @@
     ];
     bindel = [
       # Audio
-      ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-      ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-      ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+      ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+      ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
       
       # OSD
-      ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
-      ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+      ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 10%+"
+      ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 10%-"
     ];
     bindl = [
       # Media
-      ", XF86AudioNext, exec, playerctl next"
-      ", XF86AudioPause, exec, playerctl play-pause"
-      ", XF86AudioPlay, exec, playerctl play-pause"
-      ", XF86AudioPrev, exec, playerctl previous"
+      ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+      ", XF86AudioPause, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+      ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+      ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
     ];
   };
 }
