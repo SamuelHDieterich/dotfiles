@@ -15,13 +15,15 @@
     ...
   }: let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [];
+      config = {};
+    };
   in {
     homeConfigurations = {
       home = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-        };
+        inherit pkgs;
         modules = [
           ./profiles/home.nix
         ];
