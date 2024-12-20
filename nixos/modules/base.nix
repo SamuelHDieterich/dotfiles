@@ -95,6 +95,7 @@ in {
           "docker"
           "libvirt"
           "lp"
+          "scanner"
         ];
       };
     };

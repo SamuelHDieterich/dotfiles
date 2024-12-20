@@ -100,6 +100,9 @@
     powertop
     ddcutil
     #mission-center
+    # Printing/Scanning
+    system-config-printer
+    simple-scan
     # Network
     curl
     wget
