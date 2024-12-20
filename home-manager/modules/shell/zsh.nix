@@ -28,21 +28,26 @@
       bindkey '^Y' cmd_to_clip
       "
       # Autocomplete: accept next word
-      "bindkey '^[[Z' forward-word"
-      "bindkey '^[[1;5C' forward-word"
-      "bindkey '^[[1;5D' backward-word"
+      "
+      bindkey '^[[Z' forward-word
+      bindkey '^[[1;5C' forward-word
+      bindkey '^[[1;5D' backward-word
+      "
     ];
     shellAliases = {
-      ls = "eza --icons=always --color";
+      ls = "eza --icons=always --color=always";
       ll = "ls -l";
     };
 
-    history.size = 10000;
-    history.path = "${config.xdg.dataHome}/zsh/history";
+    history = {
+      size = 10000;
+      path = "${config.xdg.dataHome}/zsh/history";
+    };
   };
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
+  programs = {
+    zoxide.enable = true;
+    atuin.enable = true;
+    fzf.enable = true;
   };
 }
