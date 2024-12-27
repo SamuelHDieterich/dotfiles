@@ -1,15 +1,5 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-  home.packages = with pkgs; [
-    kitty
-    nerd-fonts.jetbrains-mono
-  ];
-
-  programs.kitty = lib.mkForce {
+{ ... }: {
+  programs.kitty = {
     enable = true;
     font = {
       name = "JetBrainsMono Nerd Font Mono";

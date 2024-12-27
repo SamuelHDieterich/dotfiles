@@ -118,6 +118,11 @@
     nh
   ];
 
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [ nerd-fonts.jetbrains-mono caladea ];
+  };
+
   # Programs
   programs.nix-ld.enable = true;  # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
   programs.steam.enable = true;
