@@ -83,10 +83,11 @@
   home.file = {};
 
   home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "code";
-    XCURSOR_THEME = "Bibata-Modern-Ice";
-    XCURSOR_SIZE = 20;
+    EDITOR = lib.getExe pkgs.neovim;
+    VISUAL = lib.getExe pkgs.vscode;
+    MANPAGER = lib.getExe pkgs.bat;
+    XCURSOR_THEME = config.gtk.cursorTheme.name;
+    XCURSOR_SIZE = config.gtk.cursorTheme.size;
   };
 
   # Let Home Manager install and manage itself.

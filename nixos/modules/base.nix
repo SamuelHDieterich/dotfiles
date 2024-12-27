@@ -102,5 +102,18 @@ in {
     
     # Shell
     programs.zsh.enable = true;
+
+    # Environment variables
+    environment.sessionVariables = rec {
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_STATE_HOME = "$HOME/.local/state";
+      ZDOTDIR = "${XDG_CONFIG_HOME}/zsh";
+      HISTFILE = "${XDG_STATE_HOME}/zsh/history";
+      CUDA_CACHE_PATH = "${XDG_CACHE_HOME}/nv";
+      GTK2_RC_FILES = "${XDG_CONFIG_HOME}/gtk-2.0/gtkrc";
+      XCOMPOSECACHE = "${XDG_CACHE_HOME}/X11/xcompose";
+    };
   };
  }
