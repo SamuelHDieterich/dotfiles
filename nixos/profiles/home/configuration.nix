@@ -57,6 +57,10 @@
   # Display manager
   services.displayManager.ly.enable = true;
 
+  # Keyring
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.ly.enableGnomeKeyring = true;
+
   # Disks
   services.gvfs.enable = true;
   services.udisks2.enable = true;
