@@ -1,18 +1,19 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  wayland.windowManager.hyprland.settings = {
+{ config, pkgs, lib, ... }: {
+  imports = [ ../../utilities/rofi.nix ];
+
+  wayland.windowManager.hyprland.settings = let
+    rofi-command =
+      "${lib.getExe config.programs.rofi.finalPackage} -steal-focus";
+  in {
     "$mod" = "SUPER";
-    "$terminal" = "${pkgs.kitty}/bin/kitty";
-    "$filemanager" = "${pkgs.xfce.thunar}/bin/thunar";
-    "$webbrowser" = "${pkgs.firefox}/bin/firefox";
-    "$drun" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
-    "$run" = "${pkgs.rofi-wayland}/bin/rofi -show run";
-    "$emoji" = "${pkgs.bemoji}/bin/bemoji -cn";
-    "$lock" = "${pkgs.hyprlock}/bin/hyprlock";
-    "$editor" = "${pkgs.vscode}/bin/code";
+    "$terminal" = lib.getExe pkgs.kitty;
+    "$filemanager" = lib.getExe pkgs.xfce.thunar;
+    "$webbrowser" = lib.getExe pkgs.firefox;
+    "$editor" = lib.getExe pkgs.vscode;
+    "$lock" = lib.getExe pkgs.hyprlock;
+    "$drun" = "${rofi-command} -show drun -show-icons";
+    "$run" = "${rofi-command} -show run -no-show-icons";
+    "$emoji" = "${rofi-command} -show emoji -no-show-icons -emoji-mode copy";
     bind = [
       # General system
       "$mod, C, killactive"
@@ -62,21 +63,29 @@
     ];
     bindel = [
       # Audio
-      ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-      ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-      ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-      
+      ", XF86AudioRaiseVolume, exec, ${
+        lib.getExe' pkgs.wireplumber "wpctl"
+      } set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+      ", XF86AudioLowerVolume, exec, ${
+        lib.getExe' pkgs.wireplumber "wpctl"
+      } set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      ", XF86AudioMute, exec, ${
+        lib.getExe' pkgs.wireplumber "wpctl"
+      } set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ", XF86AudioMicMute, exec, ${
+        lib.getExe' pkgs.wireplumber "wpctl"
+      } set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+
       # OSD
-      ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 10%+"
-      ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 10%-"
+      ", XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brightnessctl} s 10%+"
+      ", XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} s 10%-"
     ];
     bindl = [
       # Media
-      ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-      ", XF86AudioPause, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-      ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-      ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+      ", XF86AudioNext, exec, ${lib.getExe pkgs.playerctl} next"
+      ", XF86AudioPause, exec, ${lib.getExe pkgs.playerctl} play-pause"
+      ", XF86AudioPlay, exec, ${lib.getExe pkgs.playerctl} play-pause"
+      ", XF86AudioPrev, exec, ${lib.getExe pkgs.playerctl} previous"
     ];
   };
 }
