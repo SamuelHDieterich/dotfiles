@@ -22,6 +22,10 @@
   xdg.enable = true;
   gtk = {
     enable = true;
+    theme = {
+      package = pkgs.juno-theme;
+      name = "Juno-ocean";
+    };
     iconTheme = {
       package = pkgs.tela-icon-theme;
       name = "Tela";
@@ -31,20 +35,27 @@
       name = "Bibata-Modern-Ice";
       size = 20;
     };
-    gtk3 = {
-      extraConfig.gtk-application-prefer-dark-theme = true;
-    };
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
   };
   dconf = {
     enable = true;
     settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
+      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
     };
   };
   qt = {
     enable = true;
+    platformTheme.name = "qtct";
+    style.name = "kvantum";
+  };
+
+  xdg.configFile = {
+    "Kvantum/Sweet".source = "${pkgs.sweet-nova}/share/Kvantum/Sweet";
+    "Kvantum/kvantum.kvconfig".text = ''
+      [General]
+      theme=Sweet
+    '';
   };
 
   home.packages = with pkgs; [
