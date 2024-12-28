@@ -51,7 +51,7 @@
     spotify
     keepassxc
     vscode
-    tldr
+    tlrc
     ripgrep
     fastfetch
     powertop
@@ -60,7 +60,6 @@
     firefox
     thunderbird
     btop
-    emote
     pavucontrol
     eza
     zathura
@@ -68,14 +67,18 @@
     jq
     yq
     vlc
+    mpv
     inkscape
     gimp
+    obs-studio
     libreoffice
     nvtopPackages.full
-    zoxide
-    #mission-center
+    mission-center
     bat
     nh
+    grim
+    slurp
+    swappy
   ];
 
   services.udiskie.enable = true;

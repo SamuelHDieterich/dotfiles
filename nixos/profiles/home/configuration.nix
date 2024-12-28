@@ -103,7 +103,7 @@
     nvtopPackages.full
     powertop
     ddcutil
-    #mission-center
+    mission-center
     # Printing/Scanning
     system-config-printer
     simple-scan
@@ -116,6 +116,8 @@
     xdg-user-dirs
     # Nix
     nh
+    nil
+    nixfmt-classic
   ];
 
   fonts = {
