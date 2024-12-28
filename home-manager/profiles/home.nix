@@ -9,6 +9,7 @@
     ../modules/shell/starship.nix
     ../modules/terminal/kitty.nix
     ../modules/dev/git.nix
+    # ../modules/dev/vscode.nix
     ../modules/wm/hyprland/hyprland.nix
   ];
 
