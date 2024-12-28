@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ../modules/shell/zsh.nix
     ../modules/shell/starship.nix
@@ -95,7 +90,7 @@
 
   services.udiskie.enable = true;
 
-  home.file = {};
+  home.file = { };
 
   home.sessionVariables = {
     EDITOR = lib.getExe pkgs.neovim;

@@ -1,10 +1,6 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; let
-  cfg = config.nvidia;
+{ config, lib, ... }:
+with lib;
+let cfg = config.nvidia;
 in {
   options.nvidia = {
     package = mkOption {
@@ -51,7 +47,7 @@ in {
     hardware.graphics.enable = true;
 
     # Load nvidia driver for Xorg and Wayland
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = [ "nvidia" ];
 
     hardware.nvidia = {
       # Modesetting is required

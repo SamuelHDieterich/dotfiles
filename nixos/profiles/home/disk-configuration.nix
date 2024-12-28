@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, ... }: {
   disko.devices = {
     disk = {
       main = {
@@ -16,9 +16,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [
-                  "defaults"
-                ];
+                mountOptions = [ "defaults" ];
               };
             };
             luks = {
@@ -27,45 +25,31 @@
               content = {
                 name = "cryptroot";
                 type = "luks";
-		            settings = {
+                settings = {
                   allowDiscards = true;
                   bypassWorkqueues = true;
-		            };
+                };
                 content = {
                   type = "btrfs";
-                  extraArgs = ["-L" "nixos" "-f"];
+                  extraArgs = [ "-L" "nixos" "-f" ];
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";
-                      mountOptions = [
-                        "subvol=root"
-                        "compress=zstd"
-                        "noatime"
-                      ];
+                      mountOptions =
+                        [ "subvol=root" "compress=zstd" "noatime" ];
                     };
                     "/home" = {
                       mountpoint = "/home";
-                      mountOptions = [
-                        "subvol=home"
-                        "compress=zstd"
-                        "noatime"
-                      ];
+                      mountOptions =
+                        [ "subvol=home" "compress=zstd" "noatime" ];
                     };
                     "/nix" = {
                       mountpoint = "/nix";
-                      mountOptions = [
-                        "subvol=nix"
-                        "compress=zstd"
-                        "noatime"
-                      ];
+                      mountOptions = [ "subvol=nix" "compress=zstd" "noatime" ];
                     };
                     "/log" = {
                       mountpoint = "/var/log";
-                      mountOptions = [
-                        "subvol=log"
-                        "compress=zstd"
-                        "noatime"
-                      ];
+                      mountOptions = [ "subvol=log" "compress=zstd" "noatime" ];
                     };
                     "/swap" = {
                       mountpoint = "/swap";
@@ -93,7 +77,7 @@
                 settings = {
                   allowDiscards = true;
                   bypassWorkqueues = true;
-		            };
+                };
                 content = {
                   type = "filesystem";
                   format = "ext4";

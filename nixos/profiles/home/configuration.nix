@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{ lib, pkgs, ... }: {
   # Modules
   imports = [
     # Hardware
@@ -111,7 +106,6 @@
     curl
     wget
     # Misc
-    emote
     fastfetch
     xdg-user-dirs
     # Nix
@@ -126,6 +120,7 @@
   };
 
   # Programs
-  programs.nix-ld.enable = true;  # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
+  programs.nix-ld.enable =
+    true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
   programs.steam.enable = true;
 }

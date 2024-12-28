@@ -1,11 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-with lib; let
-  cfg = config.base;
+{ config, lib, pkgs, ... }:
+with lib;
+let cfg = config.base;
 in {
 
   # Options
@@ -44,7 +39,7 @@ in {
     nixpkgs.config.allowUnfree = cfg.nixos.allowUnfree;
     nix = {
       package = pkgs.nix;
-      settings.experimental-features = ["nix-command" "flakes"];
+      settings = { experimental-features = [ "nix-command" "flakes" ]; };
     };
     system.stateVersion = cfg.nixos.version;
 
@@ -67,9 +62,7 @@ in {
     time.timeZone = "America/Sao_Paulo";
 
     # Internationalization
-    i18n = {
-      defaultLocale = "en_US.UTF-8";
-    };
+    i18n = { defaultLocale = "en_US.UTF-8"; };
 
     # Keyboard
     console = {
@@ -99,7 +92,7 @@ in {
         ];
       };
     };
-    
+
     # Shell
     programs.zsh.enable = true;
 
@@ -116,4 +109,4 @@ in {
       XCOMPOSECACHE = "${XDG_CACHE_HOME}/X11/xcompose";
     };
   };
- }
+}

@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   imports = [
     ./monitors.nix
     ./input.nix

@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   wayland.windowManager.hyprland.settings.animations = {
     enabled = "yes";
     bezier = [

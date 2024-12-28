@@ -1,10 +1,6 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; let
-  cfg = config.power;
+{ config, lib, ... }:
+with lib;
+let cfg = config.power;
 in {
   options.power = {
     ac = mkOption {

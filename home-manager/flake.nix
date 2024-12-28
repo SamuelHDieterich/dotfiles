@@ -9,29 +9,24 @@
     };
   };
 
-  outputs = inputs @ {
-    nixpkgs, 
-    home-manager,
-    ...
-  }: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      overlays = [];
-      config = {};
-    };
-  in {
-    homeConfigurations = {
-      home = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./profiles/home.nix
-        ];
-        extraSpecialArgs = {
-          inherit system;
-          inherit inputs;
+  outputs = inputs@{ nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ ];
+        config = { };
+      };
+    in {
+      homeConfigurations = {
+        home = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./profiles/home.nix ];
+          extraSpecialArgs = {
+            inherit system;
+            inherit inputs;
+          };
         };
       };
     };
-  };
 }

@@ -1,11 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-with lib; let
-  cfg = config.audio;
+{ config, lib, pkgs, ... }:
+with lib;
+let cfg = config.audio;
 in {
   options.audio = {
     pipewire = mkOption {
@@ -20,23 +15,20 @@ in {
     };
   };
 
-  config =
-    {
-      security.rtkit.enable = true;
-    }
-    // lib.mkIf cfg.pipewire {
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulseaudio.enable = true;
-        jack.enable = true;
-      };
-    }
-    // lib.mkIf cfg.pulseaudio {
-     hardware.pulseaudio = {
-        enable = true;
-        package = pkgs.pulseaudioFull;
-      };
+  config = {
+    security.rtkit.enable = true;
+  } // lib.mkIf cfg.pipewire {
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulseaudio.enable = true;
+      jack.enable = true;
     };
+  } // lib.mkIf cfg.pulseaudio {
+    hardware.pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+    };
+  };
 }
