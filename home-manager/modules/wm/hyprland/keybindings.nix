@@ -18,7 +18,7 @@
         mkdir -p $SCREENSHOT_DIR
         ${
           lib.getExe pkgs.hyprshot
-        } -m ${mode} -z -o $SCREENSHOT_DIR -f $FILENAME.png
+        } -m ${mode} -z -s -o $SCREENSHOT_DIR -f $FILENAME.png
         sleep 0.5 # Wait for the screenshot to be saved
         ${lib.getExe pkgs.swappy} -f $SCREENSHOT_DIR/$FILENAME.png
       '';
