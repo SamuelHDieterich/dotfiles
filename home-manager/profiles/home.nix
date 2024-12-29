@@ -66,6 +66,7 @@
     # Media
     mpv
     vlc
+    imv
     spotify
     # Graphics
     inkscape

@@ -65,6 +65,9 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  # Thumbnails
+  services.tumbler.enable = true;
+
   # Packages
   environment.systemPackages = with pkgs; [
     # Editor
@@ -93,6 +96,7 @@
     inkscape
     # File Manager
     yazi
+    xfce.thunar
     # Password Manager
     keepassxc
     # Utilities
@@ -119,6 +123,7 @@
     nixfmt-classic
   ];
 
+  # Fonts
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [ nerd-fonts.jetbrains-mono caladea ];
