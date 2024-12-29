@@ -23,10 +23,23 @@
       "bindkey '^[[1;5D' backward-word"
       # For a clean $HOME 
       "compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+      # Nix develop alias
+      ''
+        nix() {
+          if [[ $1 == 'develop' ]]; then
+            shift
+            command nix develop -c $SHELL '$@'
+          else
+            command nix $@
+          fi
+        }
+      ''
     ];
     shellAliases = {
       ls = "eza --icons=always --color=always";
       ll = "ls -l";
+      lt = "ls --tree";
+      nix-shell = "nix-shell --run $SHELL";
     };
 
     history = {
