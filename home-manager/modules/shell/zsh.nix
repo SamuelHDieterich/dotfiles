@@ -36,7 +36,7 @@
       ''
     ];
     shellAliases = {
-      ls = "eza --icons=always --color=always";
+      ls = "${lib.getExe pkgs.eza} --icons=always --color=always";
       ll = "ls -l";
       lt = "ls --tree";
       nix-shell = "nix-shell --run $SHELL";

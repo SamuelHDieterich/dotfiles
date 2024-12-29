@@ -28,6 +28,7 @@
     "$filemanager" = lib.getExe pkgs.xfce.thunar;
     "$webbrowser" = lib.getExe pkgs.firefox;
     "$editor" = lib.getExe pkgs.vscode;
+    "$pass" = lib.getExe pkgs.keepassxc;
     "$lock" = lib.getExe pkgs.hyprlock;
     "$drun" = "${rofi-command} -show drun -show-icons";
     "$run" = "${rofi-command} -show run -no-show-icons";
@@ -59,6 +60,7 @@
       "$mod, E, exec, $filemanager"
       "$mod, B, exec, $webbrowser"
       "$mod, V, exec, $editor"
+      "$mod, K, exec, $pass"
       "$mod, A, exec, $drun"
       "$mod, R, exec, $run"
       "$mod, period, exec, $emoji"

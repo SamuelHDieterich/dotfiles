@@ -55,37 +55,41 @@
   };
 
   home.packages = with pkgs; [
-    spotify
-    keepassxc
+    # Editor
     vscode
-    tlrc
-    ripgrep
-    fastfetch
-    powertop
-    yazi
-    p7zip
+    # Browser
     firefox
-    thunderbird
-    btop
-    pavucontrol
-    eza
+    # Office
+    libreoffice
     zathura
-    wl-clipboard
-    jq
-    yq
-    vlc
+    thunderbird
+    # Media
     mpv
+    vlc
+    spotify
+    # Graphics
     inkscape
     gimp
     obs-studio
-    libreoffice
-    nvtopPackages.full
+    # File Manager
+    yazi
+    xfce.thunar
+    # Password Manager
+    keepassxc
+    # Utilities
+    tlrc
+    ripgrep
+    btop
+    powertop
     mission-center
-    bat
-    nh
-    grim
-    slurp
+    p7zip
+    pavucontrol
+    jq
+    yq
+    nvtopPackages.full
     swappy
+    # Misc
+    fastfetch
   ];
 
   services.udiskie.enable = true;
