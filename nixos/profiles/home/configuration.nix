@@ -29,8 +29,13 @@
 
   # Secure boot
   boot = {
+    loader.timeout = 0; # Skip boot menu, press any key to show it
     initrd.systemd.enable = true;
-    loader.systemd-boot.enable = lib.mkForce false;
+    loader.systemd-boot = {
+      enable = lib.mkForce false; # Use Lanzaboote
+      editor = false; # Prevent editing boot entries
+    };
+    # Secure boot
     lanzaboote = {
       enable = true;
       pkiBundle = "/etc/secureboot";
