@@ -1,9 +1,27 @@
 { config, pkgs, lib, ... }: {
   imports = [ ../../utilities/rofi.nix ];
+  xdg.configFile = {
+    "swappy/config".text = ''
+      [Default]
+      save_dir=~/Pictures/Screenshots
+      save_filename_format=%Y-%m-%d_%H-%M-%S.png
+    '';
+  };
 
   wayland.windowManager.hyprland.settings = let
     rofi-command =
       "${lib.getExe config.programs.rofi.finalPackage} -steal-focus";
+    screenshot-command = mode:
+      pkgs.writeShellScript "screenshot-command" ''
+        SCREENSHOT_DIR=~/Pictures/Screenshots
+        FILENAME=$(date +%Y-%m-%d_%H-%M-%S)
+        mkdir -p $SCREENSHOT_DIR
+        ${
+          lib.getExe pkgs.hyprshot
+        } -m ${mode} -z -o $SCREENSHOT_DIR -f $FILENAME.png
+        sleep 0.5 # Wait for the screenshot to be saved
+        ${lib.getExe pkgs.swappy} -f $SCREENSHOT_DIR/$FILENAME.png
+      '';
   in {
     "$mod" = "SUPER";
     "$terminal" = lib.getExe pkgs.kitty;
@@ -29,8 +47,8 @@
       "$mod, down, movefocus, d"
 
       # Special workspace (scratchpad)
-      "$mod, S, togglespecialworkspace, magic"
-      "$mod SHIFT, S, movetoworkspace, special:magic"
+      "$mod, Z, togglespecialworkspace, magic"
+      "$mod SHIFT, Z, movetoworkspace, special:magic"
 
       # Scroll through existing workspaces
       "$mod, mouse_down, workspace, e+1"
@@ -44,6 +62,14 @@
       "$mod, A, exec, $drun"
       "$mod, R, exec, $run"
       "$mod, period, exec, $emoji"
+
+      # Screenshots
+      ", Print, exec, ${screenshot-command "region"}"
+      "$mod, S, exec, ${screenshot-command "region"}"
+      "SHIFT, Print, exec, ${screenshot-command "window"}"
+      "$mod SHIFT, S, exec, ${screenshot-command "window"}"
+      "ALT, Print, exec, ${screenshot-command "output"}"
+      "$mod ALT, S, exec, ${screenshot-command "output"}"
     ] ++ (
       # Workspaces
       # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
