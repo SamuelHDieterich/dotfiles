@@ -59,6 +59,7 @@
     vscode
     # Browser
     firefox
+    qbittorrent
     # Office
     libreoffice
     zathura
