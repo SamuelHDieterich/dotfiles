@@ -5,17 +5,15 @@ in {
 
   # Options
   options.base = {
-    nixos = {
-      allowUnfree = mkOption {
-        type = types.bool;
-        default = true;
-        description = "Allow unfree packages.";
-      };
-      version = mkOption {
-        type = types.str;
-        default = "24.05";
-        description = "The NixOS version.";
-      };
+    allowUnfree = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Allow unfree packages.";
+    };
+    version = mkOption {
+      type = types.str;
+      default = "24.05";
+      description = "The NixOS version.";
     };
     bootloader = mkOption {
       type = types.str;
@@ -35,13 +33,21 @@ in {
   };
 
   config = {
-    # Nix & NixOS
-    nixpkgs.config.allowUnfree = cfg.nixos.allowUnfree;
+    # Nix
+    nixpkgs.config.allowUnfree = cfg.allowUnfree;
     nix = {
       package = pkgs.nix;
-      settings = { experimental-features = [ "nix-command" "flakes" ]; };
+      settings = {
+        auto-optimise-store = true;
+        experimental-features = [ "nix-command" "flakes" ];
+      };
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 15d";
+      };
     };
-    system.stateVersion = cfg.nixos.version;
+    system.stateVersion = cfg.version;
 
     # Boot
     boot = {

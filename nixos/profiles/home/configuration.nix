@@ -18,13 +18,10 @@
 
   # Base configuration
   base = {
-    nixos = {
-      allowUnfree = true;
-      version = "24.05";
-    };
-    # bootloader = "systemd-boot"; # Lanzaboote
     hostname = "nixos";
+    version = "24.05";
     username = "samuel";
+    allowUnfree = true;
   };
 
   # Secure boot

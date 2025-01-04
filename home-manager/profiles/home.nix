@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
+    ../modules/base.nix
     ../modules/shell/zsh.nix
     ../modules/shell/starship.nix
     ../modules/terminal/kitty.nix
@@ -8,11 +9,10 @@
     ../modules/wm/hyprland/hyprland.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
-  home = {
+  # Base configuration
+  base = {
     username = "samuel";
-    homeDirectory = "/home/samuel";
+    allowUnfree = true;
   };
 
   xdg.enable = true;
@@ -95,8 +95,6 @@
 
   services.udiskie.enable = true;
 
-  home.file = { };
-
   home.sessionVariables = {
     EDITOR = lib.getExe pkgs.neovim;
     VISUAL = lib.getExe pkgs.vscode;
@@ -104,10 +102,4 @@
     XCURSOR_THEME = config.gtk.cursorTheme.name;
     XCURSOR_SIZE = config.gtk.cursorTheme.size;
   };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
-  # Check the documentation before changing this.
-  home.stateVersion = "24.05";
 }
