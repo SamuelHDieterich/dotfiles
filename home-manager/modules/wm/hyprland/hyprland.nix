@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./monitors.nix
+    ./hyprpaper.nix
     ./input.nix
     ./keybindings.nix
     ./animations.nix

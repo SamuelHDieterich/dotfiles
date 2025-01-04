@@ -2,7 +2,7 @@
   services = {
     printing = {
       enable = true;
-      drivers = [ pkgs.epson_201207w ];
+      # drivers = [ pkgs.epson_201207w ]; # Stopped working
     };
     # Support for wireless printers
     avahi = {
