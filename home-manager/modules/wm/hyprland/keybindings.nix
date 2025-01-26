@@ -22,6 +22,9 @@
         sleep 0.5 # Wait for the screenshot to be saved
         ${lib.getExe pkgs.swappy} -f $SCREENSHOT_DIR/$FILENAME.png
       '';
+    ws-plugin =
+      lib.attrByPath [ "settings" "plugin" "split-monitor-workspace" ] false
+      config.wayland.windowManager.hyprland;
   in {
     "$mod" = "SUPER";
     "$terminal" = lib.getExe pkgs.kitty;
@@ -31,6 +34,7 @@
     "$pass" = lib.getExe pkgs.keepassxc;
     "$lock" = lib.getExe pkgs.hyprlock;
     "$drun" = "${rofi-command} -show drun -show-icons";
+    "$dmenu" = "${rofi-command} -dmenu";
     "$run" = "${rofi-command} -show run -no-show-icons";
     "$emoji" = "${rofi-command} -show emoji -no-show-icons -emoji-mode copy";
     bind = [
@@ -40,6 +44,8 @@
       "$mod, F, fullscreen"
       "$mod, space, togglefloating"
       "$mod, L, exec, $lock"
+      "$mod, P, pseudo,"
+      "$mod, J, togglesplit,"
 
       # Move focus
       "$mod, left, movefocus, l"
@@ -72,15 +78,32 @@
       "$mod SHIFT, S, exec, ${screenshot-command "window"}"
       "ALT, Print, exec, ${screenshot-command "output"}"
       "$mod ALT, S, exec, ${screenshot-command "output"}"
-    ] ++ (
-      # Workspaces
-      # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-      builtins.concatLists (builtins.genList (i:
-        let ws = i + 1;
-        in [
-          "$mod, code:1${toString i}, workspace, ${toString ws}"
-          "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-        ]) 9));
+
+      # Clipboard
+      "$mod SHIFT, C, exec, ${lib.getExe pkgs.cliphist} list | $dmenu | ${
+        lib.getExe pkgs.cliphist
+      } decode | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}"
+    ] ++
+      # Split monitor workspaces
+      [
+        "$mod SHIFT, Left, split-changemonitorsilent, prev"
+        "$mod SHIFT, Right, split-changemonitorsilent, next"
+      ] ++ (
+        # Workspaces
+        # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+        builtins.concatLists (builtins.genList (i:
+          let ws = i + 1;
+          in [
+            "$mod, code:1${toString i}, ${
+              if ws-plugin then "split-workspace" else "workspace"
+            }, ${toString ws}"
+            "$mod SHIFT, code:1${toString i}, ${
+              if ws-plugin then
+                "split-movetoworkspacesilent"
+              else
+                "movetoworkspace"
+            }, ${toString ws}"
+          ]) 9));
     bindm = [
       # Move/resize windows
       "$mod, mouse:272, movewindow"
@@ -111,6 +134,10 @@
       ", XF86AudioPause, exec, ${lib.getExe pkgs.playerctl} play-pause"
       ", XF86AudioPlay, exec, ${lib.getExe pkgs.playerctl} play-pause"
       ", XF86AudioPrev, exec, ${lib.getExe pkgs.playerctl} previous"
+
+      # Lock screen
+      ", switch:on:Lid Switch, exec, hyprctl dispatch dpms off"
+      ", switch:off:Lid Switch, exec, hyprctl dispatch dpms on"
     ];
   };
 }

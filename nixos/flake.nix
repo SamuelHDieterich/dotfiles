@@ -11,6 +11,10 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ nixpkgs, disko, lanzaboote, ... }:
@@ -27,6 +31,7 @@
             lanzaboote.nixosModules.lanzaboote # Secure boot
             ./profiles/home/configuration.nix # Regular NiXOS configuration
           ];
+          specialArgs = { inherit inputs; };
         };
       };
     };

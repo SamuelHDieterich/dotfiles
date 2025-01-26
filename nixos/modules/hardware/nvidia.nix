@@ -10,7 +10,7 @@ in {
     };
     open = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = "Enable the open-source driver version.";
     };
     powerManagement = mkOption {
