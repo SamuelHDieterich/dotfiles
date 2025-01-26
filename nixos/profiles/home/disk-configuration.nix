@@ -90,4 +90,8 @@
       };
     };
   };
+  syetemd.tmpfiles.rules = [
+    # Create /backup folder and make it writable for all users
+    "d /backup 0777 root root -"
+  ];
 }
