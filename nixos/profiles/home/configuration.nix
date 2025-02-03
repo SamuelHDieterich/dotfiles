@@ -40,7 +40,7 @@
   };
 
   # Firmware
-  # services.fwupd.enable = true;
+  services.fwupd.enable = true;
 
   # I2C
   hardware.i2c.enable = true;
