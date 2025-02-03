@@ -35,12 +35,12 @@
     # Secure boot
     lanzaboote = {
       enable = true;
-      pkiBundle = "/etc/secureboot";
+      pkiBundle = "/var/lib/sbctl";
     };
   };
 
   # Firmware
-  services.fwupd.enable = true;
+  # services.fwupd.enable = true;
 
   # I2C
   hardware.i2c.enable = true;
