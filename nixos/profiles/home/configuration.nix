@@ -12,6 +12,8 @@
     ../../modules/hardware/power.nix
     ../../modules/hardware/printing.nix
     ../../modules/hardware/time.nix
+    # Display Manager
+    ../../modules/display_manager/greetd.nix
     # Window Manager
     ../../modules/wm/hyprland.nix
   ];
@@ -24,9 +26,9 @@
     allowUnfree = true;
   };
 
-  # Secure boot
+  # Boot and kernel
   boot = {
-    loader.timeout = 0; # Skip boot menu, press any key to show it
+    loader.timeout = 0; # Skip boot menu, press "space" key to show it
     initrd.systemd.enable = true;
     loader.systemd-boot = {
       enable = lib.mkForce false; # Use Lanzaboote
@@ -37,6 +39,7 @@
       enable = true;
       pkiBundle = "/var/lib/sbctl";
     };
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   # Firmware
@@ -46,17 +49,27 @@
   hardware.i2c.enable = true;
 
   # Nvidia
-  nvidia.prime.busId = {
-    nvidia = "PCI:1:0:0";
-    intel = "PCI:0:2:0";
+  nvidia = {
+    package = "latest";
+    open = true;
+    powerManagement = true;
+    prime = {
+      enable = true;
+      renderOffload = true;
+      busId = {
+        nvidia = "PCI:1:0:0";
+        intel = "PCI:0:2:0";
+      };
+    };
   };
 
   # Display manager
-  services.displayManager.ly.enable = true;
+  # services.displayManager.ly.enable = true;
 
   # Keyring
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.ly.enableGnomeKeyring = true;
+  # security.pam.services.ly.enableGnomeKeyring = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
 
   # Disks
   services.gvfs.enable = true;

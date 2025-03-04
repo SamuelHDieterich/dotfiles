@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, osConfig, ... }:
 with lib;
 let cfg = config.base;
 in {
@@ -23,10 +23,7 @@ in {
   };
 
   config = {
-    # Nix
-    nixpkgs.config.allowUnfree = cfg.allowUnfree;
     nix = {
-      package = pkgs.nix;
       settings = {
         auto-optimise-store = true;
         experimental-features = [ "nix-command" "flakes" ];
@@ -36,6 +33,8 @@ in {
         frequency = "weekly";
         options = "--delete-older-than 15d";
       };
+    } // lib.optionalAttrs (!osConfig.home-manager.useGlobalPkgs) {
+      nixpkgs.config.allowUnfree = cfg.allowUnfree;
     };
 
     # Home

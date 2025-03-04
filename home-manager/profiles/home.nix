@@ -23,8 +23,8 @@
       name = "Juno-ocean";
     };
     iconTheme = {
-      package = pkgs.tela-icon-theme;
-      name = "Tela";
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
     };
     cursorTheme = {
       package = pkgs.bibata-cursors;
@@ -64,6 +64,8 @@
     libreoffice
     zathura
     thunderbird
+    obsidian
+    google-fonts
     # Media
     mpv
     vlc
@@ -76,6 +78,7 @@
     # File Manager
     yazi
     xfce.thunar
+    xfce.thunar-archive-plugin
     # Password Manager
     keepassxc
     # Utilities
@@ -90,6 +93,7 @@
     yq
     nvtopPackages.full
     swappy
+    syncthing
     # Misc
     fastfetch
   ];
