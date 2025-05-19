@@ -65,12 +65,9 @@
     };
   };
 
-  # Display manager
-  # services.displayManager.ly.enable = true;
-
   # Keyring
   services.gnome.gnome-keyring.enable = true;
-  # security.pam.services.ly.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
 
   # Disks
