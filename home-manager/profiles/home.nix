@@ -15,6 +15,14 @@
     allowUnfree = true;
   };
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    hyprcursor.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 20;
+  };
+
   xdg.enable = true;
   gtk = {
     enable = true;
@@ -25,11 +33,6 @@
     iconTheme = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
-    };
-    cursorTheme = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
-      size = 20;
     };
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
     gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
@@ -104,7 +107,5 @@
     EDITOR = lib.getExe pkgs.neovim;
     VISUAL = lib.getExe pkgs.vscode;
     MANPAGER = lib.getExe pkgs.bat;
-    XCURSOR_THEME = config.gtk.cursorTheme.name;
-    XCURSOR_SIZE = config.gtk.cursorTheme.size;
   };
 }
