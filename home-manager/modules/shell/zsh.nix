@@ -12,7 +12,7 @@
     syntaxHighlighting.enable = true;
 
     # Get a Keystroke: CTRL+V + <key combination>
-    initExtra = lib.strings.concatStringsSep "\n" [
+    initContent = lib.strings.concatStringsSep "\n" [
       # Copy current buffer to clipboard
       "cmd_to_clip () { wl-copy -n <<< $BUFFER }"
       "zle -N cmd_to_clip"
