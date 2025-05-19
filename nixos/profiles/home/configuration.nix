@@ -16,6 +16,8 @@
     ../../modules/display_manager/greetd.nix
     # Window Manager
     ../../modules/wm/hyprland.nix
+    # Development
+    ../../modules/dev/virtmanager.nix
   ];
 
   # Base configuration

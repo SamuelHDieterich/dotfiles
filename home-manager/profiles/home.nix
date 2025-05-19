@@ -6,6 +6,7 @@
     ../modules/terminal/kitty.nix
     ../modules/dev/git.nix
     # ../modules/dev/vscode.nix
+    ../modules/dev/virtmanager.nix
     ../modules/wm/hyprland/hyprland.nix
   ];
 
