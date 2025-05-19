@@ -64,6 +64,14 @@
     # Browser
     firefox
     qbittorrent
+    # Development
+    git
+    lazygit
+    jq
+    yq
+    jnv
+    docker
+    docker-compose
     # Office
     libreoffice
     zathura
@@ -88,7 +96,7 @@
     # Utilities
     tlrc
     ripgrep
-    btop
+    (btop.override { cudaSupport = true; })
     powertop
     mission-center
     p7zip
