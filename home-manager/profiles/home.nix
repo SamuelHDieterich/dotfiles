@@ -1,12 +1,19 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ../modules/base.nix
+    # Shell
+    ../modules/shell/bash.nix
     ../modules/shell/zsh.nix
+    ../modules/shell/fish.nix
+    ../modules/shell/nushell.nix
     ../modules/shell/starship.nix
+    # Terminal
     ../modules/terminal/kitty.nix
+    # Development
     ../modules/dev/git.nix
     # ../modules/dev/vscode.nix
     ../modules/dev/virtmanager.nix
+    # Window Manager
     ../modules/wm/hyprland/hyprland.nix
   ];
 
@@ -94,6 +101,9 @@
     # Password Manager
     keepassxc
     # Utilities
+    eza
+    bat
+    glow
     tlrc
     ripgrep
     (btop.override { cudaSupport = true; })
@@ -115,6 +125,6 @@
   home.sessionVariables = {
     EDITOR = lib.getExe pkgs.neovim;
     VISUAL = lib.getExe pkgs.vscode;
-    MANPAGER = lib.getExe pkgs.bat;
+    MANPAGER = lib.getExe pkgs.bat-extras.batman;
   };
 }

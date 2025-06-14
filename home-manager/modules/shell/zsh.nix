@@ -1,6 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
-  home.packages = with pkgs; [ eza wl-clipboard ];
+  imports = [ ./common.nix ];
 
   programs.zsh = {
     enable = true;
@@ -35,12 +35,7 @@
         }
       ''
     ];
-    shellAliases = {
-      ls = "${lib.getExe pkgs.eza} --icons=always --color=always";
-      ll = "ls -l";
-      lt = "ls --tree";
-      nix-shell = "nix-shell --run $SHELL";
-    };
+    shellAliases = config.shellAliases;
 
     history = {
       size = 10000;
@@ -48,9 +43,4 @@
     };
   };
 
-  programs = {
-    zoxide.enable = true;
-    atuin.enable = true;
-    fzf.enable = true;
-  };
 }
