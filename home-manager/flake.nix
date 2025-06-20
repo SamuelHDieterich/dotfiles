@@ -27,6 +27,14 @@
             inherit inputs;
           };
         };
+        work = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./profiles/work.nix ];
+          extraSpecialArgs = {
+            inherit system;
+            inherit inputs;
+          };
+        };
       };
     };
 }

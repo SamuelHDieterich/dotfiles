@@ -10,6 +10,7 @@
       background_opacity = "0.9";
       enable_audio_bell = false;
       window_margin_width = 10;
+      hide_window_decorations = true;
     };
   };
 }
