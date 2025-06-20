@@ -24,6 +24,11 @@ while true; do
             break;;
     esac
 done
-nix-channel --add https://github.com/nix-community/home-manager/archive/${branch}.tar.gz home-manager
+
+nix \
+    --extra-experimental-features nix-command \
+    nix-channel \
+    --add https://github.com/nix-community/home-manager/archive/${branch}.tar.gz \
+    home-manager
 nix-channel --update
 nix run home-manager/${branch} -- init --switch
