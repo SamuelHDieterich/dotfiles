@@ -94,6 +94,7 @@ in {
           "storage"
           "docker"
           "libvirt"
+          "libvirtd"
           "lp"
           "scanner"
         ];

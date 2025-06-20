@@ -9,5 +9,8 @@
     ./windowrules.nix
     ./autostart.nix
   ];
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.variables = [ "--all" ];
+  };
 }

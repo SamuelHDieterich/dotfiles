@@ -6,7 +6,7 @@ in {
     package = mkOption {
       type = types.str;
       default = "stable";
-      description = "The NVIDIA driver package to use: stable or beta.";
+      description = "The NVIDIA driver package to use: stable, latest, beta, production, etc.";
     };
     open = mkOption {
       type = types.bool;
@@ -67,7 +67,7 @@ in {
 
       nvidiaSettings = true;
 
-      open = false;
+      open = cfg.open;
       package = config.boot.kernelPackages.nvidiaPackages.${cfg.package};
     };
   };

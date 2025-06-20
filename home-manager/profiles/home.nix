@@ -1,11 +1,19 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ../modules/base.nix
+    # Shell
+    ../modules/shell/bash.nix
     ../modules/shell/zsh.nix
+    ../modules/shell/fish.nix
+    ../modules/shell/nushell.nix
     ../modules/shell/starship.nix
+    # Terminal
     ../modules/terminal/kitty.nix
+    # Development
     ../modules/dev/git.nix
     # ../modules/dev/vscode.nix
+    ../modules/dev/virtmanager.nix
+    # Window Manager
     ../modules/wm/hyprland/hyprland.nix
   ];
 
@@ -13,6 +21,14 @@
   base = {
     username = "samuel";
     allowUnfree = true;
+  };
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    hyprcursor.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 20;
   };
 
   xdg.enable = true;
@@ -23,13 +39,8 @@
       name = "Juno-ocean";
     };
     iconTheme = {
-      package = pkgs.tela-icon-theme;
-      name = "Tela";
-    };
-    cursorTheme = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
-      size = 20;
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
     };
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
     gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
@@ -60,10 +71,20 @@
     # Browser
     firefox
     qbittorrent
+    # Development
+    git
+    lazygit
+    jq
+    yq
+    jnv
+    docker
+    docker-compose
     # Office
     libreoffice
     zathura
     thunderbird
+    obsidian
+    google-fonts
     # Media
     mpv
     vlc
@@ -76,12 +97,16 @@
     # File Manager
     yazi
     xfce.thunar
+    xfce.thunar-archive-plugin
     # Password Manager
     keepassxc
     # Utilities
+    eza
+    bat
+    glow
     tlrc
     ripgrep
-    btop
+    (btop.override { cudaSupport = true; })
     powertop
     mission-center
     p7zip
@@ -90,6 +115,7 @@
     yq
     nvtopPackages.full
     swappy
+    syncthing
     # Misc
     fastfetch
   ];
@@ -99,8 +125,6 @@
   home.sessionVariables = {
     EDITOR = lib.getExe pkgs.neovim;
     VISUAL = lib.getExe pkgs.vscode;
-    MANPAGER = lib.getExe pkgs.bat;
-    XCURSOR_THEME = config.gtk.cursorTheme.name;
-    XCURSOR_SIZE = config.gtk.cursorTheme.size;
+    MANPAGER = lib.getExe pkgs.bat-extras.batman;
   };
 }

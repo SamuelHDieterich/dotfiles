@@ -33,6 +33,7 @@
     "$drun" = "${rofi-command} -show drun -show-icons";
     "$run" = "${rofi-command} -show run -no-show-icons";
     "$emoji" = "${rofi-command} -show emoji -no-show-icons -emoji-mode copy";
+    "$colorpicker" = "${lib.getExe pkgs.hyprpicker} -a";
     bind = [
       # General system
       "$mod, C, killactive"
@@ -64,6 +65,7 @@
       "$mod, A, exec, $drun"
       "$mod, R, exec, $run"
       "$mod, period, exec, $emoji"
+      "$mod, P, exec, $colorpicker"
 
       # Screenshots
       ", Print, exec, ${screenshot-command "region"}"
