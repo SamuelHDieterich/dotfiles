@@ -18,6 +18,7 @@
     ../../modules/wm/hyprland.nix
     # Development
     ../../modules/dev/virtmanager.nix
+    ../../modules/dev/tailscale.nix
   ];
 
   # Base configuration
