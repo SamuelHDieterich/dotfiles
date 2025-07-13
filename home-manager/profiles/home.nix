@@ -13,8 +13,9 @@
     ../modules/dev/git.nix
     # ../modules/dev/vscode.nix
     ../modules/dev/virtmanager.nix
-    # Window Manager
+    # Desktop
     ../modules/wm/hyprland/hyprland.nix
+    ../modules/utilities/waybar.nix
   ];
 
   # Base configuration
@@ -79,6 +80,7 @@
     jnv
     docker
     docker-compose
+    devenv
     # Office
     libreoffice
     zathura
