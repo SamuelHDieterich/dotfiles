@@ -68,58 +68,63 @@
 
   home.packages = with pkgs; [
     # Editor
-    vscode
+    vscode # Visual Studio Code
     # Browser
-    firefox
-    qbittorrent
+    firefox # 🔥🦊
     # Development
-    git
-    lazygit
-    jq
-    yq
-    jnv
-    docker
-    docker-compose
-    devenv
+    git # Version control
+    lazygit # Git TUI
+    jq # JSON processor
+    yq # YAML processor
+    jnv # jq TUI
+    jless # JSON viewer
+    difftastic # Structural diff tool
+    docker # Container management
+    docker-compose # Multi-docker management
+    devenv # Development environment management
     # Office
-    libreoffice
-    zathura
-    thunderbird
-    obsidian
-    google-fonts
+    libreoffice # Office suite
+    zathura # PDF viewer
+    thunderbird # Email client
+    obsidian # Note-taking app
+    google-fonts # Google Fonts
     # Media
-    mpv
-    vlc
-    imv
-    spotify
+    mpv # Media player
+    vlc # Media player
+    imv # Image viewer
+    spotify # Music streaming
+    freetube # YouTube client
     # Graphics
-    inkscape
-    gimp
-    obs-studio
+    inkscape # Vector graphics editor
+    gimp # Raster graphics editor
+    obs-studio # Screen recording and streaming
     # File Manager
-    yazi
-    xfce.thunar
-    xfce.thunar-archive-plugin
+    yazi # TUI
+    xfce.thunar # GUI
+    xfce.thunar-archive-plugin # Archive support for Thunar
     # Password Manager
     keepassxc
     # Utilities
-    eza
-    bat
-    glow
-    tlrc
-    ripgrep
-    (btop.override { cudaSupport = true; })
-    powertop
-    mission-center
-    p7zip
-    pavucontrol
-    jq
-    yq
-    nvtopPackages.full
-    swappy
-    syncthing
+    eza # Enhanced ls
+    bat # Cat replacement
+    glow # Markdown viewer
+    tlrc # Straightforward helper
+    ripgrep # Enhanced grep
+    (btop.override { cudaSupport = true; }) # System monitor
+    mission-center # System monitor
+    powertop # Power consumption monitor
+    p7zip # Archive manager
+    pavucontrol # PulseAudio volume control
+    nvtopPackages.full # NVIDIA GPU monitor
+    swappy # Image editor
+    syncthing # File synchronization
+    dysk # Disk usage analyzer
+    dua # Disk usage analyzer
+    fselect # Query file system
+    fd # Alternative to find
     # Misc
-    fastfetch
+    fastfetch # System information tool
+    qbittorrent # Torrent client
   ];
 
   services.udiskie.enable = true;
