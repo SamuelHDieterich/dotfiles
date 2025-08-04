@@ -71,6 +71,7 @@
     vscode # Visual Studio Code
     # Browser
     firefox # 🔥🦊
+    brave # 🦁
     # Development
     git # Version control
     lazygit # Git TUI
