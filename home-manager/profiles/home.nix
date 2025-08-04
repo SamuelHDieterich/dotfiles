@@ -52,19 +52,19 @@
       "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
     };
   };
-  qt = {
-    enable = true;
-    platformTheme.name = "qtct";
-    style.name = "kvantum";
-  };
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "qtct";
+  #   style.name = "kvantum";
+  # };
 
-  xdg.configFile = {
-    "Kvantum/Sweet".source = "${pkgs.sweet-nova}/share/Kvantum/Sweet";
-    "Kvantum/kvantum.kvconfig".text = ''
-      [General]
-      theme=Sweet
-    '';
-  };
+  # xdg.configFile = {
+  #   "Kvantum/Sweet".source = "${pkgs.sweet-nova}/share/Kvantum/Sweet";
+  #   "Kvantum/kvantum.kvconfig".text = ''
+  #     [General]
+  #     theme=Sweet
+  #   '';
+  # };
 
   home.packages = with pkgs; [
     # Editor
