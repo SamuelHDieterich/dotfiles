@@ -68,8 +68,12 @@
 
   # Keyring
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
-  security.pam.services.greetd.enableGnomeKeyring = true;
+  programs.seahorse.enable = true;
+  security.pam.services = {
+    gretd.enableGnomeKeyring = true;
+    gretd-password.enableGnomeKeyring = true;
+    login.enableGnomeKeyring = true;
+  };
 
   # Disks
   services.gvfs.enable = true;
