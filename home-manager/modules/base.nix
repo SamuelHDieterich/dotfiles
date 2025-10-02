@@ -24,6 +24,7 @@ in {
 
   config = {
     nix = {
+      package = pkgs.nix;
       settings = {
         auto-optimise-store = true;
         experimental-features = [ "nix-command" "flakes" ];
@@ -33,9 +34,8 @@ in {
         frequency = "weekly";
         options = "--delete-older-than 15d";
       };
-    } // lib.optionalAttrs (!osConfig.home-manager.useGlobalPkgs) {
-      nixpkgs.config.allowUnfree = cfg.allowUnfree;
     };
+    nixpkgs.config.allowUnfree = cfg.allowUnfree;
 
     # Home
     home = {

@@ -5,6 +5,7 @@
     ../modules/shell/starship.nix
     ../modules/terminal/kitty.nix
     ../modules/dev/git.nix
+    # ../modules/dev/neovim.nix
     ../modules/utilities/rofi.nix
   ];
 
@@ -46,9 +47,10 @@
 
   home.packages = with pkgs; [
     # Editor
-    # vscode
+    vscode
+    neovim
     # Browser
-    # firefox
+    firefox
     # Development
     kubectl
     kubernetes-helm
@@ -56,13 +58,15 @@
     opentofu
     terragrunt
     postman
+    devenv
+    direnv
     # Office
-    # libreoffice
-    # # zathura
+    libreoffice
+    zathura
     # # thunderbird
     # # Media
-    # # mpv
-    # # vlc
+    mpv
+    vlc
     # # imv
     spotify
     # Graphics
@@ -72,7 +76,7 @@
     # # File Manager
     yazi
     # Password Manager
-    # keepassxc
+    keepassxc
     # Utilities
     tlrc
     ripgrep
@@ -84,6 +88,7 @@
     jnv
     yq
     swappy
+    bat
     # Misc
     fastfetch
     # Nix
@@ -91,11 +96,10 @@
     nil
     nixfmt-classic
   ];
-  
+
   home.sessionVariables = {
     EDITOR = lib.getExe pkgs.neovim;
     VISUAL = lib.getExe pkgs.vscode;
-    MANPAGER = lib.getExe pkgs.bat;
     XCURSOR_THEME = config.gtk.cursorTheme.name;
     XCURSOR_SIZE = config.gtk.cursorTheme.size;
   };

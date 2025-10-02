@@ -26,6 +26,7 @@ with types; {
       zoxide.enable = true;
       atuin.enable = true;
       fzf.enable = true;
+      direnv.enable = true;
     };
   };
 }
