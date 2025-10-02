@@ -7,14 +7,21 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvf-config = {
+      url = "path:./modules/dev/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, nvf-config, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ ];
+        overlays = [
+          # Overlay to replace neovim with nvf-neovim
+          (final: prev: { neovim = nvf-config.packages.${system}.default; })
+        ];
         config = { };
       };
     in {
