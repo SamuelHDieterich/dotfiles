@@ -24,14 +24,13 @@ in {
 
   config = {
     nix = {
-      package = pkgs.nix;
       settings = {
         auto-optimise-store = true;
         experimental-features = [ "nix-command" "flakes" ];
       };
       gc = {
         automatic = true;
-        frequency = "weekly";
+        dates = "weekly";
         options = "--delete-older-than 15d";
       };
     };
