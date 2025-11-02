@@ -42,7 +42,7 @@
       enable = true;
       pkiBundle = "/var/lib/sbctl";
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
   };
 
   # Firmware
