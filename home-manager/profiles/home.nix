@@ -8,9 +8,11 @@
     ../modules/shell/nushell.nix
     ../modules/shell/starship.nix
     # Terminal
+    ../modules/terminal/tmux.nix
     ../modules/terminal/kitty.nix
     # Development
     ../modules/dev/git.nix
+    # ../modules/dev/neovim.nix
     # ../modules/dev/vscode.nix
     ../modules/dev/virtmanager.nix
     # Desktop
@@ -69,6 +71,7 @@
   home.packages = with pkgs; [
     # Editor
     vscode # Visual Studio Code
+    neovim # Vim-based text editor
     # Browser
     firefox # 🔥🦊
     brave # 🦁
@@ -99,6 +102,9 @@
     inkscape # Vector graphics editor
     gimp # Raster graphics editor
     obs-studio # Screen recording and streaming
+    krita # Digital painting
+    blender # 3D modeling and animation
+    freecad # 3D CAD modeler
     # File Manager
     yazi # TUI
     xfce.thunar # GUI
