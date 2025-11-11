@@ -7,6 +7,6 @@
       numlock_by_default = true;
       touchpad.natural_scroll = true;
     };
-    gestures = [ "3, horizontal, workspace" ];
+    gesture = [ "3, horizontal, workspace" ];
   };
 }
