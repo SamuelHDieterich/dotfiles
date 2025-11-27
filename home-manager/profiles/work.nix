@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, inputs, ... }: {
   imports = [
     ../modules/base.nix
     ../modules/shell/zsh.nix
@@ -8,6 +8,9 @@
     # ../modules/dev/neovim.nix
     ../modules/utilities/rofi.nix
   ];
+
+  # Required for non-NixOS systems
+  nix.package = pkgs.nix;
 
   # Base configuration
   base = {
@@ -45,12 +48,13 @@
     };
   };
 
+  programs.firefox.enable = true;
   home.packages = with pkgs; [
     # Editor
     vscode
     neovim
     # Browser
-    firefox
+    # firefox
     # Development
     kubectl
     kubernetes-helm
@@ -96,6 +100,18 @@
     nil
     nixfmt-classic
   ];
+
+  # NixGL for OpenGL support on non-NixOS systems
+  targets.genericLinux.nixGL = {
+    packages = inputs.nixgl.packages;
+    defaultWrapper = "mesa";
+    installScripts = [ "mesa" ];
+    vulkan.enable = true;
+  };
+  programs = {
+    firefox.package = (config.lib.nixGL.wrap pkgs.firefox);
+    kitty.package = (config.lib.nixGL.wrap pkgs.kitty);
+  };
 
   home.sessionVariables = {
     EDITOR = lib.getExe pkgs.neovim;

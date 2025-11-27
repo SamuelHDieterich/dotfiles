@@ -17,9 +17,14 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # OpenGL for non-NixOS systems
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, disko, lanzaboote, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, disko, lanzaboote, nixgl, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
