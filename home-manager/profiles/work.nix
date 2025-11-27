@@ -51,7 +51,7 @@
   programs.firefox.enable = true;
   home.packages = with pkgs; [
     # Editor
-    vscode
+    #vscode
     neovim
     # Browser
     # firefox
@@ -64,9 +64,13 @@
     postman
     devenv
     direnv
+    (google-cloud-sdk.withExtraComponents
+      [ pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+    k9s
     # Office
     libreoffice
     zathura
+    qalculate-gtk
     # # thunderbird
     # # Media
     mpv
@@ -95,6 +99,9 @@
     bat
     # Misc
     fastfetch
+    # Fonts
+    nerd-fonts.jetbrains-mono
+    caladea
     # Nix
     nh
     nil
@@ -112,6 +119,9 @@
     firefox.package = (config.lib.nixGL.wrap pkgs.firefox);
     kitty.package = (config.lib.nixGL.wrap pkgs.kitty);
   };
+
+  # Fonts
+  fonts.fontconfig.enable = true;
 
   home.sessionVariables = {
     EDITOR = lib.getExe pkgs.neovim;
