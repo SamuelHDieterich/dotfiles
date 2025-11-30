@@ -10,6 +10,7 @@
     # Terminal
     ../modules/terminal/tmux.nix
     ../modules/terminal/kitty.nix
+    ../modules/terminal/foot.nix
     # Development
     ../modules/dev/git.nix
     # ../modules/dev/neovim.nix
