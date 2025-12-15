@@ -113,7 +113,7 @@
     # Utilities
     eza # Enhanced ls
     bat # Cat replacement
-    bat-extras # Extras for bat
+    bat-extras.core # Extras for bat
     glow # Markdown viewer
     tlrc # Straightforward helper
     ripgrep # Enhanced grep
