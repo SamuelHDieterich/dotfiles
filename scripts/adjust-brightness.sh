@@ -9,6 +9,7 @@
 
 BRILLO_DELAY=1000000  # in microseconds
 BACKUP_FILE="/tmp/brightness_backup.txt"
+DDC_CACHE_FILE="/tmp/ddc_devices.txt"
 
 #############
 # FUNCTIONS #
@@ -83,7 +84,13 @@ case "$ACTION" in
 esac
 
 # Get list of devices for ddcutil
-DDC_DEVICES=$(ddcutil detect | grep 'Display' | awk '{print $2}' | xargs)
+# Cache DDC devices in tmp for faster lookup on subsequent runs
+if [ -f "$DDC_CACHE_FILE" ] && [ -s "$DDC_CACHE_FILE" ]; then
+    DDC_DEVICES=$(<"$DDC_CACHE_FILE")
+else
+    DDC_DEVICES=$(ddcutil detect | grep 'Display' | awk '{print $2}' | xargs)
+    echo "$DDC_DEVICES" > "$DDC_CACHE_FILE"
+fi
 
 # Store current brightness levels for reset
 # Only store if file doesn't exist (to avoid overwriting)
