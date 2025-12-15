@@ -97,6 +97,7 @@ in {
           "libvirtd"
           "lp"
           "scanner"
+          "i2c"
         ];
       };
     };

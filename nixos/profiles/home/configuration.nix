@@ -48,8 +48,11 @@
   # Firmware
   services.fwupd.enable = true;
 
-  # I2C
-  hardware.i2c.enable = true;
+  # Hardware
+  hardware = {
+    i2c.enable = true; # Enable I2C support
+    brillo.enable = true; # Adjust screen brightness
+  };
 
   # Nvidia
   nvidia = {
