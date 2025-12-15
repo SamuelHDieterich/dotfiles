@@ -22,10 +22,7 @@
   ];
 
   # Base configuration
-  base = {
-    username = "samuel";
-    allowUnfree = true;
-  };
+  base = { username = "samuel"; };
 
   home.pointerCursor = {
     gtk.enable = true;
@@ -77,6 +74,7 @@
     firefox # 🔥🦊
     brave # 🦁
     # Development
+    python3 # Python programming language
     git # Version control
     lazygit # Git TUI
     jq # JSON processor

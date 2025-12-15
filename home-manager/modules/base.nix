@@ -5,11 +5,6 @@ in {
 
   # Options
   options.base = {
-    allowUnfree = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Allow unfree packages.";
-    };
     username = mkOption {
       type = types.str;
       default = "samuel";
@@ -34,7 +29,6 @@ in {
         options = "--delete-older-than 15d";
       };
     };
-    nixpkgs.config.allowUnfree = cfg.allowUnfree;
 
     # Home
     home = {

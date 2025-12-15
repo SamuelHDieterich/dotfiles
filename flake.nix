@@ -27,10 +27,7 @@
   outputs = inputs@{ nixpkgs, home-manager, disko, lanzaboote, nixgl, ... }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config = { };
-      };
+      pkgs = import nixpkgs { inherit system; };
     in {
       # NixOS configurations
       nixosConfigurations = {
