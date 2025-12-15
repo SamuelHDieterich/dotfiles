@@ -22,9 +22,15 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Dynamic monitor management for Hyprland
+    hyprdynamicmonitors = {
+      url = "github:fiffeek/hyprdynamicmonitors";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, disko, lanzaboote, nixgl, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, disko, lanzaboote, nixgl
+    , hyprdynamicmonitors, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
