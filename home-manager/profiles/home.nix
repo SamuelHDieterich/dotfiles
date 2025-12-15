@@ -113,6 +113,7 @@
     # Utilities
     eza # Enhanced ls
     bat # Cat replacement
+    bat-extras # Extras for bat
     glow # Markdown viewer
     tlrc # Straightforward helper
     ripgrep # Enhanced grep
@@ -138,6 +139,7 @@
   home.sessionVariables = {
     EDITOR = lib.getExe pkgs.neovim;
     VISUAL = lib.getExe pkgs.vscode;
-    MANPAGER = lib.getExe pkgs.bat-extras.batman;
+    MANPAGER = "env BATMAN_IS_BEING_MANPAGER=yes "
+      + lib.getExe pkgs.bat-extras.batman;
   };
 }
