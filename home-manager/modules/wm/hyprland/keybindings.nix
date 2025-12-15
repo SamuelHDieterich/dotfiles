@@ -24,7 +24,7 @@
       '';
   in {
     "$mod" = "SUPER";
-    "$terminal" = lib.getExe pkgs.kitty;
+    "$terminal" = lib.getExe' pkgs.foot "footclient";
     "$filemanager" = lib.getExe pkgs.xfce.thunar;
     "$webbrowser" = lib.getExe pkgs.firefox;
     "$editor" = lib.getExe pkgs.vscode;
