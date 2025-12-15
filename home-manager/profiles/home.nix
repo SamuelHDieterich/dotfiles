@@ -19,6 +19,7 @@
     # Desktop
     ../modules/wm/hyprland/hyprland.nix
     ../modules/utilities/waybar.nix
+    ../modules/utilities/dunst.nix
   ];
 
   # Base configuration
