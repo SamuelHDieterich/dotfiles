@@ -30,7 +30,7 @@ in {
         }
         {
           timeout = 1200; # 20 minutes
-          on-timeout = "sysemctl suspend";
+          on-timeout = "systemctl suspend";
         }
       ];
     };
