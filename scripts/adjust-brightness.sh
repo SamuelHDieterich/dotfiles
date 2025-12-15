@@ -140,7 +140,7 @@ case "$ACTION" in
         while IFS=' ' read -r DEV BRIGHTNESS; do
             set_brightness "$DEV" "$BRIGHTNESS" &
         done < "$BACKUP_FILE"
-        rm "$BACKUP_FILE"
         wait
+        rm "$BACKUP_FILE"
         ;;
 esac
