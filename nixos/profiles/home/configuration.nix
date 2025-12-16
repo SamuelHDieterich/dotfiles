@@ -19,6 +19,8 @@
     # Development
     ../../modules/dev/virtmanager.nix
     ../../modules/dev/tailscale.nix
+    # Misc
+    ../../modules/misc/obs-studio.nix
   ];
 
   # Base configuration

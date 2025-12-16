@@ -101,7 +101,7 @@
     # Graphics
     inkscape # Vector graphics editor
     gimp # Raster graphics editor
-    obs-studio # Screen recording and streaming
+    # obs-studio # Screen recording and streaming
     krita # Digital painting
     blender # 3D modeling and animation
     freecad # 3D CAD modeler
