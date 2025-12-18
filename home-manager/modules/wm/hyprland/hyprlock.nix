@@ -1,13 +1,9 @@
 { ... }: {
   programs.hyprlock = {
     enable = true;
+    # Grace option is no longer configurable -> hyprlock --grace <seconds>
     settings = {
-      general = {
-        disable_loading_bar = true;
-        grace = 10;
-        hide_cursor = true;
-        no_fade_in = false;
-      };
+      general = { hide_cursor = true; };
 
       label = {
         text = "$TIME";
