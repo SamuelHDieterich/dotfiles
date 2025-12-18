@@ -76,6 +76,7 @@
     brave # 🦁
     # Development
     python3 # Python programming language
+    uv # Python package manager
     git # Version control
     lazygit # Git TUI
     jq # JSON processor
