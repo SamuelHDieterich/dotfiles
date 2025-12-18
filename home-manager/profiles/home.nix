@@ -108,8 +108,8 @@
     freecad # 3D CAD modeler
     # File Manager
     yazi # TUI
-    xfce.thunar # GUI
-    xfce.thunar-archive-plugin # Archive support for Thunar
+    # xfce.thunar # GUI
+    # xfce.thunar-archive-plugin # Archive support for Thunar
     # Password Manager
     keepassxc
     # Utilities

@@ -21,6 +21,7 @@
     ../../modules/dev/tailscale.nix
     # Misc
     ../../modules/misc/obs-studio.nix
+    ../../modules/misc/thunar.nix
   ];
 
   # Base configuration
@@ -115,16 +116,18 @@
     inkscape
     # File Manager
     yazi
-    xfce.thunar
+    # xfce.thunar
     # Password Manager
     keepassxc
     # Utilities
     bat
     fd
     ripgrep
-    btop
+    (btop.override { cudaSupport = true; })
     nvtopPackages.full
     powertop
+    p7zip
+    unzip
     ddcutil
     mission-center
     # Printing/Scanning
@@ -137,9 +140,10 @@
     fastfetch
     xdg-user-dirs
     # Nix
-    nh
-    nil
-    nixfmt-classic
+    nh # Glorified nixos/home-manager switch
+    nps # Nix package searcher
+    nil # LPS server
+    nixfmt-classic # Nix formatter
   ];
 
   # Fonts
@@ -149,6 +153,8 @@
   };
 
   # Programs
+  programs.nix-index.enable =
+    true; # Index nixpkgs for quick searching (includes shell integration).
   programs.nix-ld.enable =
     true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
   programs.steam.enable = true;
