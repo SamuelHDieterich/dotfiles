@@ -1,6 +1,8 @@
 { config, pkgs, ... }: {
   services.greetd = {
     enable = true;
+    useTextGreeter = true;
+    restart = true;
     settings = {
       default_session =
         let desktops = config.services.displayManager.sessionData.desktops;
