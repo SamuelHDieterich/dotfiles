@@ -18,8 +18,10 @@
     ../modules/dev/virtmanager.nix
     # Desktop
     ../modules/wm/hyprland/hyprland.nix
+    # Utilities
     ../modules/utilities/waybar.nix
     ../modules/utilities/dunst.nix
+    ../modules/utilities/rclone.nix
   ];
 
   # Base configuration
