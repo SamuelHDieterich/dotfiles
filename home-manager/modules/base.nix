@@ -1,4 +1,4 @@
-{ config, lib, pkgs, osConfig, ... }:
+{ config, lib, ... }:
 with lib;
 let cfg = config.base;
 in {

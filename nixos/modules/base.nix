@@ -33,6 +33,14 @@ in {
   };
 
   config = {
+    # Secrets management
+    sops = {
+      defaultSopsFile = ../../secrets/secrets.yaml;
+      defaultSopsFormat = "yaml";
+      age.keyFile = "/home/${cfg.username}/.config/sops/age/keys.txt";
+      secrets.NixConfAccessToken = { };
+    };
+
     # Nix
     nixpkgs.config.allowUnfree = cfg.allowUnfree;
     nix = {
@@ -42,6 +50,7 @@ in {
         experimental-features = [ "nix-command" "flakes" ];
         trusted-users = [ "root" "@wheel" ];
       };
+      extraOptions = "!include ${config.sops.secrets.NixConfAccessToken.path}";
       gc = {
         automatic = true;
         dates = "weekly";
@@ -101,6 +110,12 @@ in {
         ];
       };
     };
+
+    # Packages
+    environment.systemPackages = with pkgs;
+      [
+        sops # Secrets management
+      ];
 
     # Shell
     programs.zsh.enable = true;

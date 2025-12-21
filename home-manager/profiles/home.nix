@@ -87,12 +87,14 @@
     docker # Container management
     docker-compose # Multi-docker management
     devenv # Development environment management
+    dbeaver-bin # Database management
     # Office
     libreoffice # Office suite
     zathura # PDF viewer
     thunderbird # Email client
     obsidian # Note-taking app
     google-fonts # Google Fonts
+    qalculate-gtk # Advanced calculator
     # Media
     mpv # Media player
     vlc # Media player

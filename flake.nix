@@ -17,6 +17,11 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Secrets management
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # OpenGL for non-NixOS systems
     nixgl = {
       url = "github:nix-community/nixGL";
@@ -29,7 +34,7 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, disko, lanzaboote, nixgl
+  outputs = inputs@{ nixpkgs, home-manager, disko, lanzaboote, sops-nix, nixgl
     , hyprdynamicmonitors, ... }:
     let
       system = "x86_64-linux";
@@ -43,6 +48,7 @@
             disko.nixosModules.disko # Disk management module
             ./nixos/profiles/home/disk-configuration.nix # Disk configuration
             lanzaboote.nixosModules.lanzaboote # Secure boot
+            sops-nix.nixosModules.sops # Secrets management
             ./nixos/profiles/home/configuration.nix # Regular NiXOS configuration
             # Home Manager as a NixOS module
             home-manager.nixosModules.home-manager
@@ -67,7 +73,10 @@
           name = builtins.replaceStrings [ ".nix" ] [ "" ] file;
           value = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ ./home-manager/profiles/${file} ];
+            modules = [
+              sops-nix.homeManagerModules.sops # Secrets management
+              ./home-manager/profiles/${file}
+            ];
             extraSpecialArgs = {
               inherit system;
               inherit inputs;

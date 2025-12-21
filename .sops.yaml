@@ -1,0 +1,7 @@
+keys:
+  - &primary age1xvsrjvspe4phh4hdmahvtqplxwxgema2e7m2n9w0wx267pp8mersgh2vn5
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$ # Match files in the secrets/ directory with specified extensions
+    key_groups:
+      - age:
+        - *primary
