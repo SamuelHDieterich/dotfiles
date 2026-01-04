@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, lib, ... }: {
   imports = [
     ../modules/base.nix
     # Shell
@@ -98,6 +98,9 @@
     obsidian # Note-taking app
     google-fonts # Google Fonts
     qalculate-gtk # Advanced calculator
+    # Academic
+    typst # Latex alternative
+    zotero # Reference manager
     # Media
     mpv # Media player
     vlc # Media player
@@ -108,9 +111,9 @@
     inkscape # Vector graphics editor
     gimp # Raster graphics editor
     # obs-studio # Screen recording and streaming
-    krita # Digital painting
-    blender # 3D modeling and animation
-    freecad # 3D CAD modeler
+    # krita # Digital painting
+    # blender # 3D modeling and animation
+    # freecad # 3D CAD modeler
     # File Manager
     # yazi # TUI
     # pkgs.thunar # GUI
