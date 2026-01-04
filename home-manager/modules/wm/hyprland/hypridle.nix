@@ -1,8 +1,4 @@
-{ pkgs, ... }:
-let
-  adjust-brightness = pkgs.writeShellScript "adjust-brightness"
-    (builtins.readFile ../../../../scripts/adjust-brightness.sh);
-in {
+{ ... }: {
   services.hypridle = {
     enable = true;
     settings = {
@@ -22,11 +18,6 @@ in {
         }
         {
           timeout = 600; # 10 minutes
-          on-timeout = "${adjust-brightness} set 30";
-          on-resume = "${adjust-brightness} reset";
-        }
-        {
-          timeout = 720; # 12 minutes
           on-timeout = "loginctl lock-session";
         }
         {
