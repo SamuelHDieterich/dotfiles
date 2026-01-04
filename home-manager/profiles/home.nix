@@ -112,9 +112,9 @@
     blender # 3D modeling and animation
     freecad # 3D CAD modeler
     # File Manager
-    # xfce.thunar # GUI
-    # xfce.thunar-archive-plugin # Archive support for Thunar
     # yazi # TUI
+    # pkgs.thunar # GUI
+    # pkgs.thunar-archive-plugin # Archive support for Thunar
     # Password Manager
     keepassxc
     # Utilities

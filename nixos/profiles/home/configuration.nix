@@ -116,7 +116,7 @@
     inkscape
     # File Manager
     yazi
-    # xfce.thunar
+    # pkgs.thunar
     # Password Manager
     keepassxc
     # Utilities

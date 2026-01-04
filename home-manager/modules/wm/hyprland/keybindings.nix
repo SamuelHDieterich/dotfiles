@@ -25,7 +25,7 @@
   in {
     "$mod" = "SUPER";
     "$terminal" = lib.getExe' pkgs.foot "footclient";
-    "$filemanager" = lib.getExe pkgs.xfce.thunar;
+    "$filemanager" = lib.getExe pkgs.pkgs.thunar;
     "$webbrowser" = lib.getExe pkgs.firefox;
     "$editor" = lib.getExe pkgs.vscode;
     "$pass" = lib.getExe pkgs.keepassxc;
