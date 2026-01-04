@@ -22,6 +22,7 @@
     ../modules/utilities/waybar.nix
     ../modules/utilities/dunst.nix
     ../modules/utilities/rclone.nix
+    ../modules/utilities/yazi
   ];
 
   # Base configuration
@@ -111,9 +112,9 @@
     blender # 3D modeling and animation
     freecad # 3D CAD modeler
     # File Manager
-    yazi # TUI
     # xfce.thunar # GUI
     # xfce.thunar-archive-plugin # Archive support for Thunar
+    # yazi # TUI
     # Password Manager
     keepassxc
     # Utilities
@@ -127,6 +128,7 @@
     mission-center # System monitor
     powertop # Power consumption monitor
     p7zip # Archive manager
+    ouch # Archive manager
     pavucontrol # PulseAudio volume control
     nvtopPackages.full # NVIDIA GPU monitor
     swappy # Image editor
