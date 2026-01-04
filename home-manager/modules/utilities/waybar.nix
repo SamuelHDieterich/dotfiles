@@ -41,6 +41,7 @@
       #backlight,
       #memory,
       #cpu,
+      #idle_inhibitor,
       #network {
         margin: 6px 3px;
         padding: 6px 12px;
@@ -121,6 +122,14 @@
         background-color: #131822;
         color: #C0C0C0;
       }
+
+      #idle_inhibitor {
+        color: #ededed;
+        font-size: 14px;
+      }
+      #idle_inhibitor.activated {
+        background-color: #653734;
+      }
     '';
     settings = {
       mainBar = {
@@ -131,7 +140,8 @@
 
         modules-left = [ "cpu" "memory" ];
         modules-center = [ "hyprland/workspaces" ];
-        modules-right = [ "pulseaudio" "battery" "clock" "tray" ];
+        modules-right =
+          [ "idle_inhibitor" "pulseaudio" "battery" "clock" "tray" ];
 
         "hyprland/workspaces" = {
           active-only = false;
@@ -232,6 +242,14 @@
         "tray" = {
           icon-size = 14;
           spacing = 1;
+        };
+
+        "idle_inhibitor" = {
+          format = "{icon}";
+          format-icons = {
+            "activated" = "󰈈";
+            "deactivated" = "󰈉";
+          };
         };
       };
     };
