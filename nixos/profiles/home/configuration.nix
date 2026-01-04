@@ -56,6 +56,8 @@
     i2c.enable = true; # Enable I2C support
     brillo.enable = true; # Adjust screen brightness
   };
+  powerManagement.enable = true; # Enable power management
+  powerManagement.powertop.enable = true; # Power management and optimization
 
   # Nvidia
   nvidia = {
