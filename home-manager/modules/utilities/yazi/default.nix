@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let bookmarks = pkgs.callPackage ./bookmarks.nix { };
+in {
+  home.packages = with pkgs; [ ouch hexyl ];
   programs.yazi = {
     enable = true;
     shellWrapperName = "y";
@@ -13,6 +16,7 @@
       inherit duckdb; # Uses duckdb to preview data files
       inherit starship; # Starship prompt integration
       inherit smart-enter; # Open files or enter directories all in one key
+      inherit bookmarks; # Vi-like marks for files and directories
     };
     initLua = ./init.lua;
     settings = {
@@ -34,20 +38,49 @@
           # Ouch
           {
             mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}";
-            # run = lib.getExe pkgs.ouch;
             run = "ouch";
+          }
+        ];
+        append_previewers = [
+          # Hexyl
+          {
+            url = "*";
+            run = "piper -- hexyl --border=none --terminal-width=$w $1";
           }
         ];
       };
     };
     keymap = {
       mgr = {
-        prepend_keymap = [{
-          # Smart enter
-          on = "l";
-          run = "plugin smart-enter";
-          desc = "Enter the child directory or open the file";
-        }];
+        prepend_keymap = [
+          {
+            # Smart enter
+            on = "l";
+            run = "plugin smart-enter";
+            desc = "Enter the child directory or open the file";
+          }
+          # Bookmarks
+          {
+            on = [ "m" ];
+            run = "plugin bookmarks save";
+            desc = "Save current position as a bookmark";
+          }
+          {
+            on = [ "g" "m" ];
+            run = "plugin bookmarks jump";
+            desc = "Jump to a bookmark";
+          }
+          {
+            on = [ "b" "d" ];
+            run = "plugin bookmarks delete";
+            desc = "Delete a bookmark";
+          }
+          {
+            on = [ "b" "D" ];
+            run = "plugin bookmarks delete_all";
+            desc = "Delete all bookmarks";
+          }
+        ];
       };
     };
   };
