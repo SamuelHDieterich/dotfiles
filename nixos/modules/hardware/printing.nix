@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  epkowa_fixed = pkgs.epkowa.overrideAttrs (oldAttrs: {
+    configureFlags = (oldAttrs.configureFlags or [ ])
+      ++ [ "CFLAGS=-std=gnu17" ];
+  });
+in {
   services = {
     printing = {
       enable = true;
@@ -15,6 +21,6 @@
   hardware.sane = {
     enable = true;
     openFirewall = true;
-    extraBackends = [ pkgs.epkowa ];
+    extraBackends = [ epkowa_fixed ];
   };
 }
