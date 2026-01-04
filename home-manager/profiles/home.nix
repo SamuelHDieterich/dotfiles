@@ -17,7 +17,7 @@
     # ../modules/dev/vscode.nix
     ../modules/dev/virtmanager.nix
     # Desktop
-    ../modules/wm/hyprland/hyprland.nix
+    ../modules/wm/hyprland
     # Utilities
     ../modules/utilities/waybar.nix
     ../modules/utilities/dunst.nix

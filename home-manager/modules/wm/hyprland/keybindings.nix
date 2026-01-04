@@ -48,6 +48,12 @@
       "$mod, up, movefocus, u"
       "$mod, down, movefocus, d"
 
+      # Move windows
+      "$mod SHIFT, left, movewindow, l"
+      "$mod SHIFT, right, movewindow, r"
+      "$mod SHIFT, up, movewindow, u"
+      "$mod SHIFT, down, movewindow, d"
+
       # Special workspace (scratchpad)
       "$mod, Z, togglespecialworkspace, magic"
       "$mod SHIFT, Z, movetoworkspace, special:magic"

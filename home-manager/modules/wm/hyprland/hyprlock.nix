@@ -18,9 +18,11 @@
       };
 
       background = [{
-        path = "screenshot";
+        # path = "screenshot";
+        path = "~/Pictures/Wallpaper/wallpaper";
         blur_passes = 3;
         blur_size = 8;
+        crossfade_time = 5; # seconds
       }];
 
       input-field = [{
