@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let bookmarks = pkgs.callPackage ./bookmarks.nix { };
 in {
-  home.packages = with pkgs; [ ouch hexyl ];
+  home.packages = with pkgs; [ ouch hexyl duckdb ];
   programs.yazi = {
     enable = true;
     shellWrapperName = "y";
@@ -12,11 +12,14 @@ in {
       inherit sudo; # Call sudo in Yazi
       inherit piper; # Pipe any shell command as a previewer
       inherit chmod; # Execute chmod on the selected files to change their mode
+      inherit mount; # Mount manager
       inherit rsync; # Simple rsync plugin
       inherit duckdb; # Uses duckdb to preview data files
       inherit starship; # Starship prompt integration
       inherit smart-enter; # Open files or enter directories all in one key
       inherit bookmarks; # Vi-like marks for files and directories
+      inherit
+        toggle-pane; # Toggle the show, hide, and maximize states for different panes
     };
     initLua = ./init.lua;
     settings = {
@@ -40,12 +43,25 @@ in {
             mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}";
             run = "ouch";
           }
+          # DuckDB
+          {
+            url = "*.{csv,tsv,parquet,json,ndjson,jsonl,xlsx,xls,db,duckdb}";
+            run = "duckdb";
+          }
         ];
         append_previewers = [
           # Hexyl
           {
             url = "*";
             run = "piper -- hexyl --border=none --terminal-width=$w $1";
+          }
+        ];
+        prepend_preloaders = [
+          # DuckDB
+          {
+            url = "*.{csv,tsv,parquet,json,ndjson,jsonl,xlsx,xls,db,duckdb}";
+            run = "duckdb";
+            multi = false;
           }
         ];
       };
@@ -58,6 +74,21 @@ in {
             on = "l";
             run = "plugin smart-enter";
             desc = "Enter the child directory or open the file";
+          }
+          # Toggle pane
+          {
+            on = "T";
+            run = "plugin toggle-pane max-preview";
+            desc = "Maximize or restore the preview pane";
+          }
+          # Mount
+          ## m - Mount the partition
+          ## u - Unmount the partition
+          ## e = Eject the disk
+          {
+            on = "M";
+            run = "plugin mount";
+            desc = "Open the mount manager";
           }
           # Bookmarks
           {
@@ -79,6 +110,27 @@ in {
             on = [ "b" "D" ];
             run = "plugin bookmarks delete_all";
             desc = "Delete all bookmarks";
+          }
+          # DuckDB
+          {
+            on = "H";
+            run = "plugin duckdb -1";
+            desc = "Scroll one column to the left";
+          }
+          {
+            on = "L";
+            run = "plugin duckdb +1";
+            desc = "Scroll one column to the right";
+          }
+          {
+            on = [ "g" "o" ];
+            run = "plugin duckdb -open";
+            desc = "open with duckdb";
+          }
+          {
+            on = [ "g" "u" ];
+            run = "plugin duckdb -ui";
+            desc = "open with duckdb ui";
           }
         ];
       };
