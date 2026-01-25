@@ -132,6 +132,7 @@
     unzip
     ddcutil
     mission-center
+    zenity
     # Printing/Scanning
     system-config-printer
     simple-scan
@@ -141,6 +142,7 @@
     # Misc
     fastfetch
     xdg-user-dirs
+    ruffle
     # Nix
     nh # Glorified nixos/home-manager switch
     nps # Nix package searcher
