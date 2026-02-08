@@ -147,7 +147,7 @@
     nh # Glorified nixos/home-manager switch
     nps # Nix package searcher
     nil # LPS server
-    nixfmt-classic # Nix formatter
+    nixfmt # Nix formatter
   ];
 
   # Fonts
