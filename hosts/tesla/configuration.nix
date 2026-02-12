@@ -196,31 +196,10 @@ in
 
   flake.homeModules.${hostname} =
     { pkgs, lib, ... }:
-    # let
-    #   # Common shell configuration applied directly
-    #   commonShellAliases = {
-    #     # Nix
-    #     nix-shell = "nix-shell --run $SHELL";
-    #     # List commands
-    #     ls = "${lib.getExe pkgs.eza} --icons=always --color=always";
-    #     ll = "ls -l";
-    #     lt = "ls --tree";
-    #     # Git
-    #     gs = "git status";
-    #     gc = "git commit";
-    #     gw = "git worktree";
-    #   };
-    # in
     {
       imports = with inputs.self.homeModules; [
         base # Base home configuration
-        # Shell
-        shell
-        # bash
-        # zsh
-        # fish
-        # nushell
-        starship # Shell prompt
+        shell # Shell
         # Terminal
         tmux # Terminal multiplexer
         foot # Wayland terminal emulator
@@ -242,24 +221,7 @@ in
         stateVersion = stateVersion;
       };
 
-      # Common shell packages and programs
-      home.packages = with pkgs; [
-        eza
-        wl-clipboard
-      ];
-
-      programs = {
-        zoxide.enable = true;
-        atuin.enable = true;
-        fzf.enable = true;
-        direnv.enable = true;
-
-        # # Apply common aliases to each shell
-        # bash.shellAliases = commonShellAliases;
-        # zsh.shellAliases = commonShellAliases;
-        # fish.shellAliases = commonShellAliases;
-      };
-
+      # Shell
       shell.include = [
         "bash"
         "zsh"
