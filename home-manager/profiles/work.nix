@@ -4,19 +4,19 @@
     ../modules/shell/zsh.nix
     ../modules/shell/starship.nix
     ../modules/terminal/kitty.nix
+    ../modules/terminal/foot.nix
     ../modules/dev/git.nix
     # ../modules/dev/neovim.nix
     ../modules/utilities/rofi.nix
+    ../modules/utilities/yazi
   ];
 
   # Required for non-NixOS systems
   nix.package = pkgs.nix;
 
   # Base configuration
-  base = {
-    username = "samuel";
-    allowUnfree = true;
-  };
+  base = { username = "samuel"; };
+  nixpkgs.config.allowUnfree = true;
 
   # This is a MUST for non NixOS systems
   targets.genericLinux.enable = true;
@@ -66,7 +66,12 @@
     direnv
     (google-cloud-sdk.withExtraComponents
       [ pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+    awscli2
     k9s
+    duckdb
+    # Programming Languages
+    python3
+    uv # Python package manager
     # Office
     libreoffice
     zathura
