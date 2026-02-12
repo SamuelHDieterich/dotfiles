@@ -1,25 +1,37 @@
 { inputs, lib, ... }:
 let
   system = "x86_64-linux";
+  stateVersion = "24.05";
+  username = "samuel";
+  hostname = "tesla";
 in
 {
-  flake.nixosConfigurations.tesla = inputs.nixpkgs.lib.nixosSystem {
-    modules = with inputs.self; [
-      nixosModules.tesla
-      # homeConfigurations.tesla
+  flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
+    specialArgs = { inherit inputs; };
+    modules = [
+      inputs.self.nixosModules.${hostname}
       { nixpkgs.hostPlatform = lib.mkDefault system; }
+      inputs.home-manager.nixosModules.home-manager
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = { inherit inputs; };
+          users.${username} = inputs.self.homeModules.${hostname};
+        };
+      }
     ];
   };
 
-  flake.homeConfigurations.tesla = inputs.home-manager.lib.homeManagerConfiguration {
+  flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.${system};
     modules = [
-      inputs.self.homeModules.tesla
-      { home.stateVersion = "24.05"; }
+      inputs.self.homeModules.${hostname}
+      { home.stateVersion = stateVersion; }
     ];
   };
 
-  flake.nixosModules.tesla =
+  flake.nixosModules.${hostname} =
     { config, pkgs, ... }:
     {
       # Add modules
@@ -49,9 +61,9 @@ in
 
       # Base configuration
       base = {
-        hostname = "tesla";
-        version = "24.05"; # Not recommended to change this
-        username = "samuel";
+        hostname = hostname;
+        version = stateVersion; # Not recommended to change this
+        username = username;
         allowUnfree = true;
       };
 
@@ -182,17 +194,33 @@ in
       ];
     };
 
-  flake.homeModules.tesla =
-    { pkgs, ... }:
+  flake.homeModules.${hostname} =
+    { pkgs, lib, ... }:
+    # let
+    #   # Common shell configuration applied directly
+    #   commonShellAliases = {
+    #     # Nix
+    #     nix-shell = "nix-shell --run $SHELL";
+    #     # List commands
+    #     ls = "${lib.getExe pkgs.eza} --icons=always --color=always";
+    #     ll = "ls -l";
+    #     lt = "ls --tree";
+    #     # Git
+    #     gs = "git status";
+    #     gc = "git commit";
+    #     gw = "git worktree";
+    #   };
+    # in
     {
       imports = with inputs.self.homeModules; [
         base # Base home configuration
         # Shell
-        bash
-        zsh
-        fish
-        nushell
-        startship # Shell prompt
+        shell
+        # bash
+        # zsh
+        # fish
+        # nushell
+        starship # Shell prompt
         # Terminal
         tmux # Terminal multiplexer
         foot # Wayland terminal emulator
@@ -210,9 +238,34 @@ in
 
       # Base
       base = {
-        username = "samuel";
-        stateVersion = "24.05";
+        username = username;
+        stateVersion = stateVersion;
       };
+
+      # Common shell packages and programs
+      home.packages = with pkgs; [
+        eza
+        wl-clipboard
+      ];
+
+      programs = {
+        zoxide.enable = true;
+        atuin.enable = true;
+        fzf.enable = true;
+        direnv.enable = true;
+
+        # # Apply common aliases to each shell
+        # bash.shellAliases = commonShellAliases;
+        # zsh.shellAliases = commonShellAliases;
+        # fish.shellAliases = commonShellAliases;
+      };
+
+      shell.include = [
+        "bash"
+        "zsh"
+        "fish"
+        "nushell"
+      ];
 
       # Style
       home.pointerCursor = {

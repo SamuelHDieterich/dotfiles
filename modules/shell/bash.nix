@@ -1,12 +1,10 @@
-{ inputs, ... }:
 {
   flake.homeModules.bash =
     { config, lib, ... }:
+    with lib;
     {
-      imports = [ inputs.self.homeModules.shell-common ];
-
       programs.bash = {
-        enable = true;
+        enable = mkDefault false;
         # Get a Keystroke: CTRL+V + <key combination>
         initExtra = lib.strings.concatStringsSep "\n" [
           # Copy current buffer to clipboard
@@ -25,7 +23,6 @@
             }
           ''
         ];
-        shellAliases = config.shellAliases;
       };
     };
 }

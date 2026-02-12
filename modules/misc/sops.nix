@@ -20,20 +20,21 @@
         };
 
         # Define templates that can be included in configuration files.
+        # config.templates.placeholder.<secret>: Access the content of a secret.
         templates = {
           nix-access-token.content = ''
-            access-tokens = github.com=${config.sops.secrets.GitHubToken}
+            access-tokens = github.com=${config.sops.placeholder.GitHubToken}
           '';
         };
       };
     };
 
   flake.nixosModules.sops =
-    { keyfile, pkgs, ... }:
+    { pkgs, ... }:
     {
       imports = [
         inputs.sops-nix.nixosModules.sops
-        { _module.args.keyfile = keyfile; }
+        inputs.self.module.sops
       ];
 
       environment.systemPackages = with pkgs; [
@@ -42,11 +43,11 @@
     };
 
   flake.homeModules.sops =
-    { keyfile, pkgs, ... }:
+    { pkgs, ... }:
     {
       imports = [
         inputs.sops-nix.homeModules.sops
-        { _module.args.keyfile = keyfile; }
+        inputs.self.module.sops
       ];
 
       home.packages = with pkgs; [

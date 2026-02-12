@@ -3,7 +3,7 @@
   flake.homeModules.yazi =
     { pkgs, ... }:
     let
-      bookmarks = inputs.self.packages.${pkgs.system}.yazi-bookmarks;
+      bookmarks = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.yazi-bookmarks;
     in
     {
       home.packages = with pkgs; [

@@ -1,4 +1,3 @@
-{ ... }:
 {
   flake.homeModules.starship = {
     programs.starship = {

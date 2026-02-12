@@ -140,7 +140,7 @@
           ZDOTDIR = "${XDG_CONFIG_HOME}/zsh";
           HISTFILE = "${XDG_STATE_HOME}/zsh/history";
           CUDA_CACHE_PATH = "${XDG_CACHE_HOME}/nv";
-          GTK2_RC_FILES = "${XDG_CONFIG_HOME}/gtk-2.0/gtkrc";
+          GTK2_RC_FILES = lib.mkForce "${XDG_CONFIG_HOME}/gtk-2.0/gtkrc";
           XCOMPOSECACHE = "${XDG_CACHE_HOME}/X11/xcompose";
         };
       };
@@ -206,16 +206,19 @@
         };
 
         # Environment variables
-        home.sessionVariables = rec {
-          XDG_CACHE_HOME = "$HOME/.cache";
-          XDG_CONFIG_HOME = "$HOME/.config";
-          XDG_DATA_HOME = "$HOME/.local/share";
-          XDG_STATE_HOME = "$HOME/.local/state";
-          ZDOTDIR = "${XDG_CONFIG_HOME}/zsh";
-          HISTFILE = "${XDG_STATE_HOME}/zsh/history";
-          CUDA_CACHE_PATH = "${XDG_CACHE_HOME}/nv";
-          GTK2_RC_FILES = "${XDG_CONFIG_HOME}/gtk-2.0/gtkrc";
-          XCOMPOSECACHE = "${XDG_CACHE_HOME}/X11/xcompose";
+        xdg = {
+          enable = true;
+          cacheHome = "${cfg.homeDirectory}/.cache";
+          configHome = "${cfg.homeDirectory}/.config";
+          dataHome = "${cfg.homeDirectory}/.local/share";
+          stateHome = "${cfg.homeDirectory}/.local/state";
+        };
+        home.sessionVariables = {
+          ZDOTDIR = "${config.xdg.configHome}/zsh";
+          HISTFILE = "${config.xdg.stateHome}/zsh/history";
+          CUDA_CACHE_PATH = "${config.xdg.cacheHome}/nv";
+          GTK2_RC_FILES = lib.mkForce "${config.xdg.configHome}/gtk-2.0/gtkrc";
+          XCOMPOSECACHE = "${config.xdg.cacheHome}/X11/xcompose";
         };
 
         # Home Manager

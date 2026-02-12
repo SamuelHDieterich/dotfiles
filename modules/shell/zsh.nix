@@ -2,11 +2,10 @@
 {
   flake.homeModules.zsh =
     { config, lib, ... }:
+    with lib;
     {
-      imports = [ inputs.self.homeModules.shell-common ];
-
       programs.zsh = {
-        enable = true;
+        enable = mkDefault false;
         autocd = true;
         dotDir = "${config.xdg.configHome}/zsh";
 
@@ -38,7 +37,6 @@
             }
           ''
         ];
-        shellAliases = config.shellAliases;
 
         history = {
           size = 10000;

@@ -8,7 +8,7 @@
         enable = true;
         installExamples = false;
       };
-      home.packages = [ inputs.hyprdynamicmonitors.packages.${pkgs.system}.default ];
+      home.packages = [ inputs.hyprdynamicmonitors.packages.${pkgs.stdenv.hostPlatform.system}.default ];
       wayland.windowManager.hyprland.extraConfig = ''
         # Source the auto-generated monitors configuration
         source = ~/.config/hypr/monitors.conf

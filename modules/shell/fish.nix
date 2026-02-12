@@ -1,13 +1,10 @@
-{ inputs, ... }:
 {
   flake.homeModules.fish =
-    { config, ... }:
+    { lib, ... }:
+    with lib;
     {
-      imports = [ inputs.self.homeModules.shell-common ];
-
       programs.fish = {
-        enable = true;
-        shellAliases = config.shellAliases;
+        enable = mkDefault false;
       };
     };
 }

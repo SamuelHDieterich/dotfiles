@@ -1,6 +1,11 @@
 {
   flake.nixosModules.nvidia =
-    { config, lib, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       cfg = config.nvidia;
     in
@@ -82,11 +87,8 @@
         };
 
         environment.systemPackages = with pkgs; [
-          # NVIDIA utilities
-          nvidia-xconfig
-          nvidia-settings
           # Testing tools
-          glxinfo
+          mesa-demos
           vulkan-tools
           # OpenCL tools
           clinfo
