@@ -18,9 +18,12 @@
       "zle -N cmd_to_clip"
       "bindkey '^Y' cmd_to_clip"
       # Autocomplete: accept next word
-      "bindkey '^[[Z' forward-word"
-      "bindkey '^[[1;5C' forward-word"
-      "bindkey '^[[1;5D' backward-word"
+      "bindkey '^[[Z' forward-word" # Shift + Tab
+      "bindkey '^[[1;5C' forward-word" # Ctrl + Right Arrow
+      "bindkey '^[[1;5D' backward-word" # Ctrl + Left Arrow
+      # Delete word
+      "bindkey '^H' backward-kill-word" # Ctrl + Backspace
+      "bindkey '^[[3;5~' kill-word" # Ctrl + Delete
       # For a clean $HOME 
       "compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
       # Nix develop alias
