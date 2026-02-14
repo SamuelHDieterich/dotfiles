@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   # Modules
   imports = [
     # Hardware
@@ -26,7 +27,7 @@
 
   # Base configuration
   base = {
-    hostname = "nixos";
+    hostname = "tesla";
     version = "24.05";
     username = "samuel";
     allowUnfree = true;
@@ -153,13 +154,14 @@
   # Fonts
   fonts = {
     enableDefaultPackages = true;
-    packages = with pkgs; [ nerd-fonts.jetbrains-mono caladea ];
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      caladea
+    ];
   };
 
   # Programs
-  programs.nix-index.enable =
-    true; # Index nixpkgs for quick searching (includes shell integration).
-  programs.nix-ld.enable =
-    true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
+  programs.nix-index.enable = true; # Index nixpkgs for quick searching (includes shell integration).
+  programs.nix-ld.enable = true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
   programs.steam.enable = true;
 }
