@@ -4,6 +4,18 @@ let
   stateVersion = "24.05";
   username = "samuel";
   hostname = "tesla";
+  bundles = [
+    "development"
+    "office"
+    "fonts"
+    "academic"
+    "media"
+    "graphics"
+    "security"
+    "utilities"
+    "network"
+    "nix"
+  ];
 in
 {
   flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
@@ -26,9 +38,14 @@ in
   flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.${system};
     modules = [
-      inputs.self.homeModules.${hostname}
-      { home.stateVersion = stateVersion; }
+      inputs.self.homeModules.${hostname} # Base home configuration
+      inputs.self.homeModules.nonNixos # Required for non-NixOS systems
+      { home.stateVersion = stateVersion; } # Not recommended to change this
     ];
+
+    # Packages
+    ## If set in homeModules, the NixOS configuration would duplicate these packages.
+    metapackages.bundles = bundles;
   };
 
   flake.nixosModules.${hostname} =
@@ -116,6 +133,7 @@ in
       programs.nix-ld.enable = true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
 
       # Packages
+      metapackages.bundles = bundles;
       environment.systemPackages = with pkgs; [
         # Editor
         neovim # Vim-based text editor
@@ -123,74 +141,9 @@ in
         # Browser
         firefox # 🔥🦊
         brave # 🦁
-        # Development
-        git # Version control
-        lazygit # Git TUI
-        docker # Container management
-        docker-compose # Multi-docker management
-        python3 # Python programming language
-        uv # Python package manager
-        jq # JSON processor
-        yq # YAML processor
-        jnv # jq TUI
-        jless # JSON viewer
-        difftastic # Structural diff tool
-        devenv # Development environment management
-        dbeaver-bin # Database management
-        # Office
-        libreoffice # Office suite
-        zathura # PDF viewer
-        thunderbird # Email client
-        obsidian # Note-taking app
-        google-fonts # Google Fonts
-        qalculate-gtk # Advanced calculator
-        # Academic
-        zotero # Reference manager
-        typst # Latex alternative
-        # Media
-        vlc # Media player
-        mpv # Media player
-        spotify # Music streaming
-        freetube # YouTube client
-        # Graphics
-        gimp # Image editor
-        inkscape # Vector graphics editor
-        swappy # Image editor
-        # Password Manager
-        keepassxc # Password manager
-        # Utilities
-        eza # ls replacement
-        fd # Find replacement
-        fselect # Query file system
-        bat # Cat replacement
-        bat-extras.core # Extras for bat
-        glow # Markdown viewer
-        ripgrep # grep replacement
-        tlrc # Straightforward helper (tldr client)
-        (btop.override { cudaSupport = true; }) # System monitor
-        nvtopPackages.full # Nvidia GPU monitor
-        mission-center # System information
-        powertop # Power consumption monitor
-        p7zip # Archive manager
-        unzip # Archive manager
-        ouch # Archive manager
-        ddcutil # Monitor control utility
-        zenity # Display GTK dialog boxes from shell scripts
-        dysk # Disk usage analyzer
-        dua # Disk usage analyzer
         # Network
-        curl # cURL command-line tool
-        wget # File downloader
         syncthing # File synchronization
         qbittorrent # Torrent client
-        # Misc
-        fastfetch # System information tool
-        xdg-user-dirs # Manage XDG user directories
-        # Nix
-        nh # Glorified nixos/home-manager switch
-        nps # Nix package searcher
-        nil # LPS server
-        nixfmt # Nix formatter
       ];
     };
 

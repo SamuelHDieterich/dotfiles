@@ -12,10 +12,15 @@
       cfg = config.base;
     in
     {
-      imports = [
-        inputs.self.nixosModules.sops
+      imports = with inputs.self.nixosModules; [
+        # Secrets
+        sops
         # _module.args injects extra arguments into all imported modules; this supplies `keyfile`.
         { _module.args.keyfile = "/home/${cfg.username}/.config/sops/age/keys.txt"; }
+        # Environment variables
+        sessionVariables
+        # Package bundles
+        metapackages
       ];
 
       options.base = {
@@ -44,6 +49,15 @@
           default = "samuel";
           description = "The username of the user.";
         };
+        shell = mkOption {
+          type = types.enum [
+            "bash"
+            "zsh"
+            "fish"
+          ];
+          default = "zsh";
+          description = "The default shell for the user.";
+        };
       };
 
       config = {
@@ -61,6 +75,7 @@
               "root"
               "@wheel"
             ];
+            use-xdg-base-directories = true;
           };
           extraOptions = "!include ${config.sops.templates.nix-access-token.path}";
           gc = {
@@ -111,38 +126,30 @@
         users.users = {
           "${cfg.username}" = {
             isNormalUser = true;
-            shell = pkgs.zsh;
+            shell = pkgs.${cfg.shell};
             extraGroups = [
-              "wheel"
-              "networkmanager"
-              "video"
-              "audio"
-              "storage"
-              "docker"
-              "libvirt"
-              "libvirtd"
-              "lp"
-              "scanner"
-              "i2c"
+              "wheel" # For sudo access
+              "networkmanager" # For NetworkManager access
+              "video" # For GPU access
+              "audio" # For audio access
+              "storage" # For storage device access
+              "docker" # For Docker access
+              "libvirt" # For libvirt (virtualization) access
+              "libvirtd" # For libvirt daemon access
+              "lp" # For printer access
+              "scanner" # For scanner access
+              "i2c" # For I2C device access
             ];
           };
         };
 
         # Shell
-        programs.zsh.enable = true;
+        programs.${cfg.shell}.enable = true;
 
-        # Environment variables
-        environment.sessionVariables = rec {
-          XDG_CACHE_HOME = "$HOME/.cache";
-          XDG_CONFIG_HOME = "$HOME/.config";
-          XDG_DATA_HOME = "$HOME/.local/share";
-          XDG_STATE_HOME = "$HOME/.local/state";
-          ZDOTDIR = "${XDG_CONFIG_HOME}/zsh";
-          HISTFILE = "${XDG_STATE_HOME}/zsh/history";
-          CUDA_CACHE_PATH = "${XDG_CACHE_HOME}/nv";
-          GTK2_RC_FILES = lib.mkForce "${XDG_CONFIG_HOME}/gtk-2.0/gtkrc";
-          XCOMPOSECACHE = "${XDG_CACHE_HOME}/X11/xcompose";
-        };
+        # Packages
+        environment.systemPackages = with pkgs; [
+          xdg-user-dirs # Manage XDG user directories
+        ];
       };
     };
 
@@ -158,10 +165,15 @@
       cfg = config.base;
     in
     {
-      imports = [
-        inputs.self.homeModules.sops
+      imports = with inputs.self.homeModules; [
+        # Secrets
+        sops
         # _module.args injects extra arguments into all imported modules; this supplies `keyfile`.
         { _module.args.keyfile = "/home/${cfg.username}/.config/sops/age/keys.txt"; }
+        # Environment variables
+        sessionVariables
+        # Package bundles
+        metapackages
       ];
 
       options.base = {
@@ -197,6 +209,7 @@
               "nix-command"
               "flakes"
             ];
+            use-xdg-base-directories = true;
           };
           gc = {
             automatic = true;
@@ -213,13 +226,7 @@
           dataHome = "${cfg.homeDirectory}/.local/share";
           stateHome = "${cfg.homeDirectory}/.local/state";
         };
-        home.sessionVariables = {
-          ZDOTDIR = "${config.xdg.configHome}/zsh";
-          HISTFILE = "${config.xdg.stateHome}/zsh/history";
-          CUDA_CACHE_PATH = "${config.xdg.cacheHome}/nv";
-          GTK2_RC_FILES = lib.mkForce "${config.xdg.configHome}/gtk-2.0/gtkrc";
-          XCOMPOSECACHE = "${config.xdg.cacheHome}/X11/xcompose";
-        };
+        home.preferXdgDirectories = true;
 
         # Home Manager
         ## Let Home Manager install and manage itself.
