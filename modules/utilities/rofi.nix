@@ -15,7 +15,7 @@
         ];
 
         font = "JetBrainsMono Nerd Font Mono 12";
-        terminal = "foot-client";
+        terminal = "footclient";
         extraConfig = {
           modes = "drun,run,calc,emoji";
         };
