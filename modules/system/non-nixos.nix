@@ -1,3 +1,8 @@
+/*
+  This module provides the configuration for non-NixOS systems, such as Home Manager on Linux or macOS (not tested).
+  It includes settings that are necessary for Home Manager to function properly on these platforms.
+*/
+
 { inputs, ... }:
 {
   flake.homeModules.nonNixos =

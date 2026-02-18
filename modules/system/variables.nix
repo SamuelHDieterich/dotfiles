@@ -1,3 +1,8 @@
+/*
+  This module defines environment variables that are set for the user session. It includes both standard XDG variables and custom variables for specific applications.
+  These variables are set in both NixOS and Home Manager configurations to ensure consistency across different environments.
+*/
+
 let
   sessionVariables = xdg: {
     ZDOTDIR = "${xdg.configHome}/zsh";

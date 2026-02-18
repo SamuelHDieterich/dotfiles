@@ -1,3 +1,8 @@
+/*
+  This module provides the configuration for Lanzaboote, a secure bootloader for NixOS. It replaces the default systemd-boot bootloader and integrates with sbctl for secure boot management.
+  >> github.com/nix-community/lanzaboote
+*/
+
 { inputs, ... }:
 {
   flake.nixosModules.lanzaboote =

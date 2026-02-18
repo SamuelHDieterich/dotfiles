@@ -1,3 +1,8 @@
+/*
+  This module provides a nix implementation of sops, a tool for managing secrets. This module allows you to define secrets in a structured way, and then use them in your NixOS and Home Manager configurations.
+  >> github.com/Mic92/sops-nix
+*/
+
 { inputs, ... }:
 {
   flake.modules.generic.sops =

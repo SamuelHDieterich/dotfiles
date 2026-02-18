@@ -1,3 +1,8 @@
+/*
+  This module defines the base configuration for both NixOS and Home Manager.
+  This is expected to be imported on all configurations, and should contain the most basic and essential settings.
+*/
+
 { inputs, ... }:
 {
   flake.nixosModules.base =

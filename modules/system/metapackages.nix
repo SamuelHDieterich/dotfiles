@@ -1,3 +1,8 @@
+/*
+  This module defines metapackages, which are collections of related packages that can be installed together. It provides a convenient way to manage groups of packages for different purposes, such as development, office work, media, etc.
+  The metapackages are defined once and can be used in both NixOS and Home Manager configurations.
+*/
+
 { lib, ... }:
 let
   # Define package metapackages once, to be used by both NixOS and home-manager
