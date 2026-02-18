@@ -37,15 +37,17 @@ in
 
   flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.${system};
+    extraSpecialArgs = { inherit inputs; };
     modules = [
       inputs.self.homeModules.${hostname} # Base home configuration
       inputs.self.homeModules.nonNixos # Required for non-NixOS systems
+      {
+        # Packages
+        ## If set in homeModules, the NixOS configuration would duplicate these packages.
+        metapackages.bundles = bundles;
+      }
       { home.stateVersion = stateVersion; } # Not recommended to change this
     ];
-
-    # Packages
-    ## If set in homeModules, the NixOS configuration would duplicate these packages.
-    metapackages.bundles = bundles;
   };
 
   flake.nixosModules.${hostname} =
