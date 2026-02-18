@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.module.sops =
+  flake.modules.generic.sops =
     {
       keyfile,
       config,
@@ -34,7 +34,7 @@
     {
       imports = [
         inputs.sops-nix.nixosModules.sops
-        inputs.self.module.sops
+        inputs.self.modules.generic.sops
       ];
 
       environment.systemPackages = with pkgs; [
@@ -47,7 +47,7 @@
     {
       imports = [
         inputs.sops-nix.homeModules.sops
-        inputs.self.module.sops
+        inputs.self.modules.generic.sops
       ];
 
       home.packages = with pkgs; [
