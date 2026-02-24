@@ -167,7 +167,7 @@ in
         waybar # Wayland status bar
         dunst # Notification daemon
         rclone # Rsync-like program for cloud storage
-        yazi # TUI File manager
+        yazi # TUI file manager
       ];
 
       # Base

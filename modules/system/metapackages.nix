@@ -32,7 +32,7 @@ let
       terragrunt # Terraform wrapper
       ansible # Automation tool
       # Cloud
-      awscli # AWS CLI
+      awscli2 # AWS CLI
       (google-cloud-sdk.withExtraComponents [ pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin ]) # Google Cloud SDK with GKE auth plugin
       # Text processing
       jq # JSON processor
