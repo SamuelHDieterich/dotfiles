@@ -1,6 +1,10 @@
 /*
   This module provides the configuration for Lanzaboote, a secure bootloader for NixOS. It replaces the default systemd-boot bootloader and integrates with sbctl for secure boot management.
   >> github.com/nix-community/lanzaboote
+
+  Fantastic blog post: https://jnsgr.uk/2024/04/nixos-secure-boot-tpm-fde/
+  TPM unlock (example):
+  ❯ sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+2+7+12 --wipe-slot=tpm2 /dev/nvme0n1p2
 */
 
 { inputs, ... }:
