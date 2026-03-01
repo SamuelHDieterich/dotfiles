@@ -57,7 +57,14 @@
             zoxide.enable = true;
             atuin.enable = true;
             fzf.enable = true;
-            direnv.enable = true;
+            direnv = {
+              enable = true;
+              config = {
+                # Soft-disable direnv logging
+                # Show "loading" messages, but hide "exporting" messages
+                global.log_filter = "^loading";
+              };
+            };
           };
         }
         (mkIf (builtins.elem "bash" config.shell.include) {
