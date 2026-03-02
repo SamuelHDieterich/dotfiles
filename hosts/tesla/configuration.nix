@@ -67,7 +67,8 @@ in
         # Display Manager modules
         greetd # Greetd display manager
         # Window Manager modules
-        hyprland # Hyprland window manager
+        # hyprland # Hyprland window manager
+        mangowc # Mango window manager
         # Development modules
         virtmanager # Virtual machine management with virt-manager
         tailscale # Tailscale VPN client
@@ -162,7 +163,8 @@ in
         git # Git configuration
         virtmanager # virt-manager configuration
         # Desktop
-        hyprland # Hyprland configuration
+        # hyprland # Hyprland configuration
+        mangowc # Mango configuration
         # Utilities
         waybar # Wayland status bar
         dunst # Notification daemon

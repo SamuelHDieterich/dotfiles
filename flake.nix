@@ -69,6 +69,10 @@
         flake-utils.follows = "flake-utils";
       };
     };
+    mangowc = {
+      url = "github:ananyatimalsina/mangowc"; # https://github.com/mangowm/mango/pull/667
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
