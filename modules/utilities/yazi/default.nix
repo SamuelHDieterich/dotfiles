@@ -34,6 +34,16 @@
         };
         initLua = ./init.lua;
         settings = {
+          mgr = {
+            sort_by = "natural";
+            sort_dir_first = true;
+            linemode = "size";
+            show_symlink = true;
+          };
+          preview = {
+            wrap = "yes";
+            tab_size = 2;
+          };
           plugin = {
             prepend_fetchers = [
               # Git
