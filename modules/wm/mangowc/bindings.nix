@@ -59,10 +59,14 @@
             "${mod}+SHIFT,  Right,  tagmon,   right"
 
             # Focus
-            "${mod},  Left,   focusdir, left"
-            "${mod},  Right,  focusdir, right"
-            "${mod},  Up,     focusdir, up"
-            "${mod},  Down,   focusdir, down"
+            "${mod},      Left,   focusdir,   left"
+            "${mod},      Right,  focusdir,   right"
+            "${mod},      Up,     focusdir,   up"
+            "${mod},      Down,   focusdir,   down"
+            "${mod}+ALT,  Left,   focusstack, prev"
+            "${mod}+ALT,  Down,   focusstack, prev"
+            "${mod}+ALT,  Right,  focusstack, next"
+            "${mod}+ALT,  Up,     focusstack, next"
 
             # Switch window status
             "${mod},  g,    toggleglobal,"
@@ -70,6 +74,8 @@
 
             # Layout manipulation
             "${mod}, Tab, switch_layout"
+            "${mod}, T,   setlayout, tile"
+            "${mod}, M,   setlayout, monocle"
 
             # Applications shortcuts
             "${mod}, Return,  spawn, ${terminal}"
