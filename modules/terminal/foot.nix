@@ -1,6 +1,6 @@
 {
   flake.homeModules.foot =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     {
       programs.foot = {
         enable = true;
@@ -15,6 +15,12 @@
           };
           csd.preferred = "none"; # Disable window decorations
         };
+      };
+
+      # Make foot the default terminal emulator
+      xdg.terminal-exec = {
+        enable = true;
+        settings.default = lib.mkDefault [ "footclient.desktop" ];
       };
     };
 }
