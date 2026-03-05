@@ -64,6 +64,7 @@ let
     media = with pkgs; [
       vlc # Media player
       mpv # Media player
+      pix # Image viewer
       spotify # Music streaming
       freetube # YouTube client
     ];
@@ -71,6 +72,7 @@ let
     graphics = with pkgs; [
       gimp # Image editor
       inkscape # Vector graphics editor
+      swappy # Edit and annotate screenshots
     ];
 
     security = with pkgs; [
