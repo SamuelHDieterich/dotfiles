@@ -1,9 +1,14 @@
 { inputs, ... }:
 {
-  flake.nixosModules.mangowc = {
-    imports = [ inputs.mangowc.nixosModules.mango ];
-    programs.mango.enable = true;
-  };
+  flake.nixosModules.mangowc =
+    { pkgs, ... }:
+    {
+      imports = [
+        inputs.mangowc.nixosModules.mango
+        inputs.self.nixosModules.wayland
+      ];
+      programs.mango.enable = true;
+    };
 
   flake.homeModules.mangowc = {
     imports = with inputs.self.homeModules; [
