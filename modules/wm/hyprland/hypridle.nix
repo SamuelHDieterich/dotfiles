@@ -1,13 +1,17 @@
 {
   flake.homeModules.hypridle =
-    { lib, pkgs, ... }:
+    { pkgs, ... }:
     {
+      home.packages = with pkgs; [
+        wlopm
+        hyprlock
+      ];
       services.hypridle = {
         enable = true;
         settings =
           let
-            dmps-on = "${lib.getExe pkgs.wlopm} --on '*'";
-            dmps-off = "${lib.getExe pkgs.wlopm} --off '*'";
+            dmps-on = "wlopm --on '*'";
+            dmps-off = "wlopm --off '*'";
             is_locked = "pidof hyprlock";
             lock_cmd = "hyprlock --grace 10";
           in
