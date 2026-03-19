@@ -9,7 +9,7 @@
         options = "grp:alt_shift_toggle";
       };
       # Trackpad
-      trackpad_natural_scrolling = true;
+      trackpad_natural_scrolling = false;
     };
   };
 }
