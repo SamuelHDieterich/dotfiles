@@ -132,8 +132,10 @@ in
       };
 
       # Programs
-      programs.nix-index.enable = true; # Index nixpkgs for quick searching (includes shell integration).
-      programs.nix-ld.enable = true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
+      programs = {
+        nix-index.enable = true; # Index nixpkgs for quick searching (includes shell integration).
+        nix-ld.enable = true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
+      };
 
       # Packages
       metapackages.bundles = bundles;
@@ -145,7 +147,6 @@ in
         firefox # 🔥🦊
         brave # 🦁
         # Network
-        syncthing # File synchronization
         qbittorrent # Torrent client
       ];
     };
@@ -170,6 +171,7 @@ in
         dunst # Notification daemon
         rclone # Rsync-like program for cloud storage
         yazi # TUI file manager
+        syncthing # File synchronization
       ];
 
       # Base
