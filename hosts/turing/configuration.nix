@@ -52,6 +52,7 @@ in
         # Utilities
         rofi # Application launcher and window switcher
         yazi # TUI file manager
+        syncthing # File synchronization
       ];
 
       # Base configuration
