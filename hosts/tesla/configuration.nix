@@ -1,7 +1,7 @@
 { inputs, lib, ... }:
 let
   system = "x86_64-linux";
-  stateVersion = "24.05";
+  stateVersion = "26.05";
   username = "samuel";
   hostname = "tesla";
   bundles = [
