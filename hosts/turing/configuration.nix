@@ -111,6 +111,7 @@ in
 
       # Programs
       programs = {
+        dconf.enable = true; # Enable dconf for desktop environment configuration
         nix-index.enable = true; # Index nixpkgs for quick searching (includes shell integration).
         nix-ld.enable = true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
       };
@@ -185,7 +186,6 @@ in
         gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
       };
       dconf = {
-        enable = true;
         settings = {
           "org/gnome/desktop/interface" = {
             color-scheme = "prefer-dark";
