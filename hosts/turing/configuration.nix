@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 let
   system = "x86_64-linux";
-  stateVersion = "24.05";
+  stateVersion = "26.05";
   username = "samuel";
   hostname = "turing";
   bundles = [
@@ -17,6 +17,23 @@ let
   ];
 in
 {
+  flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
+    specialArgs = { inherit inputs; };
+    modules = [
+      inputs.self.nixosModules.${hostname}
+      { nixpkgs.hostPlatform = lib.mkDefault system; }
+      inputs.home-manager.nixosModules.home-manager
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = { inherit inputs; };
+          users.${username} = inputs.self.homeModules.${hostname};
+        };
+      }
+    ];
+  };
+
   flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.${system};
     extraSpecialArgs = { inherit inputs; };
@@ -32,13 +49,86 @@ in
     ];
   };
 
-  flake.homeModules.${hostname} =
+  flake.nixosModules.${hostname} =
+    { config, pkgs, ... }:
     {
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
+      # Add modules
+      imports = with inputs.self.nixosModules; [
+        # Operating System modules
+        base # Base system configuration
+        lanzaboote # Secure boot configuration
+        # Hardware modules
+        audio # Audio configuration
+        time # Time synchronization
+        power # Power management
+        bluetooth # Bluetooth support
+        # Display Manager modules
+        greetd # Greetd display manager
+        # Window Manager modules
+        mangowc # Mango window manager
+        # Development modules
+        tailscale # Tailscale VPN client
+        # Misc modules
+        thunar # Thunar file manager
+      ];
+
+      # Base configuration
+      base = {
+        hostname = hostname;
+        version = stateVersion; # Not recommended to change this
+        username = username;
+        allowUnfree = true;
+      };
+
+      # Boot
+      lanzaboote.kernelPackages = pkgs.linuxPackages;
+
+      # Hardware
+      hardware = {
+        i2c.enable = true; # Enable I2C support
+        brillo.enable = true; # Adjust screen brightness
+      };
+
+      # Keyring
+      services.gnome.gnome-keyring.enable = true;
+      programs.seahorse.enable = true;
+
+      # Disks
+      services.gvfs.enable = true;
+      services.udisks2.enable = true;
+
+      # Thumbnails
+      services.tumbler.enable = true;
+
+      # Fonts
+      fonts = {
+        enableDefaultPackages = true;
+        packages = with pkgs; [
+          nerd-fonts.jetbrains-mono
+          caladea
+        ];
+      };
+
+      # Programs
+      programs = {
+        nix-index.enable = true; # Index nixpkgs for quick searching (includes shell integration).
+        nix-ld.enable = true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
+      };
+
+      # Packages
+      metapackages.bundles = bundles;
+      environment.systemPackages = with pkgs; [
+        # Editor
+        neovim # Vim-based text editor
+        vscode # Visual Studio Code
+        # Browser
+        firefox # 🔥🦊
+        brave # 🦁
+      ];
+    };
+
+  flake.homeModules.${hostname} =
+    { pkgs, lib, ... }:
     {
       imports = with inputs.self.homeModules; [
         base # Base home configuration
@@ -48,18 +138,20 @@ in
         foot # Wayland terminal emulator
         # Development
         git # Git configuration
-        virtmanager # virt-manager configuration
+        # Desktop
+        mangowc # Mango configuration
         # Utilities
-        rofi # Application launcher and window switcher
+        waybar # Wayland status bar
+        dunst # Notification daemon
+        rclone # Rsync-like program for cloud storage
         yazi # TUI file manager
         syncthing # File synchronization
       ];
 
-      # Base configuration
-      nixpkgs.config.allowUnfree = true;
+      # Base
       base = {
         username = username;
-        stateVersion = stateVersion; # Not recommended to change this
+        stateVersion = stateVersion;
       };
 
       # Shell
@@ -71,21 +163,23 @@ in
       ];
 
       # Style
+      home.pointerCursor = {
+        gtk.enable = true;
+        hyprcursor.enable = true;
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
+        size = 20;
+      };
       xdg.enable = true;
       gtk = {
         enable = true;
-        # theme = {
-        #   package = pkgs.juno-theme;
-        #   name = "Juno-ocean";
-        # };
-        # iconTheme = {
-        #   package = pkgs.tela-icon-theme;
-        #   name = "Tela";
-        # };
-        cursorTheme = {
-          package = pkgs.bibata-cursors;
-          name = "Bibata-Modern-Ice";
-          size = 20;
+        theme = {
+          package = pkgs.juno-theme;
+          name = "Juno-ocean";
+        };
+        iconTheme = {
+          package = pkgs.papirus-icon-theme;
+          name = "Papirus-Dark";
         };
         gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
         gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
@@ -99,28 +193,55 @@ in
         };
       };
 
-      # Programs
-      programs.firefox = {
-        enable = true;
-        package = lib.mkIf config.targets.genericLinux.enable (config.lib.nixGL.wrap pkgs.firefox);
-      };
-
-      # Packages
-      metapackages.bundles = bundles;
-      home.packages = with pkgs; [
-        # Editor
-        vscode
-        neovim
-        # Development
-        postman
-      ];
+      # Disks
+      services.udiskie.enable = true;
 
       # Environment variables
       home.sessionVariables = {
         EDITOR = lib.getExe pkgs.neovim;
         VISUAL = lib.getExe pkgs.vscode;
-        XCURSOR_THEME = config.gtk.cursorTheme.name;
-        XCURSOR_SIZE = config.gtk.cursorTheme.size;
+        MANPAGER = "env BATMAN_IS_BEING_MANPAGER=yes " + lib.getExe pkgs.bat-extras.batman;
+      };
+
+      # Wayland: displays
+      services.kanshi = {
+        enable = true;
+        settings = [
+          {
+            profile.name = "undocked";
+            profile.outputs = [ { criteria = "eDP-1"; } ];
+          }
+          {
+            profile.name = "semi-docked";
+            profile.outputs = [
+              {
+                criteria = "eDP-1";
+                position = "0,0";
+              }
+              {
+                criteria = "HDMI-A-1";
+                position = "1920,0";
+              }
+            ];
+          }
+          {
+            profile.name = "fully-docked";
+            profile.outputs = [
+              {
+                criteria = "HDMI-A-1";
+                position = "0,0";
+              }
+              {
+                criteria = "eDP-1";
+                position = "1920,0";
+              }
+              {
+                criteria = "DP-1";
+                position = "3840,0";
+              }
+            ];
+          }
+        ];
       };
     };
 }
