@@ -1,7 +1,7 @@
 # Copied from /etc/nixos/hardware-configuration.nix
 # That file is generated automatically and should not be edited directly.
 {
-  flake.nixosModules.tesla =
+  flake.nixosModules.turing =
     {
       config,
       lib,
