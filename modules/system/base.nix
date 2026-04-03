@@ -105,7 +105,12 @@
         # Networking
         networking = {
           hostName = cfg.hostname;
-          networkmanager.enable = true;
+          networkmanager = {
+            enable = true;
+            plugins = with pkgs; [
+              networkmanager-openvpn
+            ];
+          };
           firewall.enable = true;
         };
 
