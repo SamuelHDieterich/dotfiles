@@ -46,7 +46,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mangowc = {
-      url = "github:ananyatimalsina/mangowc"; # https://github.com/mangowm/mango/pull/667
+      url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
