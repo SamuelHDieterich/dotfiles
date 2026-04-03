@@ -20,6 +20,7 @@ in
   flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
     specialArgs = { inherit inputs; };
     modules = [
+      inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel-gen7
       inputs.self.nixosModules.${hostname}
       { nixpkgs.hostPlatform = lib.mkDefault system; }
       inputs.home-manager.nixosModules.home-manager
@@ -88,6 +89,7 @@ in
         i2c.enable = true; # Enable I2C support
         brillo.enable = true; # Adjust screen brightness
       };
+      services.fprintd.enable = true; # Fingerprint reader
 
       # Keyring
       services.gnome.gnome-keyring.enable = true;
@@ -125,6 +127,8 @@ in
         # Browser
         firefox # 🔥🦊
         brave # 🦁
+        # Work-tools
+        slack
       ];
     };
 

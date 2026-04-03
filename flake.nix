@@ -19,7 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Hardware support
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/pull/1700/head";
     # Secure boot
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
