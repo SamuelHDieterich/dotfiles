@@ -33,7 +33,7 @@ let
       ansible # Automation tool
       # Cloud
       awscli2 # AWS CLI
-      (google-cloud-sdk.withExtraComponents [ pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin ]) # Google Cloud SDK with GKE auth plugin
+      google-cloud-sdk # Google Cloud SDK
       # Text processing
       jq # JSON processor
       yq # YAML processor
