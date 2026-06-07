@@ -128,7 +128,13 @@ in
         firefox # 🔥🦊
         brave # 🦁
         # Work-tools
-        slack
+        slack # Slack client
+        ollama-vulkan # Local LLM
+        llama-cpp-vulkan # Local LLM
+        opencode # AI coding agent
+        # Temporary
+        jdk # Java Development Kit
+        tigervnc # VNC server for remote desktop access
       ];
     };
 
