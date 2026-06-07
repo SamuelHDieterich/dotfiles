@@ -245,7 +245,21 @@ in
             profile.outputs = [ { criteria = "eDP-1"; } ];
           }
           {
-            profile.name = "semi-docked";
+            profile.name = "semi-docked-samsung-lf27t35"; # Workplace
+            profile.outputs = [
+              {
+                criteria = "eDP-1";
+                position = "0,1080";
+              }
+              {
+                # Match this exact display model/serial first.
+                criteria = "Samsung Electric Company LF27T35 HX5Y100410";
+                position = "0,0";
+              }
+            ];
+          }
+          {
+            profile.name = "semi-docked"; # Generic semi-docked profile
             profile.outputs = [
               {
                 criteria = "eDP-1";
