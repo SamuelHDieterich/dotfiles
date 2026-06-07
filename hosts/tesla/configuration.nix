@@ -72,6 +72,7 @@ in
         # Development modules
         virtmanager # Virtual machine management with virt-manager
         tailscale # Tailscale VPN client
+        podman # Podman container runtime
         # Misc modules
         printing # Printer and scanner support
         obs-studio # OBS Studio for screen recording and streaming

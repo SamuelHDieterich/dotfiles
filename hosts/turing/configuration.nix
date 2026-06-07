@@ -68,6 +68,7 @@ in
         # Window Manager modules
         mangowc # Mango window manager
         # Development modules
+        podman # Podman container runtime
         tailscale # Tailscale VPN client
         # Misc modules
         thunar # Thunar file manager

@@ -144,6 +144,7 @@
               "audio" # For audio access
               "storage" # For storage device access
               "docker" # For Docker access
+              "podman" # For Podman access
               "libvirt" # For libvirt (virtualization) access
               "libvirtd" # For libvirt daemon access
               "lp" # For printer access
