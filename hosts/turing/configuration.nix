@@ -58,6 +58,7 @@ in
         # Operating System modules
         base # Base system configuration
         lanzaboote # Secure boot configuration
+        xdg # XDG portals
         # Hardware modules
         audio # Audio configuration
         time # Time synchronization
