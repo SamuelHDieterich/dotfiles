@@ -82,6 +82,17 @@ in
         allowUnfree = true;
       };
 
+      keyboard = [
+        {
+          layout = "br";
+          variant = "thinkpad"; # Default (abnt2)
+        }
+        {
+          layout = "us";
+          variant = "intl";
+        }
+      ];
+
       # Boot
       lanzaboote.kernelPackages = pkgs.linuxPackages;
 
@@ -165,6 +176,17 @@ in
         username = username;
         stateVersion = stateVersion;
       };
+
+      keyboard = [
+        {
+          layout = "br";
+          variant = "thinkpad"; # Default (abnt2)
+        }
+        {
+          layout = "us";
+          variant = "intl";
+        }
+      ];
 
       # Shell
       shell.include = [

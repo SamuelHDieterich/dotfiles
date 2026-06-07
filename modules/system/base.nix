@@ -26,6 +26,8 @@
         sessionVariables
         # Package bundles
         metapackages
+        # Keyboard configuration
+        inputs.self.modules.generic.keyboard
       ];
 
       options.base = {
@@ -124,13 +126,15 @@
 
         # Keyboard
         console = {
-          keyMap = "br-abnt2";
+          keyMap = config.keyboardValue.keyMap;
           font = "Lat2-Terminus16";
         };
-        services.xserver.xkb = {
-          layout = "br";
-          model = "abnt2";
-        };
+        services.xserver.xkb = mkMerge [
+          { options = "grp:alt_shift_toggle"; }
+          (mkIf (config.keyboardValue.layouts != null) { layout = config.keyboardValue.layouts; })
+          (mkIf (config.keyboardValue.models != null) { model = config.keyboardValue.models; })
+          (mkIf (config.keyboardValue.variants != null) { variant = config.keyboardValue.variants; })
+        ];
 
         # Users
         users.users = {
@@ -185,6 +189,8 @@
         sessionVariables
         # Package bundles
         metapackages
+        # Keyboard configuration
+        inputs.self.modules.generic.keyboard
       ];
 
       options.base = {
