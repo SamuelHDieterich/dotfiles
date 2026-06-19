@@ -145,6 +145,7 @@ in
         ollama-vulkan # Local LLM
         llama-cpp-vulkan # Local LLM
         opencode # AI coding agent
+        claude-code # Anthropic coding agent
         # Temporary
         jdk # Java Development Kit
         tigervnc # VNC server for remote desktop access

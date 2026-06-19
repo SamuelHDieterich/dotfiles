@@ -101,6 +101,9 @@ let
       p7zip # 7zip
       unzip # unzip command
       ouch # Preview and extract archives
+      # Misc
+      toilet # Text banner generator
+      figlet # Text banner generator
     ];
 
     network = with pkgs; [
