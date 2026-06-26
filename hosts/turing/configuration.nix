@@ -64,6 +64,7 @@ in
         time # Time synchronization
         power # Power management
         bluetooth # Bluetooth support
+        fingerprint # Fingerprint reader (password-first, swipe as fallback)
         # Display Manager modules
         greetd # Greetd display manager
         # Window Manager modules
@@ -102,8 +103,6 @@ in
         i2c.enable = true; # Enable I2C support
         brillo.enable = true; # Adjust screen brightness
       };
-      services.fprintd.enable = true; # Fingerprint reader
-
       # Keyring
       services.gnome.gnome-keyring.enable = true;
       programs.seahorse.enable = true;
