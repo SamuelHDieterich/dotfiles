@@ -426,6 +426,26 @@
         "type": "github"
       }
     },
+    "msnap": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780656518,
+        "narHash": "sha256-4XTCbp8Vo8ApC/pnD9JhyQjzYz/TvIqsfKb0V+EhAjE=",
+        "owner": "xtheeq",
+        "repo": "msnap",
+        "rev": "0bb1e08911c6ef50853ea23e1ecc080edc74372a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xtheeq",
+        "repo": "msnap",
+        "type": "github"
+      }
+    },
     "nix": {
       "inputs": {
         "flake-compat": [
@@ -608,6 +628,7 @@
         "import-tree": "import-tree",
         "lanzaboote": "lanzaboote",
         "mangowc": "mangowc",
+        "msnap": "msnap",
         "nixgl": "nixgl",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

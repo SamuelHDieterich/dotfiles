@@ -49,6 +49,11 @@
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Screenshot/screencast tool for mango
+    msnap = {
+      url = "github:xtheeq/msnap";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

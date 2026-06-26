@@ -7,15 +7,12 @@
       lib,
       ...
     }:
+    let
+      msnap = inputs.msnap.packages.${pkgs.stdenv.hostPlatform.system}.msnap;
+    in
     {
       imports = [ inputs.self.homeModules.rofi ];
-      xdg.configFile = {
-        "swappy/config".text = ''
-          [Default]
-          save_dir=~/Pictures/Screenshots
-          save_filename_format=%Y-%m-%d_%H-%M-%S.png
-        '';
-      };
+      home.packages = [ msnap ]; # msnap on PATH for CLI + `msnap gui`
 
       wayland.windowManager.mango.settings =
         let
@@ -25,11 +22,8 @@
             mode:
             pkgs.writeShellScript "screenshot-command" ''
               SCREENSHOT_DIR=~/Pictures/Screenshots
-              FILENAME=$(date +%Y-%m-%d_%H-%M-%S)
               mkdir -p $SCREENSHOT_DIR
-              ${lib.getExe pkgs.hyprshot} -m ${mode} -z -s -o $SCREENSHOT_DIR -f $FILENAME.png
-              sleep 0.5 # Wait for the screenshot to be saved
-              ${lib.getExe pkgs.swappy} -f $SCREENSHOT_DIR/$FILENAME.png
+              ${lib.getExe msnap} shot ${mode} --annotate --output $SCREENSHOT_DIR
             '';
           terminal = lib.getExe' pkgs.foot "footclient";
           filemanager = lib.getExe pkgs.thunar;
@@ -90,12 +84,12 @@
             "${mod}, L,       spawn, ${lock}"
 
             # Screenshots
-            "NONE,  Print,      spawn, ${screenshot-command "region"}"
-            "${mod},        S,  spawn, ${screenshot-command "region"}"
-            "SHIFT, Print,      spawn, ${screenshot-command "window"}"
-            "${mod}+SHIFT,  S,  spawn, ${screenshot-command "window"}"
-            "ALT,   Print,      spawn, ${screenshot-command "output"}"
-            "${mod}+ALT,    S,  spawn, ${screenshot-command "output"}"
+            "NONE,  Print,      spawn, ${screenshot-command "--region"}"
+            "${mod},        S,  spawn, ${screenshot-command "--region"}"
+            "SHIFT, Print,      spawn, ${screenshot-command "--window"}"
+            "${mod}+SHIFT,  S,  spawn, ${screenshot-command "--window"}"
+            "ALT,   Print,      spawn, ${screenshot-command ""}"
+            "${mod}+ALT,    S,  spawn, ${screenshot-command ""}"
 
             # Brightness
             "NONE,  XF86MonBrightnessUp,    spawn, ${lib.getExe pkgs.brightnessctl} s +2%"
