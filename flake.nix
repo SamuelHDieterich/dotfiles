@@ -1,77 +1,62 @@
+# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
   description = "Dotfiles configuration";
 
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      inputs.import-tree [
+        ./hosts
+        ./modules
+        ./packages
+      ]
+    );
+
   inputs = {
-    # Package management
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Modular flake structure
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    # Recursively import nix modules
-    import-tree.url = "github:vic/import-tree";
-    # User-level configuration management
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # Disk management
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # Hardware support
-    nixos-hardware.url = "github:NixOS/nixos-hardware/pull/1700/head";
-    # Secure boot
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # Secrets management
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # OpenGL for non-NixOS systems
-    nixgl = {
-      url = "github:nix-community/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # Development environment management
     devenv = {
       url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Dynamic monitor management for Hyprland
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-file.url = "github:vic/flake-file";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprdynamicmonitors = {
       url = "github:fiffeek/hyprdynamicmonitors";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    import-tree.url = "github:vic/import-tree";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mangowc = {
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Screenshot/screencast tool for mango
     msnap = {
       url = "github:xtheeq/msnap";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs =
-    inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        inputs.flake-parts.flakeModules.modules
-        inputs.home-manager.flakeModules.home-manager
-        (inputs.import-tree [
-          ./hosts # Device-specific configurations
-          ./modules # General Nix modules
-          ./packages # Custom packages
-          # ./shells # Development shells
-        ])
-      ];
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ]; # Supported systems
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/pull/1700/head";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 }
