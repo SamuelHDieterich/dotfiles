@@ -18,13 +18,6 @@
         let
           mod = "SUPER";
           rofi-command = "${lib.getExe config.programs.rofi.finalPackage} -steal-focus";
-          screenshot-command =
-            mode:
-            pkgs.writeShellScript "screenshot-command" ''
-              SCREENSHOT_DIR=~/Pictures/Screenshots
-              mkdir -p $SCREENSHOT_DIR
-              ${lib.getExe msnap} shot ${mode} --annotate --output $SCREENSHOT_DIR
-            '';
           terminal = lib.getExe' pkgs.foot "footclient";
           filemanager = lib.getExe pkgs.thunar;
           webbrowser = lib.getExe pkgs.firefox;
@@ -35,6 +28,7 @@
           run = "${rofi-command} -show run -no-show-icons";
           emoji = "${rofi-command} -show emoji -no-show-icons -emoji-mode copy";
           colorpicker = "${lib.getExe pkgs.hyprpicker} -a";
+          screenshot = "${lib.getExe msnap} gui";
         in
         {
           # Key bindings
@@ -84,12 +78,8 @@
             "${mod}, L,       spawn, ${lock}"
 
             # Screenshots
-            "NONE,  Print,      spawn, ${screenshot-command "--region"}"
-            "${mod},        S,  spawn, ${screenshot-command "--region"}"
-            "SHIFT, Print,      spawn, ${screenshot-command "--window"}"
-            "${mod}+SHIFT,  S,  spawn, ${screenshot-command "--window"}"
-            "ALT,   Print,      spawn, ${screenshot-command ""}"
-            "${mod}+ALT,    S,  spawn, ${screenshot-command ""}"
+            "NONE,    Print,  spawn, ${screenshot}"
+            "${mod},  S,      spawn, ${screenshot}"
 
             # Brightness
             "NONE,  XF86MonBrightnessUp,    spawn, ${lib.getExe pkgs.brightnessctl} s +2%"
