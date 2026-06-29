@@ -40,11 +40,23 @@
             "${mod}, F,         togglefullscreen"
             "${mod}, Space,     togglefloating"
 
-            # # Monitor switching
-            "${mod}+CTRL,   Left,   focusmon, left"
-            "${mod}+CTRL,   Right,  focusmon, right"
-            "${mod}+SHIFT,  Left,   tagmon,   left"
-            "${mod}+SHIFT,  Right,  tagmon,   right"
+            # Monitor focus
+            "${mod}+CTRL, Left,   focusmon, left"
+            "${mod}+CTRL, Right,  focusmon, right"
+            "${mod}+CTRL, Up,     focusmon, up"
+            "${mod}+CTRL, Down,   focusmon, down"
+
+            # Move window to other monitor
+            "${mod}+CTRL+SHIFT, Left,   tagmon, left"
+            "${mod}+CTRL+SHIFT, Right,  tagmon, right"
+            "${mod}+CTRL+SHIFT, Up,     tagmon, up"
+            "${mod}+CTRL+SHIFT, Down,   tagmon, down"
+
+            # Swap focused tiled window with its neighbor
+            "${mod}+SHIFT,  Left,   exchange_client, left"
+            "${mod}+SHIFT,  Right,  exchange_client, right"
+            "${mod}+SHIFT,  Up,     exchange_client, up"
+            "${mod}+SHIFT,  Down,   exchange_client, down"
 
             # Focus
             "${mod},      Left,   focusdir,   left"
@@ -61,9 +73,10 @@
             "ALT,     Tab,  toggleoverview,"
 
             # Layout manipulation
-            "${mod}, Tab, switch_layout"
-            "${mod}, T,   setlayout, tile"
-            "${mod}, M,   setlayout, monocle"
+            "${mod},        Tab,    switch_layout"
+            "${mod},        T,      setlayout, tile"
+            "${mod},        M,      setlayout, monocle"
+            "${mod}+SHIFT,  Return, zoom"
 
             # Applications shortcuts
             "${mod}, Return,  spawn, ${terminal}"
