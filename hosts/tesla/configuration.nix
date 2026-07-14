@@ -70,6 +70,7 @@ in
         # Window Manager modules
         # hyprland # Hyprland window manager
         mangowc # Mango window manager
+        waybarMangoOverlay # TEMPORARY: waybar built with unreleased mango module support
         # Development modules
         virtmanager # Virtual machine management with virt-manager
         tailscale # Tailscale VPN client
@@ -193,6 +194,7 @@ in
 
       # Style
       home.pointerCursor = {
+        enable = true;
         gtk.enable = true;
         hyprcursor.enable = true;
         package = pkgs.bibata-cursors;

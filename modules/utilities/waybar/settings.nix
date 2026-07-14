@@ -25,11 +25,11 @@
                 "hyprland/workspaces"
               ]
               ++ lib.optionals (config.wayland.windowManager.mango.enable) [
-                "ext/workspaces"
-                "dwl/window#layout"
+                "mango/workspaces"
+                "mango/layout"
               ];
             modules-center = lib.optionals (config.wayland.windowManager.mango.enable) [
-              "dwl/window#title"
+              "mango/window"
             ];
             modules-right = [
               "tray"
@@ -55,29 +55,22 @@
               on-scroll-down = "hyprctl dispatch workspace e-1";
             };
 
-            "ext/workspaces" = {
+            "mango/workspaces" = {
               format = "{icon}";
-              ignore-hidden = false;
               on-click = "activate";
               on-click-right = "deactivate";
-              sort-by-id = true;
             };
 
-            "dwl/window" = {
-              format = "[{layout}] {title}";
-              max-length = 50;
-            };
-
-            "dwl/window#layout" = {
-              format = "[{layout}]";
-              icon-size = 0;
-              tooltip = false;
-              on-click = "mmsg -d switch_layout";
-            };
-
-            "dwl/window#title" = {
+            "mango/window" = {
               format = "{title}";
               max-length = 50;
+            };
+
+            "mango/layout" = {
+              format = "[{symbol}]";
+              icon-size = 0;
+              tooltip = false;
+              on-click = "mmsg dispatch switch_layout";
             };
 
             ## System

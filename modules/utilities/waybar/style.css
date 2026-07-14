@@ -48,17 +48,20 @@ tooltip {
 
 /* Occupied but not selected */
 #workspaces button {
+  padding: 0 10px;
+  margin: 0;
+  min-width: 0;
   color: @secondary;
 }
 
-/* Occupied and selected */
-#workspaces button.active {
-  color: @primary;
+/* Not in use */
+#workspaces button.empty {
+  color: @foreground;
 }
 
-/* Not in use */
-#workspaces button.hidden {
-  color: @foreground;
+/* Occupied and selected (must come after .empty so it wins when both classes are present) */
+#workspaces button.active {
+  color: @primary;
 }
 
 /* Alert */

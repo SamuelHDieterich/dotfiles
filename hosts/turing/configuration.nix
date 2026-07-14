@@ -69,6 +69,7 @@ in
         greetd # Greetd display manager
         # Window Manager modules
         mangowc # Mango window manager
+        waybarMangoOverlay # TEMPORARY: waybar built with unreleased mango module support
         # Development modules
         podman # Podman container runtime
         tailscale # Tailscale VPN client
@@ -162,6 +163,7 @@ in
         foot # Wayland terminal emulator
         # Development
         git # Git configuration
+        devenv # Development environment with nix
         # Desktop
         mangowc # Mango configuration
         # Utilities
@@ -199,6 +201,7 @@ in
 
       # Style
       home.pointerCursor = {
+        enable = true;
         gtk.enable = true;
         hyprcursor.enable = true;
         package = pkgs.bibata-cursors;
