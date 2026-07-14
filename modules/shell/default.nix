@@ -56,7 +56,10 @@
           programs = {
             zoxide.enable = true;
             atuin.enable = true;
-            fzf.enable = true;
+            fzf = {
+              enable = true;
+              historyWidget.command = "";
+            };
             direnv = {
               enable = true;
               config = {
