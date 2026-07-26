@@ -58,7 +58,7 @@
             "mango/workspaces" = {
               format = "{icon}";
               on-click = "activate";
-              on-click-right = "deactivate";
+              on-click-right = "toggle";
             };
 
             "mango/window" = {
