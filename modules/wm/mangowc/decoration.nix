@@ -11,6 +11,10 @@
       # Colors
       focuscolor = "0x00ff99ee";
       bordercolor = "0x1a1a1aee";
+      # Hot corner: enter overview when the cursor hits a screen corner.
+      enable_hotarea = 1;
+      hotarea_corner = 2; # bottom-left
+      hotarea_size = 10;
     };
   };
 }
