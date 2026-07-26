@@ -171,6 +171,7 @@ in
         dunst # Notification daemon
         rclone # Rsync-like program for cloud storage
         yazi # TUI file manager
+        thunar # Thunar terminal helper config
         syncthing # File synchronization
       ];
 
