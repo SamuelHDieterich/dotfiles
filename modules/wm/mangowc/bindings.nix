@@ -23,7 +23,7 @@
           webbrowser = lib.getExe pkgs.firefox;
           editor = lib.getExe pkgs.vscode;
           pass = lib.getExe pkgs.keepassxc;
-          lock = "${lib.getExe pkgs.hyprlock} --grace 5";
+          lock = "loginctl lock-session";
           drun = "${rofi-command} -show drun -show-icons";
           run = "${rofi-command} -show run -no-show-icons";
           emoji = "${rofi-command} -show emoji -no-show-icons -emoji-mode copy";
@@ -156,7 +156,7 @@
             "NONE,  down,   4,  toggleoverview"
           ];
           switchbind = [
-            "fold,   spawn_shell, pidof hyprlock || hyprlock --grace 10"
+            "fold,   spawn_shell, loginctl lock-session"
             "unfold, spawn,       ${lib.getExe pkgs.wlopm} --on '*'"
           ];
         };

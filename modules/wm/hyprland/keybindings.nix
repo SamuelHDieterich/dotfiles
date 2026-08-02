@@ -38,7 +38,7 @@
           "$webbrowser" = lib.getExe pkgs.firefox;
           "$editor" = lib.getExe pkgs.vscode;
           "$pass" = lib.getExe pkgs.keepassxc;
-          "$lock" = "${lib.getExe pkgs.hyprlock} --grace 5";
+          "$lock" = "loginctl lock-session";
           "$drun" = "${rofi-command} -show drun -show-icons";
           "$run" = "${rofi-command} -show run -no-show-icons";
           "$emoji" = "${rofi-command} -show emoji -no-show-icons -emoji-mode copy";
