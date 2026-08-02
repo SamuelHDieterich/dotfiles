@@ -14,6 +14,14 @@
     );
 
   inputs = {
+    claude-code-nix = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    claude-plugins-official = {
+      url = "github:anthropics/claude-plugins-official";
+      flake = false;
+    };
     devenv = {
       url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,9 +62,25 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/pull/1700/head";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    prompt-master = {
+      url = "github:nidhinjs/prompt-master";
+      flake = false;
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    superpowers = {
+      url = "github:obra/superpowers";
+      flake = false;
+    };
+    terraform-skill = {
+      url = "github:antonbabenko/terraform-skill";
+      flake = false;
+    };
+    tokenline = {
+      url = "github:inbrace-tech/tokenline";
+      flake = false;
     };
   };
 }

@@ -30,6 +30,43 @@
         "type": "github"
       }
     },
+    "claude-code-nix": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785285785,
+        "narHash": "sha256-r1cMlvXjRVKe+uQ/GKwy4TpionpmbNgksFP2758D/MM=",
+        "owner": "sadjow",
+        "repo": "claude-code-nix",
+        "rev": "da78262708d858861afbe1f68ea65fedda4054c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sadjow",
+        "repo": "claude-code-nix",
+        "type": "github"
+      }
+    },
+    "claude-plugins-official": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785693993,
+        "narHash": "sha256-cIgmlkbh/cK2zhc2v6of46YFxpmhJ7lf01hL7t87iEQ=",
+        "owner": "anthropics",
+        "repo": "claude-plugins-official",
+        "rev": "7217edcd2b0922a1f411e9c92b5b4e2eb6d43604",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anthropics",
+        "repo": "claude-plugins-official",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1784564969,
@@ -237,6 +274,24 @@
     },
     "flake-utils_2": {
       "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_3": {
+      "inputs": {
         "systems": [
           "mangowc",
           "scenefx",
@@ -257,9 +312,9 @@
         "type": "github"
       }
     },
-    "flake-utils_3": {
+    "flake-utils_4": {
       "inputs": {
-        "systems": "systems_3"
+        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -338,7 +393,7 @@
     },
     "hyprdynamicmonitors": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -505,7 +560,7 @@
     },
     "nixgl": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -609,8 +664,26 @@
         "type": "github"
       }
     },
+    "prompt-master": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781108083,
+        "narHash": "sha256-o7JNvsAzcN5t271A61FtCxpz+sQR3rnFbxSnmuBwibE=",
+        "owner": "nidhinjs",
+        "repo": "prompt-master",
+        "rev": "d15eabbe5d2122eedc060bae8a771381e9873d1b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nidhinjs",
+        "repo": "prompt-master",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "claude-code-nix": "claude-code-nix",
+        "claude-plugins-official": "claude-plugins-official",
         "devenv": "devenv",
         "disko": "disko",
         "flake-file": "flake-file",
@@ -624,7 +697,11 @@
         "nixgl": "nixgl",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
-        "sops-nix": "sops-nix"
+        "prompt-master": "prompt-master",
+        "sops-nix": "sops-nix",
+        "superpowers": "superpowers",
+        "terraform-skill": "terraform-skill",
+        "tokenline": "tokenline"
       }
     },
     "rust-overlay": {
@@ -671,12 +748,12 @@
     },
     "scenefx": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "mangowc",
           "nixpkgs"
         ],
-        "systems": "systems_2"
+        "systems": "systems_3"
       },
       "locked": {
         "lastModified": 1782624992,
@@ -712,6 +789,22 @@
         "type": "github"
       }
     },
+    "superpowers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785266736,
+        "narHash": "sha256-fnl+HbPL2qD5Zgz8a1NctjFJSqu6UsyHJAhQMLQNXXc=",
+        "owner": "obra",
+        "repo": "superpowers",
+        "rev": "44c9b2d6e889982ac18c27d05a19fefe335194e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "obra",
+        "repo": "superpowers",
+        "type": "github"
+      }
+    },
     "systems": {
       "locked": {
         "lastModified": 1681028828,
@@ -729,6 +822,21 @@
     },
     "systems_2": {
       "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_3": {
+      "locked": {
         "lastModified": 1689347949,
         "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
         "owner": "nix-systems",
@@ -742,7 +850,7 @@
         "type": "github"
       }
     },
-    "systems_3": {
+    "systems_4": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -754,6 +862,38 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "terraform-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783058190,
+        "narHash": "sha256-utKu3sueu6SdhjmtRa+Osg761YPwdQa6IPhceZsgsn8=",
+        "owner": "antonbabenko",
+        "repo": "terraform-skill",
+        "rev": "0a3a4a66e99001347d36a41e10260a825be3ab62",
+        "type": "github"
+      },
+      "original": {
+        "owner": "antonbabenko",
+        "repo": "terraform-skill",
+        "type": "github"
+      }
+    },
+    "tokenline": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785039548,
+        "narHash": "sha256-1G43IwaS/D/3sq//08vkzy8AtX+lGWBjw7Z4/ArH0cM=",
+        "owner": "inbrace-tech",
+        "repo": "tokenline",
+        "rev": "f9456173438900fdf39b3143e5b42bf571f3bbc7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "inbrace-tech",
+        "repo": "tokenline",
         "type": "github"
       }
     },

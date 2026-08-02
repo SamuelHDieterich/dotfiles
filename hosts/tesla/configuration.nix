@@ -166,6 +166,8 @@ in
         foot # Wayland terminal emulator
         # Development
         git # Git configuration
+        devenv # Development environment with nix
+        claudeCode # Anthropic coding agent
         virtmanager # virt-manager configuration
         # Desktop
         # hyprland # Hyprland configuration
