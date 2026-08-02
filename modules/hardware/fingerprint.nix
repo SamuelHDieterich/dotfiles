@@ -23,7 +23,6 @@
 
         # Move pam_fprintd to just after pam_unix so password is tried first.
         # These services are environment-independent (always present on any host).
-        # Greeter and locker services apply their own reorder in their own modules.
         security.pam.services = lib.mkIf config.fingerprint.passwordFirst (
           lib.genAttrs [ "login" "sudo" "su" "polkit-1" ] (name: {
             rules.auth.fprintd.order = config.security.pam.services.${name}.rules.auth.unix.order + 10;
