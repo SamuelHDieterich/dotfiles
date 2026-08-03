@@ -83,6 +83,16 @@
               "@wheel"
             ];
             use-xdg-base-directories = true;
+            substituters = [
+              "https://cache.nixos.org"
+              "https://cachix.cachix.org"
+              "https://devenv.cachix.org"
+            ];
+            trusted-public-keys = [
+              "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+              "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+              "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+            ];
           };
           extraOptions = "!include ${config.sops.templates.nix-access-token.path}";
           gc = {
@@ -227,6 +237,16 @@
               "flakes"
             ];
             use-xdg-base-directories = true;
+            substituters = [
+              "https://cache.nixos.org"
+              "https://devenv.cachix.org"
+              "https://cachix.cachix.org"
+            ];
+            trusted-public-keys = [
+              "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+              "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+              "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+            ];
           };
           gc = {
             automatic = true;
