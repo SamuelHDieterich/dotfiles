@@ -147,6 +147,9 @@ in
         # Editor
         neovim # Vim-based text editor
         vscode # Visual Studio Code
+        # Development
+        beads
+        inputs.self.packages.${system}.bead-me-up-scotty # Local web UI for the beads (bd) issue tracker
         # Browser
         firefox # 🔥🦊
         brave # 🦁

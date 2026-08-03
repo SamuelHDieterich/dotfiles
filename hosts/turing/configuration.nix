@@ -140,6 +140,9 @@ in
         # Browser
         firefox # 🔥🦊
         brave # 🦁
+        # Development
+        beads
+        inputs.self.packages.${system}.bead-me-up-scotty # Local web UI for the beads (bd) issue tracker
         # Work-tools
         slack # Slack client
         ollama-vulkan # Local LLM
