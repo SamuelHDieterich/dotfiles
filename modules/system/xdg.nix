@@ -69,13 +69,24 @@
         text = builtins.readFile ./xdpw-chooser/windows.sh;
       };
       # The launcher ties the two mode scripts above together into one tabbed rofi invocation.
+      # Paths are substituted here rather than passed as --flags on chooser_cmd:
+      # xdpw's ini parser (inih) caps a config line at 200 bytes (INI_MAX_LINE),
+      # and chooser_cmd plus two flagged store paths silently overflowed and got
+      # truncated mid-value, breaking screencast.
       xdpwChooser = pkgs.writeShellApplication {
         name = "xdpw-chooser";
         runtimeInputs = with pkgs; [
           rofi
           coreutils # mktemp/cat/rm under xdpw's restricted PATH
         ];
-        text = builtins.readFile ./xdpw-chooser/launcher.sh;
+        text =
+          builtins.replaceStrings
+            [ "@screens_bin@" "@windows_bin@" ]
+            [
+              "${xdpwScreens}/bin/xdpw-screens"
+              "${xdpwWindows}/bin/xdpw-windows"
+            ]
+            (builtins.readFile ./xdpw-chooser/launcher.sh);
       };
     in
     {
@@ -85,11 +96,11 @@
 
       xdg.portal.wlr.settings.screencast = {
         chooser_type = "simple";
-        chooser_cmd = ''
-          ${xdpwChooser}/bin/xdpw-chooser \
-            --screens ${xdpwScreens}/bin/xdpw-screens \
-            --windows ${xdpwWindows}/bin/xdpw-windows
-        '';
+        # Must stay a single physical line (xdpw's ini parser re-invokes its
+        # handler once per continuation line and each call overwrites the
+        # previous value via strdup) and under inih's 200-byte INI_MAX_LINE
+        # (see xdpwChooser above) — hence a bare path with no arguments.
+        chooser_cmd = "${xdpwChooser}/bin/xdpw-chooser";
         # Intel Arrow Lake-U (i915) exposes GPU-composited surfaces (e.g.Firefox)
         # as dmabufs with implicit/tiled modifiers that wlr-screencopy can't read
         # directly, producing a black frame instead of an error.

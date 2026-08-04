@@ -1,22 +1,10 @@
 # Ties the two rofi script modes together into one tabbed picker.
-# --screens PATH: path to the "screens" mode script
-# --windows PATH: path to the "windows" mode script
-while [ $# -gt 0 ]; do
-  case "$1" in
-    --screens)
-      screens_bin=$2
-      shift 2
-      ;;
-    --windows)
-      windows_bin=$2
-      shift 2
-      ;;
-    *)
-      echo "xdpw-chooser: unknown argument '$1'" >&2
-      exit 1
-      ;;
-  esac
-done
+# Paths are substituted at build time rather than passed as CLI flags:
+# xdpw's inih-based ini parser hard-caps a config line at 200 bytes (INI_MAX_LINE),
+# and chooser_cmd plus two --flag store paths blew past that,
+# silently truncating the value with no error at parse time.
+screens_bin="@screens_bin@"
+windows_bin="@windows_bin@"
 
 # Script modes hand the selection back via ROFI_INFO on re-invocation rather than stdout
 # (see rofi-script(5)), so each mode writes its final "Monitor: "/"Window: " line to this
