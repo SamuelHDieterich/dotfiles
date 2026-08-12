@@ -90,6 +90,14 @@ in
         allowUnfree = true;
       };
 
+      keyboard = [
+        { layout = "br"; }
+        {
+          layout = "us";
+          variant = "intl";
+        }
+      ];
+
       # Boot
       lanzaboote.kernelPackages = pkgs.linuxPackages;
 
@@ -189,6 +197,14 @@ in
         username = username;
         stateVersion = stateVersion;
       };
+
+      keyboard = [
+        { layout = "br"; }
+        {
+          layout = "us";
+          variant = "intl";
+        }
+      ];
 
       # Shell
       shell.include = [
