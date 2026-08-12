@@ -69,6 +69,7 @@
           theme = "dark";
           spinnerTipsEnabled = false;
           syntaxHighlightingDisabled = false;
+          includeCoAuthoredBy = false;
 
           statusLine = {
             type = "command";
