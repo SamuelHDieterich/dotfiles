@@ -18,6 +18,19 @@
           }
           ''
             install -Dm755 ${inputs.tokenline}/tokenline.sh $out/bin/tokenline
+
+            # Claude Code sends rate_limits.*.resets_at as a raw epoch int, not the
+            # ISO-8601 string tokenline's epoch_from_iso() expects, so the 5h/7d
+            # reset countdown silently disappears. Use the value as-is when it's
+            # already numeric, falling back to ISO parsing otherwise.
+            substituteInPlace $out/bin/tokenline \
+              --replace-fail \
+                'rl_5h_reset=$(epoch_from_iso "''${_f[6]}")' \
+                'rl_5h_reset="''${_f[6]}"; [[ "$rl_5h_reset" =~ ^[0-9]+$ ]] || rl_5h_reset=$(epoch_from_iso "$rl_5h_reset")' \
+              --replace-fail \
+                'rl_7d_reset=$(epoch_from_iso "''${_f[8]}")' \
+                'rl_7d_reset="''${_f[8]}"; [[ "$rl_7d_reset" =~ ^[0-9]+$ ]] || rl_7d_reset=$(epoch_from_iso "$rl_7d_reset")'
+
             wrapProgram $out/bin/tokenline \
               --prefix PATH : ${
                 lib.makeBinPath (
