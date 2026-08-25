@@ -14,6 +14,10 @@
     );
 
   inputs = {
+    caveman = {
+      url = "github:JuliusBrussee/caveman";
+      flake = false;
+    };
     claude-code-nix = {
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs";

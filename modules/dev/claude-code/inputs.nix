@@ -24,5 +24,9 @@
       url = "github:inbrace-tech/tokenline"; # Cache-aware statusline
       flake = false;
     };
+    caveman = {
+      url = "github:JuliusBrussee/caveman"; # Ultra-compressed output mode
+      flake = false;
+    };
   };
 }

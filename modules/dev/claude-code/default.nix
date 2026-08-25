@@ -46,6 +46,15 @@
           '';
 
       officialPlugin = name: "${inputs.claude-plugins-official}/plugins/${name}";
+
+      # The hooks' commands call bare `node`, which would depend on whatever
+      # the host happens to have on PATH. Pin the interpreter instead.
+      caveman = pkgs.runCommand "caveman-plugin" { } ''
+        cp -r --no-preserve=mode,ownership ${inputs.caveman} $out
+
+        substituteInPlace $out/.claude-plugin/plugin.json \
+          --replace-fail '"command": "node ' '"command": "${lib.getExe pkgs.nodejs} '
+      '';
     in
     {
       programs.claude-code = {
@@ -74,6 +83,7 @@
           typescript-lsp = officialPlugin "typescript-lsp"; # TypeScript language server
           pr-review-toolkit = officialPlugin "pr-review-toolkit"; # PR review agents
           commit-commands = officialPlugin "commit-commands"; # /commit, /commit-push-pr
+          caveman = caveman; # Ultra-compressed output mode
         };
 
         settings = {
@@ -113,5 +123,14 @@
           };
         };
       };
+
+      # Installed, but not automatic: without this the plugin turns caveman
+      # on in every session of every repo. Opt a session in with
+      # CAVEMAN_DEFAULT_MODE=full.
+      xdg.configFile."caveman/config.json".source =
+        (pkgs.formats.json { }).generate "caveman-config.json"
+          {
+            defaultMode = "off";
+          };
     };
 }
