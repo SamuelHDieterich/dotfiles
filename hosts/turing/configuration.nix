@@ -121,6 +121,7 @@ in
         packages = with pkgs; [
           nerd-fonts.jetbrains-mono
           caladea
+          google-fonts
         ];
       };
 
@@ -140,16 +141,17 @@ in
         # Browser
         firefox # 🔥🦊
         brave # 🦁
+        # Office
+        typst
         # Development
         beads
         inputs.self.packages.${system}.bead-me-up-scotty # Local web UI for the beads (bd) issue tracker
+        jdk # Java Development Kit
         # Work-tools
         slack # Slack client
         ollama-vulkan # Local LLM
         llama-cpp-vulkan # Local LLM
         opencode # AI coding agent
-        # Temporary
-        jdk # Java Development Kit
         tigervnc # VNC server for remote desktop access
       ];
     };

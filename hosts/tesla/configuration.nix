@@ -139,6 +139,7 @@ in
         packages = with pkgs; [
           nerd-fonts.jetbrains-mono
           caladea
+          google-fonts
         ];
       };
 

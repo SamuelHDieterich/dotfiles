@@ -47,7 +47,6 @@ let
       zathura # PDF viewer
       thunderbird # Email client
       obsidian # Note-taking app
-      google-fonts # Google Fonts
       qalculate-gtk # Advanced calculator
     ];
 
