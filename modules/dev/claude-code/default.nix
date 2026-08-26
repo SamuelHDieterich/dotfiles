@@ -55,6 +55,14 @@
         substituteInPlace $out/.claude-plugin/plugin.json \
           --replace-fail '"command": "node ' '"command": "${lib.getExe pkgs.nodejs} '
       '';
+
+      # Same issue as caveman: hooks call bare `python3`. Pin the interpreter.
+      hookify = pkgs.runCommand "hookify-plugin" { } ''
+        cp -r --no-preserve=mode,ownership ${officialPlugin "hookify"} $out
+
+        substituteInPlace $out/hooks/hooks.json \
+          --replace-fail '"command": "python3 ' '"command": "${lib.getExe' pkgs.python3 "python3"} '
+      '';
     in
     {
       programs.claude-code = {
@@ -78,17 +86,52 @@
           superpowers = "${inputs.superpowers}"; # Brainstorming, TDD, systematic debugging
           frontend-design = officialPlugin "frontend-design"; # Visual design guidance
           skill-creator = officialPlugin "skill-creator"; # Authoring and evaluating skills
-          pyright-lsp = officialPlugin "pyright-lsp"; # Python language server
-          rust-analyzer-lsp = officialPlugin "rust-analyzer-lsp"; # Rust language server
-          typescript-lsp = officialPlugin "typescript-lsp"; # TypeScript language server
+          claude-md-management = officialPlugin "claude-md-management"; # Audit and refresh CLAUDE.md
+          claude-security = officialPlugin "claude-security"; # On-demand vulnerability scan
           pr-review-toolkit = officialPlugin "pr-review-toolkit"; # PR review agents
           commit-commands = officialPlugin "commit-commands"; # /commit, /commit-push-pr
           caveman = caveman; # Ultra-compressed output mode
+          hookify = hookify; # Author hooks from conversation patterns
+        };
+
+        # The marketplace's `*-lsp` plugin dirs are just README+LICENSE; the
+        # real config lives in the manifest, which personal-plugin symlinks skip.
+        # Declare the servers directly, pinned to store paths.
+        lspServers = {
+          pyright = {
+            command = lib.getExe' pkgs.pyright "pyright-langserver";
+            args = [ "--stdio" ];
+            extensionToLanguage = {
+              ".py" = "python";
+              ".pyi" = "python";
+            };
+          };
+          rust-analyzer = {
+            command = lib.getExe' pkgs.rust-analyzer "rust-analyzer";
+            extensionToLanguage = {
+              ".rs" = "rust";
+            };
+          };
+          typescript = {
+            command = lib.getExe' pkgs.typescript-language-server "typescript-language-server";
+            args = [ "--stdio" ];
+            extensionToLanguage = {
+              ".ts" = "typescript";
+              ".tsx" = "typescriptreact";
+              ".mts" = "typescript";
+              ".cts" = "typescript";
+              ".js" = "javascript";
+              ".jsx" = "javascriptreact";
+              ".mjs" = "javascript";
+              ".cjs" = "javascript";
+            };
+          };
         };
 
         settings = {
           model = "opusplan";
           effortLevel = "high";
+          promptCacheTtl = "1h";
           theme = "dark";
           spinnerTipsEnabled = false;
           syntaxHighlightingDisabled = false;
