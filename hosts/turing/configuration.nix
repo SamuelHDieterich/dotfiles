@@ -255,7 +255,7 @@ in
             profile.outputs = [ { criteria = "eDP-1"; } ];
           }
           {
-            profile.name = "semi-docked-samsung-lf27t35"; # Workplace
+            profile.name = "semi-docked-samsung-ls27d300g"; # Workplace
             profile.outputs = [
               {
                 criteria = "eDP-1";
@@ -263,7 +263,7 @@ in
               }
               {
                 # Match this exact display model/serial first.
-                criteria = "Samsung Electric Company LF27T35 HX5Y100410";
+                criteria = "Samsung Electric Company LS27D300G H1AK500000";
                 position = "0,0";
               }
             ];
