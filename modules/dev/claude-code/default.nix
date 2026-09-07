@@ -53,7 +53,7 @@
         cp -r --no-preserve=mode,ownership ${inputs.caveman} $out
 
         substituteInPlace $out/.claude-plugin/plugin.json \
-          --replace-fail '"command": "node ' '"command": "${lib.getExe pkgs.nodejs} '
+          --replace-fail '; node \"$HOOK_ROOT' '; ${lib.getExe pkgs.nodejs} \"$HOOK_ROOT'
       '';
 
       # Same issue as caveman: hooks call bare `python3`. Pin the interpreter.
