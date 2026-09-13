@@ -45,5 +45,43 @@
 
     # fidget: small corner messages while language servers load or index
     plugins.fidget.enable = true;
+
+    # dashboard-nvim: start screen shown when Neovim opens with no file, with recent files and quick actions
+    plugins.dashboard = {
+      enable = true;
+      settings = {
+        theme = "hyper"; # dashboard-nvim's richer layout: header, shortcuts, recent files, footer
+        config = {
+          mru.limit = 10; # Recent files list
+          header = [
+            ""
+            "███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗"
+            "████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║"
+            "██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║"
+            "██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║"
+            "██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
+            "╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
+            ""
+          ];
+          shortcut = [
+            {
+              desc = " Files";
+              key = "f";
+              action = "FzfLua files";
+            }
+            {
+              desc = " Recent";
+              key = "r";
+              action = "FzfLua oldfiles";
+            }
+            {
+              desc = " Explorer";
+              key = "e";
+              action = "Neotree";
+            }
+          ];
+        };
+      };
+    };
   };
 }

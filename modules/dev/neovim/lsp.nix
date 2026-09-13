@@ -16,7 +16,7 @@
       lsp = {
         inlayHints.enable = true; # Inline type and parameter-name hints
 
-        # Added in any buffer with a language server; the rest (K, grn, gra, grr, gri, grt, gO) are Neovim defaults
+        # Added in any buffer with a language server; the rest (grn, gra, grr, gri, grt, gO) are Neovim defaults
         keymaps = [
           {
             key = "gd";
@@ -27,6 +27,12 @@
             key = "gD";
             lspBufAction = "declaration";
             options.desc = "Go to declaration";
+          }
+          {
+            # Overrides Neovim's plain-text default hover with lspsaga's bordered, markdown-rendered popup
+            key = "K";
+            action = "<CMD>Lspsaga hover_doc<CR>";
+            options.desc = "Hover docs";
           }
         ];
 
@@ -124,6 +130,12 @@
 
       # trouble: a Problems panel listing every error and warning
       plugins.trouble.enable = true;
+
+      # lspsaga: prettier LSP popups (rounded border, icons, markdown rendering) than Neovim's default
+      plugins.lspsaga = {
+        enable = true;
+        settings.ui.border = "rounded";
+      };
 
       keymaps = [
         {

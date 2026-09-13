@@ -19,6 +19,8 @@
         gs = "git status";
         gc = "git commit";
         gw = "git worktree";
+        # Editor
+        n = "nvim";
       };
     in
     with lib;
