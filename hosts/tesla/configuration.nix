@@ -154,7 +154,6 @@ in
       metapackages.bundles = bundles;
       environment.systemPackages = with pkgs; [
         # Editor
-        neovim # Vim-based text editor
         vscode # Visual Studio Code
         # Development
         beads
@@ -179,6 +178,7 @@ in
         # Development
         git # Git configuration
         devenv # Development environment with nix
+        neovim # IDE-like Neovim (nixvim)
         claudeCode # Anthropic coding agent
         virtmanager # virt-manager configuration
         # Desktop
@@ -252,7 +252,6 @@ in
 
       # Environment variables
       home.sessionVariables = {
-        EDITOR = lib.getExe pkgs.neovim;
         VISUAL = lib.getExe pkgs.vscode;
         MANPAGER = "env BATMAN_IS_BEING_MANPAGER=yes " + lib.getExe pkgs.bat-extras.batman;
       };
