@@ -10,7 +10,7 @@
       };
     };
 
-    # Use the `claude` already on PATH rather than adding a second, differently versioned copy from nixpkgs
+    # Use the `claude` already on PATH
     dependencies.claude-code.enable = false;
 
     keymaps = [

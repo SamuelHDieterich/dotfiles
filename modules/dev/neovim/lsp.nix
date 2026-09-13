@@ -59,13 +59,14 @@
             enable = true;
             config.settings.nixd =
               let
-                flake = ''(builtins.getFlake "/home/samuel/dotfiles")'';
+                flake = ''(builtins.getFlake (toString ./.))'';
+                hostname = ''(builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile "/etc/hostname"))'';
               in
               {
                 nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
                 options = {
-                  nixos.expr = "${flake}.nixosConfigurations.turing.options";
-                  home-manager.expr = "${flake}.homeConfigurations.turing.options";
+                  nixos.expr = "${flake}.nixosConfigurations.${hostname}.options";
+                  home-manager.expr = "${flake}.homeConfigurations.${hostname}.options";
                 };
               };
           };
