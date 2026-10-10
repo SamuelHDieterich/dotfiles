@@ -71,6 +71,7 @@ in
         mangowc # Mango window manager
         waybarMangoOverlay # TEMPORARY: waybar built with unreleased mango module support
         # Development modules
+        virtmanager # Virtual machine management with virt-manager
         podman # Podman container runtime
         tailscale # Tailscale VPN client
         # Misc modules
