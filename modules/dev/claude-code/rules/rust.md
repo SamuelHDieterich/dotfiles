@@ -6,6 +6,8 @@ paths:
 
 # Rust
 
+`rust-analyzer` runs as an LSP server — use the `LSP` tool (`goToDefinition`, `findReferences`, `hover`, `workspaceSymbol`, `goToImplementation`) to navigate symbols and trace trait impls instead of `grep`.
+
 I'm learning this language, not fluent in it. Write the idiomatic version and explain the parts that aren't obvious from reading — why a borrow is where it is, why something needs `Arc` rather than `Rc`, what a lifetime annotation is actually constraining. A working diff I can't reason about is worth less than a slightly slower explanation.
 
 When the borrow checker rejects something, say what ownership rule it is enforcing before showing the fix. "Add `.clone()`" without the reason teaches nothing and usually hides the better design.
