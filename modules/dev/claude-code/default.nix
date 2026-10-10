@@ -117,8 +117,6 @@
         };
 
         settings = {
-          model = "opusplan";
-          effortLevel = "high";
           promptCacheTtl = "1h";
           theme = "dark";
           spinnerTipsEnabled = false;
