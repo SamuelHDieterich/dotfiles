@@ -55,7 +55,7 @@
     {
       programs.claude-code = {
         enable = true;
-        package = inputs.claude-code-nix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        package = lib.mkDefault inputs.claude-code-nix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
         context = ./CLAUDE.md;
         rulesDir = ./rules;

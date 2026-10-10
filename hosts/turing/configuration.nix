@@ -206,6 +206,13 @@ in
         "nushell"
       ];
 
+      # Claude Code: per folder login
+      claudeCode.accounts = {
+        kalanos = {
+          paths = [ "/home/${username}/Projects/Kalanos" ];
+        };
+      };
+
       # Style
       home.pointerCursor = {
         enable = true;
