@@ -90,6 +90,7 @@ in
         {
           layout = "br";
           variant = "thinkpad"; # Default (abnt2)
+          consoleKeyMap = "br-abnt2";
         }
         {
           layout = "us";

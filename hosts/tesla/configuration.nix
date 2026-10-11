@@ -91,7 +91,10 @@ in
       };
 
       keyboard = [
-        { layout = "br"; }
+        {
+          layout = "br";
+          consoleKeyMap = "br-abnt2";
+        }
         {
           layout = "us";
           variant = "intl";

@@ -39,6 +39,11 @@
                   default = null;
                   description = "The keyboard variant.";
                 };
+                consoleKeyMap = mkOption {
+                  type = types.nullOr types.str;
+                  default = null;
+                  description = "The kbd keymap for the console. XKB names often have no kbd equivalent (e.g. br-thinkpad), so set this when layout-variant isn't a valid kbd keymap.";
+                };
               };
             }
           );
@@ -82,7 +87,10 @@
                   let
                     k = head cfg;
                   in
-                  "${k.layout}${optionalString (k.variant != null) "-${k.variant}"}";
+                  if k.consoleKeyMap != null then
+                    k.consoleKeyMap
+                  else
+                    "${k.layout}${optionalString (k.variant != null) "-${k.variant}"}";
                 description = "The keymap for the console, derived from the first keyboard configuration.";
               };
             };
