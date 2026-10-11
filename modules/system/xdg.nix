@@ -8,25 +8,6 @@
       ...
     }:
     {
-      # xdpw 0.8.3 shipped "screencast: drive the Pipewire graph by ourselves",
-      # which upstream's own release notes warn "will sometimes stall screen recording" —
-      # it freezes the stream after the first frame (Firefox/Meet).
-      # 0.8.2 is the last good release. Pinned via overlay so it is globally used.
-      # Drop once 0.8.4 lands in nixpkgs.
-      nixpkgs.overlays = [
-        (final: prev: {
-          xdg-desktop-portal-wlr = prev.xdg-desktop-portal-wlr.overrideAttrs (old: {
-            version = "0.8.2";
-            src = prev.fetchFromGitHub {
-              owner = "emersion";
-              repo = "xdg-desktop-portal-wlr";
-              rev = "v0.8.2";
-              hash = "sha256-HITf/hgiASWvn/z49mzS8IS1vuyXwdk1JiAOOHRSQMo=";
-            };
-          });
-        })
-      ];
-
       xdg.portal = {
         enable = true;
         config.common.default = [

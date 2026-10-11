@@ -1,11 +1,6 @@
 {
   flake.nixosModules.printing =
     { pkgs, ... }:
-    let
-      epkowa_fixed = pkgs.epkowa.overrideAttrs (oldAttrs: {
-        configureFlags = (oldAttrs.configureFlags or [ ]) ++ [ "CFLAGS=-std=gnu17" ];
-      });
-    in
     {
       services = {
         printing = {
@@ -23,7 +18,7 @@
       hardware.sane = {
         enable = true;
         openFirewall = true;
-        extraBackends = [ epkowa_fixed ];
+        extraBackends = [ pkgs.epkowa ];
       };
 
       # Helpful tools for printer and scanner configuration
