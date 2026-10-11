@@ -16,7 +16,7 @@
         in
         {
           # Keyboard
-          numlockon = 1; # Enable numlock on startup
+          numlock_on = 1; # Enable numlock on startup
           xkb_rules = mkMerge [
             { options = "grp:alt_shift_toggle"; }
             (mkIf (keyboard.layouts != null) { layout = keyboard.layouts; })

@@ -108,7 +108,6 @@
 
             # Media
             "NONE,  XF86AudioNext,    spawn,  ${lib.getExe pkgs.playerctl}  next"
-            "NONE,  XF86AudioPause,   spawn,  ${lib.getExe pkgs.playerctl}  play-pause"
             "NONE,  XF86AudioPlay,    spawn,  ${lib.getExe pkgs.playerctl}  play-pause"
             "NONE,  XF86AudioPrev,    spawn,  ${lib.getExe pkgs.playerctl}  previous"
           ]

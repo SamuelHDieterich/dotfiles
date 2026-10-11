@@ -2,15 +2,15 @@
   flake.homeModules.mangowc = {
     wayland.windowManager.mango.settings = {
       # Dimensions
-      borderpx = 2;
-      gappih = 5;
-      gappiv = 5;
-      gappoh = 10;
-      gappov = 10;
+      border_px = 2;
+      gap_inner_horizontal = 5;
+      gap_inner_vertical = 5;
+      gap_outer_horizontal = 10;
+      gap_outer_vertical = 10;
       border_radius = 10;
       # Colors
-      focuscolor = "0x00ff99ee";
-      bordercolor = "0x1a1a1aee";
+      focus_color = "0x00ff99ee";
+      border_color = "0x1a1a1aee";
       # Hot corner: enter overview when the cursor hits a screen corner.
       enable_hotarea = 1;
       hotarea_corner = 2; # bottom-left
