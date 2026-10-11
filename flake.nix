@@ -66,6 +66,7 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/pull/1700/head";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-zotero.url = "github:NixOS/nixpkgs/20b1ddd1aa5ace70c9468305030aa4f9ef79671b";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs = {

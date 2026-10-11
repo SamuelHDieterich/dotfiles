@@ -3,7 +3,7 @@
   The metapackages are defined once and can be used in both NixOS and Home Manager configurations.
 */
 
-{ lib, ... }:
+{ inputs, lib, ... }:
 let
   # Define package metapackages once, to be used by both NixOS and home-manager
   mkMetapackages = pkgs: {
@@ -56,7 +56,8 @@ let
     ];
 
     academic = with pkgs; [
-      zotero # Reference manager
+      # TEMPORARY: zotero fails to build on current nixpkgs (https://github.com/NixOS/nixpkgs/issues/568692)
+      inputs.nixpkgs-zotero.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zotero # Reference manager
       typst # Latex alternative
     ];
 
