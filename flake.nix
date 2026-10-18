@@ -14,6 +14,10 @@
     );
 
   inputs = {
+    academic-research-skills = {
+      url = "github:Imbad0202/academic-research-skills";
+      flake = false;
+    };
     caveman = {
       url = "github:JuliusBrussee/caveman";
       flake = false;

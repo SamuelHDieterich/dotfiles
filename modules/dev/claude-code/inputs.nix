@@ -28,5 +28,9 @@
       url = "github:JuliusBrussee/caveman"; # Ultra-compressed output mode
       flake = false;
     };
+    academic-research-skills = {
+      url = "github:Imbad0202/academic-research-skills"; # Research, paper writing, peer review
+      flake = false;
+    };
   };
 }

@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "academic-research-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792286736,
+        "narHash": "sha256-VHRk4YVEY2mmUJ+c/O3aXkveJ8yWPFgdSjAMwDrZoYo=",
+        "owner": "Imbad0202",
+        "repo": "academic-research-skills",
+        "rev": "cfd081d8f309ec65254d9f9f04c845ee78b1ec1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Imbad0202",
+        "repo": "academic-research-skills",
+        "type": "github"
+      }
+    },
     "cachix": {
       "inputs": {
         "devenv": [
@@ -708,6 +724,7 @@
     },
     "root": {
       "inputs": {
+        "academic-research-skills": "academic-research-skills",
         "caveman": "caveman",
         "claude-code-nix": "claude-code-nix",
         "claude-plugins-official": "claude-plugins-official",

@@ -51,6 +51,14 @@
         substituteInPlace $out/hooks/hooks.json \
           --replace-fail '"command": "python3 ' '"command": "${lib.getExe' pkgs.python3 "python3"} '
       '';
+
+      # The write-scope guard probes PATH for `py -3`, `python3` and `python`. Pin the interpreter.
+      academic-research-skills = pkgs.runCommand "academic-research-skills-plugin" { } ''
+        cp -r --no-preserve=mode,ownership ${inputs.academic-research-skills} $out
+
+        substituteInPlace $out/hooks/run_guard.sh \
+          --replace-fail 'for cand in "py -3" "python3" "python"; do' 'for cand in "${lib.getExe' pkgs.python3 "python3"}"; do'
+      '';
     in
     {
       programs.claude-code = {
@@ -80,6 +88,7 @@
           commit-commands = officialPlugin "commit-commands"; # /commit, /commit-push-pr
           caveman = caveman; # Ultra-compressed output mode
           hookify = hookify; # Author hooks from conversation patterns
+          academic-research-skills = academic-research-skills; # Research, paper writing, peer review
         };
 
         # The marketplace's `*-lsp` plugin dirs are just README+LICENSE; the
