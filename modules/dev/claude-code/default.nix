@@ -1,6 +1,7 @@
 {
   flake.homeModules.claudeCode =
     {
+      config,
       lib,
       pkgs,
       inputs,
@@ -63,6 +64,7 @@
     {
       programs.claude-code = {
         enable = true;
+        configDir = "${config.home.homeDirectory}/.claude";
         package = lib.mkDefault inputs.claude-code-nix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
         context = ./CLAUDE.md;

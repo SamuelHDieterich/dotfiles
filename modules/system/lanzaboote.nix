@@ -37,7 +37,6 @@
             timeout = 0; # Skip boot menu, press "space" key to show it
             efi.canTouchEfiVariables = true;
           };
-          initrd.systemd.enable = true;
           loader.systemd-boot = {
             enable = lib.mkForce false; # Use Lanzaboote
             editor = false; # Prevent editing boot entries

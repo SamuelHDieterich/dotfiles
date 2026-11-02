@@ -14,9 +14,9 @@
           rofi-emoji
         ];
 
-        font = "JetBrainsMono Nerd Font Mono 12";
-        terminal = "footclient";
-        extraConfig = {
+        settings = {
+          font = "JetBrainsMono Nerd Font Mono 12";
+          terminal = "footclient";
           modes = "drun,run,calc,emoji";
         };
         theme =
