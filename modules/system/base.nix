@@ -20,8 +20,6 @@
       imports = with inputs.self.nixosModules; [
         # Secrets
         sops
-        # _module.args injects extra arguments into all imported modules; this supplies `keyfile`.
-        { _module.args.keyfile = "/home/${cfg.username}/.config/sops/age/keys.txt"; }
         # Environment variables
         sessionVariables
         # Package bundles
@@ -193,8 +191,6 @@
       imports = with inputs.self.homeModules; [
         # Secrets
         sops
-        # _module.args injects extra arguments into all imported modules; this supplies `keyfile`.
-        { _module.args.keyfile = "/home/${cfg.username}/.config/sops/age/keys.txt"; }
         # Environment variables
         sessionVariables
         # Package bundles
@@ -227,6 +223,9 @@
           username = cfg.username;
           homeDirectory = cfg.homeDirectory;
         };
+
+        # Secrets
+        sops.age.keyFile = "${cfg.homeDirectory}/.config/sops/age/keys.txt";
 
         # Nix
         nix = {

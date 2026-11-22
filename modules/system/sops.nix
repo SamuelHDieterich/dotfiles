@@ -7,7 +7,6 @@
 {
   flake.modules.generic.sops =
     {
-      keyfile,
       config,
       lib,
       pkgs,
@@ -17,7 +16,6 @@
       sops = {
         defaultSopsFile = ../../secrets/secrets.yaml;
         defaultSopsFormat = "yaml";
-        age.keyFile = keyfile;
 
         # Define secrets here to make them available as environment variables and in templates.
         secrets = {

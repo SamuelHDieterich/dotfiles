@@ -12,7 +12,6 @@ let
 in
 {
   flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
-    specialArgs = { inherit inputs; };
     modules = [
       inputs.self.nixosModules.${hostname}
       { nixpkgs.hostPlatform = lib.mkDefault system; }

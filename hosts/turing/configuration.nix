@@ -18,7 +18,6 @@ let
 in
 {
   flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
-    specialArgs = { inherit inputs; };
     modules = [
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel-gen7
       inputs.self.nixosModules.${hostname}
@@ -28,7 +27,6 @@ in
         home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
-          extraSpecialArgs = { inherit inputs; };
           users.${username} = inputs.self.homeModules.${hostname};
         };
       }
@@ -37,7 +35,6 @@ in
 
   flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.${system};
-    extraSpecialArgs = { inherit inputs; };
     modules = [
       inputs.self.homeModules.${hostname} # Base home configuration
       inputs.self.homeModules.nonNixos # Required for non-NixOS systems
@@ -96,6 +93,10 @@ in
           variant = "intl";
         }
       ];
+
+      # Secrets
+      ## This laptop decrypts with Samuel's personal age key.
+      sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
 
       # Boot
       lanzaboote.kernelPackages = pkgs.linuxPackages;

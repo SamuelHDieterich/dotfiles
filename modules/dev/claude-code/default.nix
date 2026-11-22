@@ -1,10 +1,10 @@
+{ inputs, ... }:
 {
   flake.homeModules.claudeCode =
     {
       config,
       lib,
       pkgs,
-      inputs,
       ...
     }:
     let

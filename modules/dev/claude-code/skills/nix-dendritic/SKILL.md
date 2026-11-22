@@ -51,13 +51,14 @@ A module file declares a named output and nothing else. There is no `mkEnableOpt
 
 `flake.homeModules.<name>` for user config, `flake.nixosModules.<name>` for system config. Compound names are camelCase — `nonNixos`, `claudeCode`.
 
-Modules taking arguments receive `inputs` and the usual module args, because both host paths pass `specialArgs = { inherit inputs; }`:
+Modules that need flake inputs take them from the file's outer `{ inputs, ... }:` and close over them. Hosts pass no `specialArgs` or `extraSpecialArgs`, so an `inputs` argument on the inner module function is never supplied:
 
 ```nix
+{ inputs, ... }:
 {
   flake.homeModules.foo =
-    { pkgs, inputs, ... }:
-    { ... };
+    { pkgs, ... }:
+    { home.packages = [ inputs.bar.packages.${pkgs.stdenv.hostPlatform.system}.default ]; };
 }
 ```
 

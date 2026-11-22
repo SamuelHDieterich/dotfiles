@@ -1,6 +1,7 @@
+{ inputs, ... }:
 {
   flake.homeModules.hyprland =
-    { inputs, pkgs, ... }:
+    { pkgs, ... }:
     {
       imports = [ inputs.hyprdynamicmonitors.homeManagerModules.default ];
 

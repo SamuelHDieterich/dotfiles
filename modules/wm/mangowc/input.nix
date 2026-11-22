@@ -1,7 +1,6 @@
 {
   flake.homeModules.mangowc =
     {
-      inputs,
       config,
       lib,
       ...

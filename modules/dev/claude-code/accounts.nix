@@ -6,13 +6,13 @@
 # 2. The files home-manager writes into ~/.claude are mirrored into every account's dir, so all accounts share one configuration.
 # 3. Assertions catch the setups that would silently break 1 or 2.
 
+{ inputs, ... }:
 {
   flake.homeModules.claudeCode =
     {
       config,
       lib,
       pkgs,
-      inputs,
       ...
     }:
     {
