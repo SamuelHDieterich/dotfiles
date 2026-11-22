@@ -56,6 +56,7 @@ in
         base # Base system configuration
         lanzaboote # Secure boot configuration
         xdg # XDG portals
+        desktop # Keyring, disks, thumbnails, fonts and desktop programs
         # Hardware modules
         nvidia # Nvidia GPU support
         audio # Audio configuration
@@ -125,36 +126,6 @@ in
         brillo.enable = true; # Adjust screen brightness
       };
 
-      # Keyring
-      services.gnome.gnome-keyring.enable = true;
-      programs.seahorse.enable = true;
-
-      # Disks
-      services.gvfs.enable = true;
-      services.udisks2.enable = true;
-
-      # Thumbnails
-      services.tumbler.enable = true;
-
-      # Fonts
-      fonts = {
-        enableDefaultPackages = true;
-        packages = with pkgs; [
-          nerd-fonts.jetbrains-mono
-          caladea
-          google-fonts
-        ];
-      };
-
-      # Programs
-      programs = {
-        dconf.enable = true; # Enable dconf for desktop environment configuration
-        # nix-index provides the command-not-found hook, and the two are mutually exclusive.
-        command-not-found.enable = false;
-        nix-index.enable = true; # Index nixpkgs for quick searching (includes shell integration).
-        nix-ld.enable = true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
-      };
-
       # Packages
       metapackages.bundles = bundles;
       environment.systemPackages = with pkgs; [
@@ -172,7 +143,7 @@ in
     };
 
   flake.homeModules.${hostname} =
-    { pkgs, lib, ... }:
+    { ... }:
     {
       imports = with inputs.self.homeModules; [
         base # Base home configuration
@@ -190,6 +161,9 @@ in
         # Desktop
         # hyprland # Hyprland configuration
         mangowc # Mango configuration
+        desktop # Removable disks, default editor and man pager
+        theme # Cursor, GTK theme and dark mode
+        kanshi # Display profiles
         # Utilities
         waybar # Wayland status bar
         dunst # Notification daemon
@@ -220,87 +194,5 @@ in
         "fish"
         "nushell"
       ];
-
-      # Style
-      home.pointerCursor = {
-        enable = true;
-        gtk.enable = true;
-        hyprcursor.enable = true;
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Ice";
-        size = 20;
-      };
-      xdg.enable = true;
-      gtk = {
-        enable = true;
-        theme = {
-          package = pkgs.juno-theme;
-          name = "Juno-ocean";
-        };
-        iconTheme = {
-          package = pkgs.papirus-icon-theme;
-          name = "Papirus-Dark";
-        };
-        gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-        gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
-      };
-      dconf = {
-        enable = true;
-        settings = {
-          "org/gnome/desktop/interface" = {
-            color-scheme = "prefer-dark";
-          };
-        };
-      };
-
-      # Disks
-      services.udiskie.enable = true;
-
-      # Environment variables
-      home.sessionVariables = {
-        VISUAL = lib.getExe pkgs.vscode;
-        MANPAGER = "env BATMAN_IS_BEING_MANPAGER=yes " + lib.getExe pkgs.bat-extras.batman;
-      };
-
-      # Wayland: displays
-      services.kanshi = {
-        enable = true;
-        settings = [
-          {
-            profile.name = "undocked";
-            profile.outputs = [ { criteria = "eDP-1"; } ];
-          }
-          {
-            profile.name = "semi-docked";
-            profile.outputs = [
-              {
-                criteria = "eDP-1";
-                position = "0,0";
-              }
-              {
-                criteria = "HDMI-A-1";
-                position = "1920,0";
-              }
-            ];
-          }
-          {
-            profile.name = "fully-docked";
-            profile.outputs = [
-              {
-                criteria = "HDMI-A-1";
-                position = "0,0";
-              }
-              {
-                criteria = "eDP-1";
-                position = "1920,0";
-              }
-              {
-                criteria = "DP-1";
-                position = "3840,0";
-              }
-            ];
-          }
-        ];
-      };
     };
 }
