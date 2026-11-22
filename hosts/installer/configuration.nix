@@ -7,7 +7,7 @@
 let
   system = "x86_64-linux";
   stateVersion = "24.05";
-  hostname = "minimum-iso";
+  hostname = "installer";
   inherit (config.dotfiles) sshKeys;
 in
 {
@@ -18,12 +18,19 @@ in
     ];
   };
 
+  flake.packages.${system}.installer-iso =
+    inputs.self.nixosConfigurations.${hostname}.config.system.build.isoImage;
+
   flake.nixosModules.${hostname} =
     { modulesPath, pkgs, ... }:
     {
       imports = [
         (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix")
       ];
+
+      # Image
+      # zstd builds much faster than the default xz
+      isoImage.squashfsCompression = "zstd -Xcompression-level 6";
 
       networking.hostName = hostname;
       system.stateVersion = stateVersion;
@@ -46,10 +53,12 @@ in
       users.users.root.openssh.authorizedKeys.keys = sshKeys;
 
       environment.systemPackages = with pkgs; [
-        neovim
-        git
-        nh
-        btop
+        neovim # editor
+        git # version control
+        nh # nix helper
+        btop # monitor
+        nixos-facter # hardware reports
+        tmux # multiplexer
       ];
     };
 }
