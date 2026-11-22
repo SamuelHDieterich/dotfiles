@@ -155,8 +155,8 @@
             "NONE,  down,   4,  toggleoverview"
           ];
           switchbind = [
-            "fold,   spawn_shell, loginctl lock-session"
-            "unfold, spawn,       ${lib.getExe pkgs.wlopm} --on '*'"
+            "lid_on,  spawn_shell, loginctl lock-session"
+            "lid_off, spawn,       ${lib.getExe pkgs.wlopm} --on '*'"
           ];
         };
     };
