@@ -49,7 +49,7 @@ A module file declares a named output and nothing else. There is no `mkEnableOpt
 }
 ```
 
-`flake.homeModules.<name>` for user config, `flake.nixosModules.<name>` for system config. Compound names are camelCase — `waybarMangoOverlay`, `nonNixos`, `claudeCode`.
+`flake.homeModules.<name>` for user config, `flake.nixosModules.<name>` for system config. Compound names are camelCase — `nonNixos`, `claudeCode`.
 
 Modules taking arguments receive `inputs` and the usual module args, because both host paths pass `specialArgs = { inherit inputs; }`:
 

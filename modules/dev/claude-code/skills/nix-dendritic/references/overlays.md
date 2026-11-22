@@ -6,9 +6,9 @@ Overlays are applied inside a *NixOS* module via `nixpkgs.overlays`, not at flak
 
 ```nix
 {
-  flake.nixosModules.waybarMangoOverlay = {
+  flake.nixosModules.fooOverlay = {
     nixpkgs.overlays = [
-      (final: prev: { waybar = /* ... */; })
+      (final: prev: { foo = /* ... */; })
     ];
   };
 }
@@ -24,13 +24,13 @@ The standalone path builds from `inputs.nixpkgs.legacyPackages.${system}` direct
 
 ## Overlays are temporary by default
 
-Every overlay in this repo opens with a comment saying why it exists and when to delete it:
+An overlay opens with a comment saying why it exists and when to delete it:
 
 ```nix
 # TEMPORARY
-# waybar's mango module was added upstream on 2026-05-29 but has not shipped in a tagged release yet.
-# Build from a post-mango master commit until a release includes it, then delete this file and its imports in hosts/*.
-# https://github.com/Alexays/Waybar/commit/3eeffbe3
+# foo's bar module was added upstream on 2026-01-15 but has not shipped in a tagged release yet.
+# Build from a post-bar master commit until a release includes it, then delete this file and its imports in hosts/*.
+# https://github.com/example/foo/commit/abc1234
 ```
 
 This is the exception to keeping comments short. An overlay encodes a claim about upstream state that nothing in the code can express, and without the deletion condition it outlives its reason. Include the upstream commit, issue or PR link.

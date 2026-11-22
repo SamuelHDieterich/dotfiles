@@ -4,7 +4,7 @@
 
   flake-file.inputs = {
     # Package management
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     # User-level configuration management
     home-manager = {
       url = "github:nix-community/home-manager";

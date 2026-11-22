@@ -2,7 +2,7 @@
   flake-file.inputs = {
     # Secure boot
     lanzaboote = {
-      url = "github:nix-community/lanzaboote";
+      url = "github:nix-community/lanzaboote/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Secrets management
