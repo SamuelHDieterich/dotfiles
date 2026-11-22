@@ -1,2 +1,5 @@
 # Ignore build results
 result
+# Ignore direnv state and generated git hook config
+.direnv
+.pre-commit-config.yaml

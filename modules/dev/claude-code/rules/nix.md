@@ -9,6 +9,8 @@ paths:
 
 **`flake.nix` is generated.** Never edit it. Declare inputs in the nearest `inputs.nix` under `flake-file.inputs`, then run `nix run .#write-flake` to regenerate.
 
+Formatting is nixfmt. The pre-commit hook applies it; `nix fmt` formats the tree by hand.
+
 Modules declare `flake.homeModules.<name>` or `flake.nixosModules.<name>` with plain config. There are no `enable` flags — a host opts out by not importing the module. Compound names are camelCase (`nonNixos`, `claudeCode`).
 
 A directory module splits across files: each file declares `flake.homeModules.<sameName>` and flake-parts merges them. See `modules/wm/mangowc/`.

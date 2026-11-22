@@ -14,7 +14,13 @@
           # XKB matches layouts/variants/models positionally by comma index,
           # so entries without a value must keep an empty placeholder rather
           # than being dropped, or later entries shift onto the wrong layout.
-          values = map (k: let v = k.${optionName}; in if v == null then "" else v) cfg;
+          values = map (
+            k:
+            let
+              v = k.${optionName};
+            in
+            if v == null then "" else v
+          ) cfg;
         in
         if all (v: v == "") values then null else concatStringsSep "," values;
     in

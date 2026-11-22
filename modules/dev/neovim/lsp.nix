@@ -65,7 +65,7 @@
             enable = true;
             config.settings.nixd =
               let
-                flake = ''(builtins.getFlake (toString ./.))'';
+                flake = "(builtins.getFlake (toString ./.))";
                 hostname = ''(builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile "/etc/hostname"))'';
               in
               {
