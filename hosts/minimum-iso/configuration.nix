@@ -1,9 +1,14 @@
-{ inputs, lib, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 let
   system = "x86_64-linux";
   stateVersion = "24.05";
   hostname = "minimum-iso";
-  rootAuthorizedKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIANBmVVJXeQrw57e3t0JX+dbPz6rYUAVT0z6IurSoLqS samuel@tesla";
+  inherit (config.dotfiles) sshKeys;
 in
 {
   flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
@@ -39,7 +44,7 @@ in
         };
       };
 
-      users.users.root.openssh.authorizedKeys.keys = [ rootAuthorizedKey ];
+      users.users.root.openssh.authorizedKeys.keys = sshKeys;
 
       environment.systemPackages = with pkgs; [
         neovim

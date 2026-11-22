@@ -80,6 +80,8 @@ imports = with inputs.self.homeModules; [
 
 Each host file defines four attributes — `nixosConfigurations.<host>`, `homeConfigurations.<host>`, `nixosModules.<host>` and `homeModules.<host>` — with a `let` block holding `system`, `stateVersion`, `username`, `hostname` and `bundles`.
 
+Facts shared by several hosts (SSH public keys, say) are flake-level options declared in a flake-parts module. Read them from the host file's outer `{ config, ... }:` argument and pass them into the NixOS module by closure, as `inputs` is.
+
 Watch the spelling: `modules/dev/vscode.nix` declares `flake.homeManager.vscode` instead of `flake.homeModules.vscode`, so that module is silently dead. A typo here produces no error, just a module nobody imports.
 
 ## Config files
