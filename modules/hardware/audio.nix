@@ -35,8 +35,10 @@
             alsa.enable = true;
             alsa.support32Bit = true;
             pulse.enable = true;
-            jack.enable = true;
           };
+          environment.systemPackages = with pkgs; [
+            pipewire.jack # pw-jack wrapper for JACK clients
+          ];
         })
         (lib.mkIf (cfg.platform == "pulseaudio") {
           hardware.pulseaudio = {
