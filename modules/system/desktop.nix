@@ -26,9 +26,7 @@
       # Programs
       programs = {
         dconf.enable = true; # Enable dconf for desktop environment configuration
-        # nix-index provides the command-not-found hook, and the two are mutually exclusive.
-        command-not-found.enable = false;
-        nix-index.enable = true; # Index nixpkgs for quick searching (includes shell integration).
+        command-not-found.enable = true; # Suggest the package providing a missing command
         nix-ld.enable = true; # Run unpatched dynamic binaries on NixOS. Needed for compilation (C, Rust).
       };
     };
