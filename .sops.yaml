@@ -1,7 +1,14 @@
 keys:
   - &primary age1xvsrjvspe4phh4hdmahvtqplxwxgema2e7m2n9w0wx267pp8mersgh2vn5
+# First match wins, so per-host rules come before the shared one.
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$ # Match files in the secrets/ directory with specified extensions
+  # A host's private SSH key: only Samuel decrypts it, to seed it at install
+  - path_regex: ^hosts/[^/]+/secrets/ssh_host_ed25519_key$
     key_groups:
       - age:
-        - *primary
+          - *primary
+  # Shared secrets: Samuel and every host importing base
+  - path_regex: ^secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *primary
