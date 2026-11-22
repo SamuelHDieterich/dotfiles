@@ -171,6 +171,7 @@ in
         devenv # Development environment with nix
         neovim # IDE-like Neovim (nixvim)
         claudeCode # Anthropic coding agent
+        tailscale # Tailscale systray
         # Desktop
         mangowc # Mango configuration
         # Utilities

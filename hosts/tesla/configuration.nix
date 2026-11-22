@@ -184,6 +184,7 @@ in
         neovim # IDE-like Neovim (nixvim)
         claudeCode # Anthropic coding agent
         virtmanager # virt-manager configuration
+        tailscale # Tailscale systray
         # Desktop
         # hyprland # Hyprland configuration
         mangowc # Mango configuration
