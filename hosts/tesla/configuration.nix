@@ -34,7 +34,10 @@ in
   };
 
   flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = inputs.nixpkgs.legacyPackages.${system};
+    pkgs = import inputs.nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
     modules = [
       inputs.self.homeModules.${hostname} # Base home configuration
       inputs.self.homeModules.nonNixos # Required for non-NixOS systems
