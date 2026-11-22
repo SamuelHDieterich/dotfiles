@@ -18,7 +18,7 @@ The host then imports that module by name like any other.
 
 ## The standalone home-manager caveat
 
-Each host defines both `nixosConfigurations.<host>` (home-manager as a NixOS module) and `homeConfigurations.<host>` (standalone, driven by `nh home switch`).
+A repo may define a host's user config twice: inside `nixosConfigurations.<host>` (home-manager as a NixOS module) and as `homeConfigurations.<host>` (standalone, driven by `nh home switch`).
 
 The standalone path builds from `inputs.nixpkgs.legacyPackages.${system}` directly, so **`nixpkgs.overlays` set in a NixOS module does not reach it**. A package override that must apply to both paths belongs in the home module, using an explicit `pkgs.<name>.override` or a package from `inputs.self.packages`.
 
@@ -29,7 +29,7 @@ An overlay opens with a comment saying why it exists and when to delete it:
 ```nix
 # TEMPORARY
 # foo's bar module was added upstream on 2026-01-15 but has not shipped in a tagged release yet.
-# Build from a post-bar master commit until a release includes it, then delete this file and its imports in hosts/*.
+# Build from a post-bar master commit until a release includes it, then delete this module and its host imports.
 # https://github.com/example/foo/commit/abc1234
 ```
 
@@ -39,14 +39,14 @@ The same applies to individual `override` arguments — say what breaks without 
 
 ## Local packages
 
-Packages built in this repo live under `packages/` and use `perSystem`:
+Packages built in the flake itself are declared with `perSystem`:
 
 ```nix
 {
   perSystem = { pkgs, ... }: {
-    packages.yazi-bookmarks = pkgs.stdenv.mkDerivation { /* ... */ };
+    packages.foo = pkgs.stdenv.mkDerivation { /* ... */ };
   };
 }
 ```
 
-Consume them as `inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.yazi-bookmarks`. `modules/utilities/yazi/default.nix` shows the pattern.
+Consume them as `inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.foo`.

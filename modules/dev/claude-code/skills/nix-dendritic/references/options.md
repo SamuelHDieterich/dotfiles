@@ -1,12 +1,8 @@
 # Module options
 
-Most modules have no options. A host either imports the module or it doesn't, and that is the whole configuration surface. Reach for `options` only when one host needs the module configured *differently* from another — not to make it toggleable.
-
-There is no `mkEnableOption` in this repo. Don't introduce one.
+Most modules have no options. A host either imports the module or it doesn't, and that is the whole configuration surface. Reach for `options` only when one host needs the module configured *differently* from another, not to make it toggleable. Never add an `mkEnableOption`.
 
 ## Shape
-
-`modules/shell/default.nix` is the reference implementation:
 
 ```nix
 { inputs, ... }:
@@ -35,7 +31,7 @@ Points worth copying:
 
 - The option namespace is bare (`options.shell`, `options.keyboard`), not nested under `programs` or `services`. Those namespaces belong to upstream.
 - Always give a `default` and a `description`.
-- `types.enum` over a free-form string when the valid values are known — it turns a typo into an evaluation error instead of silent no-op.
+- `types.enum` over a free-form string when the valid values are known: it turns a typo into an evaluation error instead of a silent no-op.
 - `mkMerge` with `mkIf` branches, rather than one large conditional.
 
 A host then sets it alongside its imports:
@@ -44,6 +40,6 @@ A host then sets it alongside its imports:
 shell.include = [ "zsh" "nushell" ];
 ```
 
-## Where options already exist
+## Before designing a new option
 
-`modules/system/` and `modules/hardware/` hold most of them — `base.nix`, `keyboard.nix`, `metapackages.nix`, `lanzaboote.nix`, `nvidia.nix`, `audio.nix`, `fingerprint.nix`. Read the closest one before designing a new option; the conventions there are consistent.
+Read the modules in the repo that already declare `options`, and match their conventions.
