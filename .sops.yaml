@@ -1,5 +1,6 @@
 keys:
   - &primary age1xvsrjvspe4phh4hdmahvtqplxwxgema2e7m2n9w0wx267pp8mersgh2vn5
+  - &lovelace age1m38nql0dk6y0dxymhwts0mr6sqzrtc65mv9fldp4c4883dmahcqsqeak4d
 # First match wins, so per-host rules come before the shared one.
 creation_rules:
   # A host's private SSH key: only Samuel decrypts it, to seed it at install
@@ -7,8 +8,15 @@ creation_rules:
     key_groups:
       - age:
           - *primary
+  # lovelace's own secrets
+  - path_regex: ^hosts/lovelace/secrets/secrets\.yaml$
+    key_groups:
+      - age:
+          - *primary
+          - *lovelace
   # Shared secrets: Samuel and every host importing base
   - path_regex: ^secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *primary
+          - *lovelace

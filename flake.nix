@@ -77,6 +77,7 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/pull/1700/head";
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
+    nixpkgs-stable.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst";
     nixpkgs-zotero.url = "github:NixOS/nixpkgs/20b1ddd1aa5ace70c9468305030aa4f9ef79671b";
     nixvim = {
       url = "github:nix-community/nixvim";
